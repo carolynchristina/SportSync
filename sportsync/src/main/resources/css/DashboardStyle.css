@@ -2,7 +2,7 @@ body{
     margin: 0px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.body{
+.bodyLandingPage{
     margin: 0px;
     padding: 0px;
     border: 0px;
@@ -15,29 +15,29 @@ body{
     "main2"
     "footer";
 }
-.bodyDashboard{
+.body{
     display: grid;
     grid-template-columns: 100vw;
     grid-template-rows: 95px 60vw;
     grid-template-areas:
-    "headerDashboard"
-    "mainDashboard";
+    "header"
+    "main";
 
 }
-.headerDashboard{
-    grid-area: headerDashboard;
+.header{
+    grid-area: header;
     display: flex;
     flex-direction: row;
     padding: 25px;
     background-color: #F4F4F4;
 }
-.leftHeaderDashboard{
+.leftHeader{
     flex: 1;
     display: flex;
     align-items: center;
 
 }
-.leftHeaderDashboard button{
+.leftHeader button{
     flex: 0.1;
     width: 20px;
     height: 95px;
@@ -46,23 +46,28 @@ body{
     color: #5E587A;
     font-size: 18px;
 }
-.leftHeaderDashboard button:hover{
+.leftHeader button:hover{
     cursor: pointer;
     background-color: rgba(51, 37, 197, 0.1);
 }
-.leftHeaderDashboard .logo{
+.leftHeader .logo{
     font-size: 36px;
     color: #3325C5;
     flex: 0.2;
 
 }
-.rightHeaderDashboard img{
+.rightHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rightHeader img{
     width: 40px;
     height: 40px;
-    padding-right:20px ;
 }
+
 .mainDashboard{
-    grid-area: mainDashboard;
+    grid-area: main;
     display: grid;
     grid-template-columns: 33vw 34vw 33vw;
     grid-template-rows: 30vw 30vw;
@@ -232,7 +237,7 @@ body{
 }
 .rightside .friendList button{
     background-color: white;
-    width: 13.25vw;
+    width: 13.8vw;
     height: 5vh;
     flex: 0.8;
     border: 0px;
@@ -243,7 +248,7 @@ body{
 }
 .rightside .addFriend button{
     background-color: white;
-    width: 13.25vw;
+    width: 13.8vw;
     height: 5vh;
     border: 0px;
 }
