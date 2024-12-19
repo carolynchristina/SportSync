@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Activity</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/AddActivityStyle.css}">
+    <script th:src="@{/user/js/addActivity.js}" defer></script>
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="leftHeader">
+            <label for="" class="logo">SportSync</label>
+            <button for="" class="dashboard">Dashboard</button>
+            <button for="" class="activities">Activities</button>
+            <button for="" class="race">Races</button>
+            <button for="" class="analysis">Analysis</button>
+        </div>
+        <div class="rightHeader">
+            <img src="assets/AddActivity/userIcon.svg" alt="">
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div th:if="${error}" style="color: red;">
+            <p th:text="${error}"></p>
+        </div>
+        
+        <div class="title">
+            <label for="">Add New Activity</label>
+        </div>
+
+        <form method="post" id="registerForm" th:method="post" enctype="multipart/form-data">
+            <div class="form-container">
+                <!-- Title -->
+                <div>
+                    <label for="judul"><b>Title</b></label><br>
+                    <input type="text" id="judul" name="judul" placeholder="Morning Run" required maxlength="100">
+                </div>
+
+                
+
+                <!-- Distance & Duration-->
+                <div class="distance-duration-wrapper">
+                    <!-- Distance -->
+                    <div class="distance-container">
+                        <label for="jarakTempuh"><b>Distance</b></label>
+                        <div>
+                            <input type="number" id="jarakTempuh" name="jarakTempuh" required min="1" max="99999"> <span>meters</span>
+                        </div>
+                    </div>
+
+                    <!--Duration-->
+                    <div class="duration-container">
+                        <label class="labelDurasi"><b>Duration</b></label>
+                        <div class="duration-inputs">
+                            <input type="number" id="durasiJam" name="durasiJam" required value="01" placeholder="1" min="0" max="98"> <span>h</span>
+                            <input type="number" id="durasiMenit" name="durasiMenit" required value="00" placeholder="00" min="0" max="59"> <span>m</span>
+                            <input type="number" id="durasiDetik" name="durasiDetik" required value="00" placeholder="00" min="0" max="59"> <span>s</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date & Time -->
+                <div class="datetime-container">
+                    <label for="tglWaktuMulai"><b>Date and Time</b></label><br>
+                    <input type="datetime-local" id="tglWaktuMulai" name="tglWaktuMulai" required max="${datetimeNow}">
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="deskripsi"><b>Description</b></label><br>
+                    <textarea id="deskripsi" name="deskripsi" placeholder="How did it go?" required maxlength="200"></textarea>
+                </div>
+
+                <!-- Upload picture -->
+                <div>
+                    <label for="foto"><b>Upload a Picture</b></label><br>
+                    <input type="file" id="foto" name="foto" accept="image/jpg, image/jpeg, image/png">
+                </div>
+
+                <!-- Race -->
+                <div>
+                    <div class="race-checkbox">
+                        <label for="isRace"><b>This is for a race</b></label>
+                        <input type="checkbox" id="isRace" name="isRace" onclick="toggleRaceDropdown()">    
+                    </div>
+                    <select name="idRace" id="race" disabled required>
+                        <option value="" disabled selected>Select a race</option>
+                        <option th:each="race : ${joinedRaces}" 
+                                th:value="${race.id}" 
+                                th:text="${race.judul}"
+                                th:selected="${race.id == race}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="formActions">
+                    <button type="submit" class="create-btn">Create</button>
+                    <a class="cancel" th:onclick="'window.location.href=\'/user/activities\''">Cancel</button></a>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
