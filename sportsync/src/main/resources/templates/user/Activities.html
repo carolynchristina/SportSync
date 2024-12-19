@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/sportsync/src/main/resources/css/ActivitiesStyle.css">
-    <script src="/sportsync/src/main/resources/js/mainScript.js" defer></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/ActivitiesStyle.css}">
+    <script th:src="@{/user/js/mainScript.js}" defer></script>
     <title>Activities</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
                 <button for="" class="analysis">Analysis</button>
             </div>
             <div class="rightHeader">
-                <img src="/sportsync/src/main/resources/Assets/DashboardPage/userIcon.svg" alt="">
+                <img src="assets/DashboardPage/userIcon.svg" alt="">
             </div>
         </div>
         <div class="main">

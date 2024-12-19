@@ -42,7 +42,7 @@ public class UserController {
         return "user/add_activity"; 
     }
 
-    @PostMapping("/addActivity")
+    @PostMapping("/saveActivity")
     public String saveActivity(
             @Valid @ModelAttribute ActivityDTO activityDTO, 
             @RequestParam(required = false) MultipartFile foto,
@@ -79,8 +79,7 @@ public class UserController {
             activity.setIdRace(id);
             userRepository.submitToRace(activity);
         } 
-        // Save or process the `activity` object
-        userRepository.saveActivity(activity); // Save to the database
+        userRepository.saveActivity(activity);
 
         return "redirect:/member/activities";
         
