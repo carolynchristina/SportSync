@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 10vh;
+    background: #f4f4f4;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+.sport-sync {
+    color: #3325c5;
+    text-align: left;
+    font-family: "Poppins-Regular", sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    position: absolute;
+    right: 88.11%;
+    left: 2.4%;
+    width: 9.49%;
+    bottom: 18.45%;
+    top: 27.55%;
+    height: 54%;
+}
+.duration-container {
+    margin: 10px 0;
+}
+
+.duration-inputs {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between inputs and labels */
+}
+
+.duration-inputs input {
+    width: 50px;
+    text-align: center;
+}
+
+.duration-inputs span {
+    margin-left: 2px;
+    font-weight: bold;
+}
+
+#race {
+    display: none;
+}
