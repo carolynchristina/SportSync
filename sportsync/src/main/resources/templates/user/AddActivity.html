@@ -34,7 +34,7 @@
             <label for="">Add New Activity</label>
         </div>
 
-        <form method="post" id="registerForm" th:method="post" enctype="multipart/form-data">
+        <form method="post" id="registerForm" th:action="@{/user/saveActivity}" th:method="post" enctype="multipart/form-data">
             <div class="form-container">
                 <!-- Title -->
                 <div>

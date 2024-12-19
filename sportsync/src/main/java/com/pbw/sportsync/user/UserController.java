@@ -33,9 +33,7 @@ public class UserController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         String datetimeNow = LocalDateTime.now().format(formatter);
         model.addAttribute("datetimeNow", datetimeNow);
-        //TEST
-        session.setAttribute("username", "bobby");
-        
+
         String username = (String) session.getAttribute("username");
         LocalDate dateNow = LocalDate.now();
         List<Race> joinedRaces = userRepository.findOngoingJoinedRaces(username, dateNow);
@@ -44,7 +42,7 @@ public class UserController {
         return "user/add_activity"; 
     }
 
-    @PostMapping("/addActivity")
+    @PostMapping("/saveActivity")
     public String saveActivity(
             @Valid @ModelAttribute ActivityDTO activityDTO, 
             @RequestParam(required = false) MultipartFile foto,
