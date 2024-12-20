@@ -1,0 +1,74 @@
+.body{
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+    grid-template-rows: 50vw;
+    grid-template-areas: 
+    "left right";
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.leftSide{
+    grid-area: left;
+    width: 50vw;
+    height: 100vh;
+}
+.leftSide img{
+    width: 50vw;
+    height: 100vh;
+}
+.rightSide{
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    border: 1px solid #3325c5;
+    border-radius: 8px;
+    width: 30vw;
+    height: 50vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.container label, .container .email, .container .password, .container button{
+    flex: 0.5;
+}
+.email{
+    display: flex;
+    flex-direction: column;
+
+}
+.password{
+    display: flex;
+    flex-direction: column;
+}
+.container button{
+    border: 0px;
+    border-radius: 8px;
+    background-color: #3325c5;
+    color: white;
+    height: 50vh;
+    width: 30vw;
+}
+.container button:hover{
+    cursor: pointer;
+    background-color: rgba(51, 37, 197, 0.8);
+}
+.email input, .password input{
+    border-radius: 8px;
+    border: 1px solid #3325c5;
+    height:30px;
+}
+.container>label:nth-child(1){
+    color: #3325c5;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center;
+}

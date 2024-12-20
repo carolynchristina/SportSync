@@ -28,6 +28,56 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/Login")
+    public String showLogin(Model model){
+        if (!model.containsAttribute("error")) {
+            model.addAttribute("error", null);
+        }
+        model.addAttribute("email", "");
+        return "LoginPage"; 
+    }
+
+    @PostMapping("/Login")
+    public String login(@RequestParam ("email") String Email,@RequestParam ("password") String Password,Model model, HttpSession session){
+        List<User> users = userRepository.findUser(Email, Password);
+        if (users.size()==1) {
+            User user = users.get(0);
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("password", user.getPassword());
+            session.setAttribute("role", user.getRole());
+            return "redirect:/dashbord";
+        }
+        else{
+            model.addAttribute("Error", "Email Atau Password Salah!");
+            model.addAttribute("email", Email);
+            return "LoginPage";
+        }
+    }
+    @GetMapping("/Dashboard")
+    public String showDashboard(@RequestParam (defaultValue = "") String username, HttpSession session, Model model){
+        if(session.getAttribute("username") != null){
+            String nama = (String)session.getAttribute("username");
+            String role = (String)session.getAttribute("role");
+
+            model.addAttribute("username", nama);
+            model.addAttribute("role", role);
+
+            if(model.getAttribute("role").equals("admin")){
+                List<User> Allusers = userRepository.findUserByName(username);
+                model.addAttribute("users",Allusers);
+                return "redirect:/Dashboard/admin";
+            }
+            else{
+                List<User> Allusers = userRepository.findUserByName(username);
+                model.addAttribute("users",Allusers);
+                return "redirect:/Dashboard/user";
+            }
+        }
+        else{
+            return "redirect:/user";
+        }
+    }
     @GetMapping("/addActivity")
     public String addActivity(HttpSession session, Model model) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");

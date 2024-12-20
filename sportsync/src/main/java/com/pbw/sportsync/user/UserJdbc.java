@@ -15,6 +15,16 @@ public class UserJdbc implements UserRepository{
     private JdbcTemplate jdbcTemplate;
 
     @Override
+    public List<User> findUser(String email, String password) {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, email, password);
+    }
+    @Override
+    public List<User> findUserByName(String username){
+        String sql = "SELECT * FROM users WHERE LOWER(nama) LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + username.toLowerCase() + "%");
+    }
+    @Override
     public void saveActivity(Activity activity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveActivity'");
@@ -50,7 +60,14 @@ public class UserJdbc implements UserRepository{
             resultSet.getDate("tglSelesai").toLocalDate()
         );
     }
-
+    public User mapRowToUser(ResultSet resultSet, int rowNum)throws SQLException{
+        return new User(
+            resultSet.getString("username"),
+            resultSet.getString("email"),
+            resultSet.getString("role"),
+            resultSet.getString("password")
+        );
+    }
     @Override
     public void submitToRace(Activity activity) {
         // TODO Auto-generated method stub
