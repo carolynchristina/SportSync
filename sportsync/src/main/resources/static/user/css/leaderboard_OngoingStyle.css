@@ -1,0 +1,76 @@
+/* Leaderboard Section */
+.leaderboard-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leaderboard-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.leaderboard-header h1 {
+    font-size: 36px;
+    color: #3325C5;
+    margin: 0;
+}
+
+.leaderboard-header h2 {
+    font-size: 24px;
+    color: #5E587A;
+    margin: 5px 0;
+}
+
+.leaderboard-header p {
+    font-size: 16px;
+    color: #5E587A;
+    margin: 5px 0 20px 0;
+}
+
+.join-race-button {
+    padding: 10px 20px;
+    background-color: #3325C5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.join-race-button:hover {
+    background-color: rgba(51, 37, 197, 0.8);
+}
+
+/* Leaderboard Table */
+.leaderboard-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #5E587A;
+}
+
+.leaderboard-table thead {
+    background-color: #E8E8FF;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    border: 1px solid #CFCFCF;
+    text-align: center;
+    padding: 10px;
+}
+
+.leaderboard-table tr:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+.leaderboard-table tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.leaderboard-table th {
+    font-weight: bold;
+    color: #3325C5;
+}

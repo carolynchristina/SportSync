@@ -1,0 +1,42 @@
+/* CSS GLOBAL BIAR HEADERNYA KONSISTEN STYLENYA*/
+.header{
+    grid-area: header;
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    background-color: #F4F4F4;
+}
+.leftHeader{
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+}
+.leftHeader button{
+    flex: 0.1;
+    width: 20px;
+    height: 95px;
+    border: 0px;
+    background-color:#F4F4F4 ;
+    color: #5E587A;
+    font-size: 18px;
+}
+.leftHeader button:hover{
+    cursor: pointer;
+    background-color: rgba(51, 37, 197, 0.1);
+}
+.leftHeader .logo{
+    font-size: 36px;
+    color: #3325C5;
+    flex: 0.2;
+
+}
+.rightHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rightHeader img{
+    width: 40px;
+    height: 40px;
+}
