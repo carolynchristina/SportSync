@@ -1,6 +1,7 @@
 --DROP DATABASE IF EXISTS sportSync;
 --CREATE DATABASE sportSync;
 
+DROP TABLE IF EXISTS raceParticipants CASCADE;
 DROP TABLE IF EXISTS activity CASCADE;
 DROP TABLE IF EXISTS race CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
@@ -28,6 +29,11 @@ CREATE TABLE activity(
 	jarakTempuh int, --meter
 	durasi TIME, --hh:mm:ss
 	foto BYTEA,
+	username VARCHAR(30) REFERENCES users(username),
+	idRace int REFERENCES race(id)
+);
+
+CREATE TABLE raceParticipants(
 	username VARCHAR(30) REFERENCES users(username),
 	idRace int REFERENCES race(id)
 );
@@ -80,4 +86,16 @@ INSERT INTO activity (judul, deskripsi, tglWaktuMulai, jarakTempuh, durasi, foto
 ('Park Run', 'Jogging in the park for 6km', '2024-03-23 06:00:00', 6000, '00:55:00', NULL, 'rachel', NULL),
 ('Weekend Run', 'Running in the hills for 7km', '2024-03-24 07:00:00', 7000, '01:40:00', NULL, 'steve', NULL),
 ('Marathon Run', 'Participating in the Half Marathon', '2024-12-20 06:30:00', 21000, '01:10:00', NULL, 'alice', 2);
+
+INSERT INTO raceParticipants (username, idRace) VALUES
+('bobby', 1),
+('diana', 1),
+('fiona', 3),
+('julia', 3),
+('peter', 3),
+('alice', 2),
+('steve', 2),
+('peter', 2),
+('mia', 1),
+('rachel', 2);
 

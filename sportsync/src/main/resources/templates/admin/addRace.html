@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/headerAdmin_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/addRace_styles.css}">
+    <title>Add Race</title>
+</head>
+<body>
+    <th:block th:include="~{/admin/header :: headerAdmin}"></th:block>
+    <main>
+        <h1>Add Race</h1>
+        <div class="main_container">
+            <div class="container">
+                <form class="form" method="POST">
+                    <div class="form_group">
+                        <label>Judul</label><br>
+                        <input type="text" class="form_control" name="judul" required>
+                    </div>
+                    <div class="form_group">
+                        <label>Description</label><br>
+                        <input type="text" class="form_control" name="deskripsi" required>
+                    </div>
+                    <div class="form_group">
+                        <label>Start Date</label><br>
+                        <input type="date" class="form_control" name="tglMulai" required>
+                    </div>
+                    <div class="form_group">
+                        <label>End Date</label><br>
+                        <input type="date" class="form_control" name="tglSelesai" required>
+                    </div>
+    
+                    <div class="buttons-container">
+                        <button class="button" type="submit">Reset</button>
+                        <button class="button" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
