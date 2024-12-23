@@ -35,24 +35,26 @@ public class UserController {
         model.addAttribute("datetimeNow", datetimeNow);
 
         String username = (String) session.getAttribute("username");
+        model.addAttribute("username", username);
+
         LocalDate dateNow = LocalDate.now();
-        List<Race> joinedRaces = userRepository.findOngoingJoinedRaces(username, dateNow);
+        List<Race> joinedRaces = userRepository.findValidJoinedRaces(username, dateNow);
 
         model.addAttribute("joinedRaces", joinedRaces);
-        return "user/add_activity"; 
+        return "user/AddActivity"; 
     }
 
     @PostMapping("/saveActivity")
     public String saveActivity(
             @Valid @ModelAttribute ActivityDTO activityDTO, 
-            @RequestParam(required = false) MultipartFile foto,
-            @RequestParam(required = false, defaultValue="-1") int id, //id race
+            @RequestParam(required = false) MultipartFile fotoUpload,
+            @RequestParam(required = false, defaultValue="-1") int idRace, 
             Model model, 
             BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "Please correct the highlighted errors.");
-            return "user/add_activity";
+            return "user/AddActivity";
         }
         Activity activity = new Activity(
             activityDTO.getJudul(),
@@ -60,13 +62,14 @@ public class UserController {
             activityDTO.getTglWaktuMulai(),
             activityDTO.getJarakTempuh(),
             activityDTO.getDurasi(),
-            activityDTO.getUsername()
+            activityDTO.getUsername(),
+            activityDTO.getIdRace()
         );
 
         //handle foto
-        if (foto != null && !foto.isEmpty()){
+        if (fotoUpload != null && !fotoUpload.isEmpty()){
              try {
-                byte[] fotoBytes = foto.getBytes();
+                byte[] fotoBytes = fotoUpload.getBytes();
                 String fotoBase64 = Base64.getEncoder().encodeToString(fotoBytes);
                 activity.setFoto(fotoBase64);  
             } catch (IOException e) {
@@ -74,15 +77,9 @@ public class UserController {
             }
         }
 
-        //handle race
-        if(id > -1){
-            activity.setIdRace(id);
-            userRepository.submitToRace(activity);
-        } 
         userRepository.saveActivity(activity);
 
-        return "redirect:/member/activities";
-        
+        return "redirect:/user/Activities";
     }
 
 }

@@ -5,6 +5,5 @@ import java.util.List;
 
 public interface UserRepository {
     void saveActivity(Activity activity);
-    List<Race> findOngoingJoinedRaces(String username, LocalDate dateNow);
-    void submitToRace(Activity activity);
+    List<Race> findValidJoinedRaces(String username, LocalDate dateNow);
 }
