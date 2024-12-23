@@ -36,6 +36,7 @@
 
         <form method="post" id="registerForm" th:action="@{/user/saveActivity}" th:method="post" enctype="multipart/form-data">
             <div class="form-container">
+                <input type="text" name="username" th:value="${username}" hidden>
                 <!-- Title -->
                 <div>
                     <label for="judul"><b>Title</b></label><br>
@@ -79,8 +80,8 @@
 
                 <!-- Upload picture -->
                 <div>
-                    <label for="foto"><b>Upload a Picture</b></label><br>
-                    <input type="file" id="foto" name="foto" accept="image/jpg, image/jpeg, image/png">
+                    <label for="fotoUpload"><b>Upload a Picture</b></label><br>
+                    <input type="file" id="fotoUpload" name="fotoUpload" accept="image/jpg, image/jpeg, image/png">
                 </div>
 
                 <!-- Race -->
@@ -89,12 +90,12 @@
                         <label for="isRace"><b>This is for a race</b></label>
                         <input type="checkbox" id="isRace" name="isRace" onclick="toggleRaceDropdown()">    
                     </div>
+                    <input type="hidden" id="hiddenIdRace" name="idRace" value="-1">
                     <select name="idRace" id="race" disabled required>
-                        <option value="" disabled selected>Select a race</option>
+                        <option value="-1" selected>Select a race</option>
                         <option th:each="race : ${joinedRaces}" 
                                 th:value="${race.id}" 
-                                th:text="${race.judul}"
-                                th:selected="${race.id == race}">
+                                th:text="${race.judul}">
                         </option>
                     </select>
                 </div>
