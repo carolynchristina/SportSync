@@ -1,81 +1,97 @@
-body{
-    margin: 0px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.body{
+
+body {
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.body {
     display: grid;
     grid-template-columns: 100vw;
     grid-template-rows: 95px 60vw;
     grid-template-areas:
-    "header"
-    "main";
-
+        "header"
+        "main";
 }
-.header{
-    grid-area: header;
-    display: flex;
-    flex-direction: row;
-    padding: 25px;
-    background-color: #F4F4F4;
-}
-.leftHeader{
-    flex: 1;
-    display: flex;
-    align-items: center;
-
-}
-.leftHeader button{
-    flex: 0.1;
-    width: 20px;
-    height: 95px;
-    border: 0px;
-    background-color:#F4F4F4 ;
-    color: #5E587A;
-    font-size: 18px;
-}
-.leftHeader button:hover{
-    cursor: pointer;
-    background-color: rgba(51, 37, 197, 0.1);
-}
-.leftHeader .logo{
-    font-size: 36px;
-    color: #3325C5;
-    flex: 0.2;
-
-}
-.rightHeader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rightHeader img{
-    width: 40px;
-    height: 40px;
-}
-.main{
+.main {
     grid-area: main;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.judul{
-    font-size: 48px;
-    color: #3325C5;
-    flex: 0.2;
-}
-.container1{
-    width: 40vw;
-    height: 50vh;
-    border: 1px solid black;
-    border-radius: 18px;
-    background-color: #FFFAF1;
-    display: flex;
-    flex-direction: column;
     padding: 20px;
 }
-.container1 label{
-    flex: 0.3;
+
+.title {
+    display: flex;
+    font-size: 36px;
+    color: #3325C5;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
-.container1 img{
-    flex: 0.3;
+.activities-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+
+.activity-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFAF1;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card .username {
+    font-size: 16px;
+}
+
+.activity-card .tanggal {
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 10px;
+}
+
+.activity-card .judul {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.activity-card .deskripsi {
+    font-size: 14px;
+    color: #5E587A;
+    margin-bottom: 15px;
+}
+
+.activity-card .foto img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.activity-card .jarakTempuh,
+.activity-card .durasi {
+    font-size: 14px;
+}
+
+.add-activity-button {
+    right: 0px;
+    position: absolute;
+    margin-right: 20px;
+    background-color: #3325C5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-activity-button:hover {
+    background-color: #241a94;
 }

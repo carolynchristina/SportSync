@@ -12,47 +12,6 @@ body{
     "header"
     "main";
 }
-.header{
-    grid-area: header;
-    display: flex;
-    flex-direction: row;
-    padding: 25px;
-    background-color: #F4F4F4;
-}
-.leftHeader{
-    flex: 1;
-    display: flex;
-    align-items: center;
-
-}
-.leftHeader button{
-    flex: 0.1;
-    width: 20px;
-    height: 95px;
-    border: 0px;
-    background-color:#F4F4F4 ;
-    color: #5E587A;
-    font-size: 18px;
-}
-.leftHeader button:hover{
-    cursor: pointer;
-    background-color: rgba(51, 37, 197, 0.1);
-}
-.leftHeader .logo{
-    font-size: 36px;
-    color: #3325C5;
-    flex: 0.2;
-
-}
-.rightHeader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rightHeader img{
-    width: 40px;
-    height: 40px;
-}
 .main{
     grid-area: main;
     display: flex;
@@ -150,13 +109,6 @@ input::-webkit-inner-spin-button {
     width: 50%;
 }
 
-.logo {
-    color: #3325c5;
-    text-align: left;
-    font-family: "Poppins-Regular", sans-serif;
-    font-size: 7vh;
-    font-weight: 400;
-}
 .formActions{
     display: flex;
     flex-direction: row-reverse;
@@ -166,6 +118,9 @@ input::-webkit-inner-spin-button {
     height: fit-content;
     margin-right: 20px;
     color: #1B59F8;
+}
+button:hover, a:hover{
+    cursor:pointer;
 }
 .create-btn{
     width: 8vw;

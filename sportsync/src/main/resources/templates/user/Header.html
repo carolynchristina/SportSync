@@ -1,0 +1,18 @@
+<html th:fragment="headerUser">
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/user/css/HeaderStyle.css}">
+    </head>
+<body>    
+    <div class="header">
+        <div class="leftHeader">
+            <label class="logo">SportSync</label>
+            <a th:href="@{/user/dashboard}" class="button"><button class="dashboard">Dashboard</button></a>
+            <a th:href="@{/user/activities}" class="button"><button class="activities">Activities</button></a>
+            <a th:href="@{/user/races}" class="button"><button class="race">Races</button></a>
+            <a th:href="@{/user/analysis}" class="button"><button lass="analysis">Analysis</button></a>
+        </div>
+        <div class="rightHeader">
+            <a th:href="@{/user/profile}"><img src="assets/Activities/userIcon.svg" alt="profile"></a>
+        </div>
+    </div>
+</body>

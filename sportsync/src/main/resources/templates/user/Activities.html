@@ -4,37 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/ActivitiesStyle.css}">
-    <script th:src="@{/user/js/mainScript.js}" defer></script>
     <title>Activities</title>
 </head>
 <body>
     <div class="body">
-        <div class="header">
-            <div class="leftHeader">
-                <label for="" class="logo">SportSync</label>
-                <button for="" class="dashboard">Dashboard</button>
-                <button for="" class="activities">Activities</button>
-                <button for="" class="race">Races</button>
-                <button for="" class="analysis">Analysis</button>
-            </div>
-            <div class="rightHeader">
-                <img src="assets/DashboardPage/userIcon.svg" alt="">
-            </div>
-        </div>
+        <!-- Header -->
+        <th:block class="header" th:include="~{user/Header :: headerUser}"></th:block>
+
         <div class="main">
-            <div class="judul">
+            <div class="title">
                 <label for="">Your Activities</label>
+                <a th:href="@{/user/addActivity}"><button class="add-activity-button">Add New Activity</button></a>
             </div>
-            <div class="container1">
-                <label for="">Username</label>
-                <label for="">YYYY-MM-DD HH:mm </label>
-                <label for="">Title</label>
-                <label for="">desc.</label>
-                <img src="" alt="">
-                <label for="">Distance: XX m</label>
-                <label for="">Duration: HHh, MMm, SSs</label>
+
+            <div class="activities-container">
+                <div th:each="activity : ${activityList}" class="activity-card">
+                    <!-- Username -->
+                    <div class="username">
+                        <strong th:text="${activity.username}"></strong>
+                    </div>
+                    <!-- Tanggal & Waktu -->
+                    <div class="tanggal">
+                        <span th:text="${#temporals.format(activity.tglWaktuMulai, 'yyyy-MM-dd')} + ' at ' + ${#temporals.format(activity.tglWaktuMulai, 'HH:mm')}"></span>
+                    </div>                    
+                    <!-- Judul -->
+                    <div class="judul">
+                        <h3 th:text="${activity.judul}"></h3>
+                    </div>
+                    <!-- Deskripsi -->
+                    <div class="deskripsi">
+                        <p th:text="${activity.deskripsi}"></p>
+                    </div>
+                    <!-- Foto -->
+                    <div class="foto" th:if="${activity.foto != null}">
+                        <img th:src="'data:image/jpeg;base64,' + ${activity.foto}" alt="Activity Photo">
+                    </div>
+                    <!-- Distance -->
+                    <div class="jarakTempuh">
+                        <span>Distance: </span><strong th:text="${activity.jarakTempuh}"></strong><span> m</span>
+                    </div>
+                    <!-- Duration -->
+                    <div class="durasi">
+                        <span>Duration: </span>
+                        <strong th:text="${activity.durasi.hour + 'h ' + activity.durasi.minute + 'm ' + activity.durasi.second + 's'}"></strong>
+                    </div>
+                         
+                </div>
             </div>
+
         </div>
+
     </div>
 </body>
 </html>
