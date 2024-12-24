@@ -28,12 +28,22 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/activities")
+    public String activities(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+
+        List<Activity> activityList = userRepository.findUserActivities(username);
+        model.addAttribute("activityList", activityList);
+
+        return "user/Activities"; 
+    }
+
     @GetMapping("/addActivity")
     public String addActivity(HttpSession session, Model model) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         String datetimeNow = LocalDateTime.now().format(formatter);
         model.addAttribute("datetimeNow", datetimeNow);
-
+        
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
 
@@ -79,7 +89,7 @@ public class UserController {
 
         userRepository.saveActivity(activity);
 
-        return "redirect:/user/Activities";
+        return "redirect:/user/activities";
     }
 
 }

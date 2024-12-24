@@ -77,4 +77,44 @@ public class UserJdbc implements UserRepository{
     }
 
 
+    @Override
+    public List<Activity> findUserActivities(String username) {
+        String sql = """
+                SELECT 
+                    judul,
+                    deskripsi,
+                    tglWaktuMulai,
+                    jarakTempuh,
+                    durasi,
+                    username,
+                    foto,
+                    idRace
+                FROM
+                    activity
+                WHERE
+                    username = ?
+                ORDER BY
+                    tglWaktuMulai DESC
+                """;
+
+        return jdbcTemplate.query(sql, this::mapRowToActivity, username);
+
+    }
+
+    public Activity mapRowToActivity(ResultSet resultSet, int rowNum) throws SQLException {
+        byte[] fotoBytes = resultSet.getBytes("foto");
+        
+        String fotoBase64 = fotoBytes != null ? Base64.getEncoder().encodeToString(fotoBytes) : null;
+        
+        return new Activity(
+            resultSet.getString("judul"),
+            resultSet.getString("deskripsi"),
+            resultSet.getTimestamp("tglWaktuMulai").toLocalDateTime(),
+            resultSet.getInt("jarakTempuh"),
+            resultSet.getTime("durasi").toLocalTime(),
+            resultSet.getString("username"),
+            fotoBase64,
+            resultSet.getInt("idRace")
+        );
+    }
 }
