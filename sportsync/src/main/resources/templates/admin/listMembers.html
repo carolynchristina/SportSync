@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
+    <link rel="stylesheet" th:href="@{/css/headerAdmin_styles.css}">
+    <link rel="stylesheet" th:href="@{/css/listMembers_styles.css}">
+    <title>Komponen Bobot Nilai</title>
+</head>
+<body>
+    <th:block th:include="~{/admin/header :: headerAdmin}"></th:block>
+    <main>
+        <h1>Members</h1>
+        <div class="fragments_container">
+            <th:block th:include="~{/admin/search :: searchBar}"></th:block>
+            <th:block th:include="~{/admin/pagination :: pagination}"></th:block>
+        </div>
+        <div class="list">
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="u : ${users}">
+                            <td th:text="${u.username}">Username</td>
+                            <td th:text="${u.email}">Email</td>
+                            <td><a><img src="/img/icon_edit.png" class="editBtn"></a></td>
+                        </tr>
+                    <tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
