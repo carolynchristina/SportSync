@@ -98,4 +98,3 @@ INSERT INTO raceParticipants (username, idRace) VALUES
 ('peter', 2),
 ('mia', 1),
 ('rachel', 2);
-
