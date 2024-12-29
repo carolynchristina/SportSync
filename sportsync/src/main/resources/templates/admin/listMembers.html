@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
-    <link rel="stylesheet" th:href="@{/css/headerAdmin_styles.css}">
-    <link rel="stylesheet" th:href="@{/css/listMembers_styles.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/headerAdmin_styles.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/listMembers_styles.css}">
     <title>Komponen Bobot Nilai</title>
 </head>
 <body>
-    <th:block th:include="~{/admin/header :: headerAdmin}"></th:block>
+    <th:block class="header" th:include="~{/admin/header :: headerAdmin}"></th:block>
     <main>
         <h1>Members</h1>
         <div class="fragments_container">
@@ -28,7 +28,7 @@
                         <tr th:each="u : ${users}">
                             <td th:text="${u.username}">Username</td>
                             <td th:text="${u.email}">Email</td>
-                            <td><a><img src="/img/icon_edit.png" class="editBtn"></a></td>
+                            <td><a><img src="/admin/assets/icon_edit.png" class="editBtn"></a></td>
                         </tr>
                     <tbody>
                 </table>

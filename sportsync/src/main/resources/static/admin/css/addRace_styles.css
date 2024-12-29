@@ -1,9 +1,27 @@
+body {
+    margin:0;
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 95px 60vw;
+    grid-template-areas:
+        "header"
+        "main";
+}
+.main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
 .main_container{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+h1{
+    text-align: center;
+}
 .container{
     overflow: auto;
     width: 80%;
@@ -54,7 +72,7 @@ margin-top: 15px;
 gap: 20px;
 }
 
-.button{
+main .button{
 padding: 10px 24px;
 background-color: rgba(255, 255, 255, 0.1);
 box-shadow: 0px 2px 1px rgba(170, 170, 170, 0.25);
