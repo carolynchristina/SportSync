@@ -1,12 +1,12 @@
 <div th:fragment="headerAdmin">
-    <header>
-        <div class="header">
-            <ul>
-                <li><a th:href="@{/}" class="sportSync">SportSync</a></li>
-                <li><a th:href="@{/admin/listMembers}">Members</a></li>
-                <li><a th:href="@{/admin/addRace}">Add Race</a></li>
-            </ul>
+    <div class="header">
+        <div class="leftHeader">
+            <label class="logo">SportSync</label>
+            <a th:href="@{/admin/listMembers}" class="button"><button class="listMembers">Members</button></a>
+            <a th:href="@{/admin/addRace}" class="button"><button class="addRace">Add Race</button></a>
+        </div>
+        <div class="rightHeader">
             <button type="button" onclick="window.location.href='/'">Log Out</button>
         </div>
-    </header>
+    </div>
 </div>

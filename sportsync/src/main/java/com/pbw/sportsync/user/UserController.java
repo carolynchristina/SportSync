@@ -30,6 +30,9 @@ public class UserController {
 
     @GetMapping("/activities")
     public String activities(HttpSession session, Model model) {
+        //TEST
+        session.setAttribute("username", "bobby");
+
         String username = (String) session.getAttribute("username");
 
         List<Activity> activityList = userRepository.findUserActivities(username);
@@ -43,6 +46,9 @@ public class UserController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         String datetimeNow = LocalDateTime.now().format(formatter);
         model.addAttribute("datetimeNow", datetimeNow);
+        
+        //TEST
+        session.setAttribute("username", "bobby");
         
         String username = (String) session.getAttribute("username");
         model.addAttribute("username", username);
