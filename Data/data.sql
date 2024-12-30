@@ -10,7 +10,8 @@ CREATE TABLE users(
 	username VARCHAR(30) PRIMARY KEY,
 	email VARCHAR(60),
 	password VARCHAR(60),
-	roles VARCHAR(10)
+	roles VARCHAR(10),
+	status boolean
 );
 
 CREATE TABLE race(
@@ -29,36 +30,36 @@ CREATE TABLE activity(
 	jarakTempuh int, --meter
 	durasi TIME, --hh:mm:ss
 	foto BYTEA,
-	username VARCHAR(30) REFERENCES users(username),
+	username VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE, --hapus otomatis jika username dihapus
 	idRace int REFERENCES race(id)
 );
 
 CREATE TABLE raceParticipants(
-	username VARCHAR(30) REFERENCES users(username),
+	username VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE, --hapus otomatis jika username dihapus
 	idRace int REFERENCES race(id)
 );
 
-INSERT INTO users (username, email, password, roles) VALUES
-('admin', 'admin@gmail.com', 'admin123', 'admin'),
-('alice', 'alice@gmail.com', 'password1', 'pengguna'),
-('bobby', 'bobby@gmail.com', 'password2', 'pengguna'),
-('charles', 'charles@gmail.com', 'password3', 'pengguna'),
-('diana', 'diana@gmail.com', 'password4', 'pengguna'),
-('edward', 'edward@gmail.com', 'password5', 'pengguna'),
-('fiona', 'fiona@gmail.com', 'password6', 'pengguna'),
-('greg', 'greg@gmail.com', 'password7', 'pengguna'),
-('hannah', 'hannah@gmail.com', 'password8', 'pengguna'),
-('ivan', 'ivan@gmail.com', 'password9', 'pengguna'),
-('julia', 'julia@gmail.com', 'password10', 'pengguna'),
-('karen', 'karen@gmail.com', 'password11', 'pengguna'),
-('linda', 'linda@gmail.com', 'password12', 'pengguna'),
-('mia', 'mia@gmail.com', 'password13', 'pengguna'),
-('noah', 'noah@gmail.com', 'password14', 'pengguna'),
-('olivia', 'olivia@gmail.com', 'password15', 'pengguna'),
-('peter', 'peter@gmail.com', 'password16', 'pengguna'),
-('rachel', 'rachel@gmail.com', 'password18', 'pengguna'),
-('qira', 'qira@gmail.com', 'password19', 'pengguna'),
-('steve', 'steve@gmail.com', 'password19', 'pengguna');
+INSERT INTO users (username, email, password, roles, status) VALUES
+('admin', 'admin@gmail.com', 'admin123', 'admin', true),
+('alice', 'alice@gmail.com', 'password1', 'pengguna', true),
+('bobby', 'bobby@gmail.com', 'password2', 'pengguna', true),
+('charles', 'charles@gmail.com', 'password3', 'pengguna', false),
+('diana', 'diana@gmail.com', 'password4', 'pengguna', true),
+('edward', 'edward@gmail.com', 'password5', 'pengguna', true),
+('fiona', 'fiona@gmail.com', 'password6', 'pengguna', true),
+('greg', 'greg@gmail.com', 'password7', 'pengguna', false),
+('hannah', 'hannah@gmail.com', 'password8', 'pengguna', false),
+('ivan', 'ivan@gmail.com', 'password9', 'pengguna', false),
+('julia', 'julia@gmail.com', 'password10', 'pengguna', true),
+('karen', 'karen@gmail.com', 'password11', 'pengguna', false),
+('linda', 'linda@gmail.com', 'password12', 'pengguna', false),
+('mia', 'mia@gmail.com', 'password13', 'pengguna', false),
+('noah', 'noah@gmail.com', 'password14', 'pengguna', true),
+('olivia', 'olivia@gmail.com', 'password15', 'pengguna', true),
+('peter', 'peter@gmail.com', 'password16', 'pengguna', true),
+('rachel', 'rachel@gmail.com', 'password18', 'pengguna', false),
+('qira', 'qira@gmail.com', 'password19', 'pengguna', false),
+('steve', 'steve@gmail.com', 'password19', 'pengguna', false);
 
 INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
 ('December Run 10K Race', 'Run a total of 10km', '2024-12-01', '2024-12-31'),
@@ -98,3 +99,13 @@ INSERT INTO raceParticipants (username, idRace) VALUES
 ('peter', 2),
 ('mia', 1),
 ('rachel', 2);
+
+---------------------------------------------------------------
+--VIEW
+CREATE OR REPLACE VIEW lastActPerUser AS
+SELECT username, MAX(tglwaktumulai) AS last_activity
+FROM ACTIVITY
+GROUP BY username
+ORDER BY username;
+
+

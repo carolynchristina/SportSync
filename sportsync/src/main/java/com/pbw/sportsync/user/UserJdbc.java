@@ -131,24 +131,39 @@ public class UserJdbc implements UserRepository{
     }
 
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException{
+        boolean isActive = resultSet.getBoolean("status");
+        String status = isActive? "Active" : "Inactive";
         return new User(
             resultSet.getString("username"),
             resultSet.getString("email"),
             resultSet.getString("password"),
-            resultSet.getString("roles")
+            resultSet.getString("roles"),
+            status
         );
     }
 
     @Override
-    public List<User> pagination(int limit, int offset){
-        String sql = "SELECT * FROM users LIMIT ? OFFSET ?";
-        return jdbcTemplate.query(sql, this::mapRowToUser, limit, offset);
+    public List<User> pagination(int limit, int offset, String status, String keyword){
+        String sql = "";
+        if(status.equals("")){ //all status
+            sql = "SELECT * FROM users WHERE username ILIKE ? LIMIT ? OFFSET ?";
+        }else if(status.equalsIgnoreCase("active")){ //active status
+            sql = "SELECT * FROM users WHERE status=true AND username ILIKE ? LIMIT ? OFFSET ?";
+        }else{ //inactive status
+            sql = "SELECT * FROM users WHERE status=false AND username ILIKE ? LIMIT ? OFFSET ?";
+        }
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%"+keyword+"%", limit, offset);
     }
 
     @Override
-    public int rowCount(){
-        String sql = "SELECT COUNT(*) FROM users";
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+    public int rowCount(String status, String keyword){
+        String sql = "SELECT COUNT(*) FROM users WHERE username ILIKE ?";
+        if(status.equalsIgnoreCase("active")){ //active status
+            sql += " AND status=true";
+        }else if(status.equalsIgnoreCase("inactive")){ //inactive status
+            sql += " AND status=false";
+        }
+        return jdbcTemplate.queryForObject(sql, Integer.class, "%"+keyword+"%");
     }
     
 }

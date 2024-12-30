@@ -1,0 +1,10 @@
+<div th:fragment="filter">
+    <form method="GET" th:action="@{/admin/}">
+        <select class="select" name="status" th:value="${status}" onchange="this.form.submit()">
+            <option value="" disabled selected>Filter by member status:</option>
+            <option value="">All</option>
+            <option th:selected="${status=='Active'}">Active</option>
+            <option th:selected="${status=='Inactive'}">Inactive</option>
+        </select>
+    </form>
+</div>
