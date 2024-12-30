@@ -96,4 +96,42 @@ public class AdminController {
         model.addAttribute("race", new Race());
         return "admin/addRace";
     }
+
+    @GetMapping("/memberInfo")
+    public String memberInfo(@RequestParam(name="user") String username, Model model){
+        User user = this.userRepo.findByKeyword(username).get(0);
+        model.addAttribute("user", user);
+        model.addAttribute("edit", false);
+        return "admin/memberInfo";
+    }
+
+    @GetMapping("/edit")
+    public String edit(@RequestParam(name="user") String username, Model model){
+        User user = this.userRepo.findByKeyword(username).get(0);
+        model.addAttribute("user", user);
+        model.addAttribute("edit", true);
+        return "admin/memberInfo";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@RequestParam(name="user") String username, @RequestParam("status") boolean status,  Model model){
+        boolean success = this.userRepo.editStatus(username, status);
+        if(success){
+            User user = this.userRepo.findByKeyword(username).get(0);
+            model.addAttribute("user", user);
+            return "admin/memberInfo";
+        }else{
+            model.addAttribute("error", "Edit role gagal");
+            return "admin/edit";
+        }
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name="user") String username, Model model){
+        boolean success = this.userRepo.deleteUser(username);
+        if(success){
+            return "redirect:/admin/";
+        }
+        return "admin/memberInfo";
+    }
 }

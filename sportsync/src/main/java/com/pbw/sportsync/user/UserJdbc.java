@@ -166,4 +166,22 @@ public class UserJdbc implements UserRepository{
         return jdbcTemplate.queryForObject(sql, Integer.class, "%"+keyword+"%");
     }
     
+    @Override
+    public boolean editStatus(String username, boolean status){
+        int rowsAffected = 0;
+        String sql = "UPDATE users SET status = ? WHERE username = ?";
+        rowsAffected = jdbcTemplate.update(sql, status, username);
+        return rowsAffected > 0;
+    }
+
+    @Override
+    public boolean deleteUser(String username){
+        String sql = "DELETE FROM users WHERE username = ?";
+        try{
+            jdbcTemplate.update(sql, username);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
 }

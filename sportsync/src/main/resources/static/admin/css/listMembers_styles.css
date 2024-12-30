@@ -7,6 +7,7 @@ body {
         "header"
         "main";
 }
+
 .main {
     grid-area: main;
     display: flex;
@@ -14,9 +15,11 @@ body {
     align-items: center;
     padding: 20px;
 }
+
 h1{
     text-align: center;
 }
+
 .list{
     display: flex;
     justify-content: center;
@@ -59,7 +62,16 @@ h1{
     border-width: 0px 0px 1.35px 0px;
 }
 
-.editBtn{
+.infoBtn{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    &:hover{
+        background-color: #f7f7f7;
+    }
+}
+
+.iconInfo {
     width: 15px;
     object-fit: contain;
 }

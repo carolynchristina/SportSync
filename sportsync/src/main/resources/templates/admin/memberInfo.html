@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
+    <link rel="stylesheet" th:href="@{/admin/css/headerAdmin_styles.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/memberInfo_styles.css}">
+    <title>Member Information</title>
+</head>
+<body>
+    <th:block class="header" th:include="~{/admin/header :: headerAdmin}"></th:block>
+    <main>
+        <h1>Member Information</h1>
+        <div class="infoContainer">
+            <div class="container">
+                <div class="infoGroup">
+                    <label>Username</label>
+                    <span th:text="${user.username}"></span>
+                </div> 
+                <div class="infoGroup">
+                    <label>Email</label>
+                    <span th:text="${user.email}"></span>
+                </div> 
+                <div class="infoGroup">
+                    <label>Password</label>
+                    <span th:text="${user.password}"></span>
+                </div> 
+                <div class="infoGroup" th:if="!${edit}">
+                    <label>Status</label>
+                    <span th:text="${user.status}"></span>
+                </div> 
+
+                <form action="/admin/edit" method="POST" th:if="${edit}">
+                    <div class="infoGroup">
+                        <label>Status</label>
+                            <span><input type="radio" name="status" value=true>Active</span><br>
+                            <span><input type="radio" name="status" value=false>Inactive</span>
+                    </div>
+                    <div class="buttonsContainer">
+                        <a th:href="@{/admin/memberInfo(user=${user.username})}" class="buttonNonHeader">Cancel</a>
+                        <input type="hidden" name="user" th:value="${user.username}">
+                        <button class="buttonNonHeader" type="submit" value="Save">Save</button>
+                    </div>
+                </form>
+
+                <form method="GET" th:if="!${edit}">
+                    <input type="hidden" name="user" th:value="${user.username}">
+                    <div class="buttonsContainer">
+                        <button class="buttonNonHeader" type="submit" formaction="/admin/edit">Edit</button>
+                        <button class="buttonNonHeader" type="submit" formaction="/admin/delete">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

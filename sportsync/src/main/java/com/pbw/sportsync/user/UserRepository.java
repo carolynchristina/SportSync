@@ -11,4 +11,6 @@ public interface UserRepository {
     List<User> findByKeyword(String keyword);
     List<User> pagination(int limit, int offset, String status, String keyword);
     int rowCount(String status, String keyword);
+    boolean editStatus(String username, boolean status);
+    boolean deleteUser(String username);
 }
