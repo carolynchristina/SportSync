@@ -184,4 +184,17 @@ public class UserJdbc implements UserRepository{
             return false;
         }
     }
+
+    @Override
+    public List<User> findUser(String email, String password) {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, email, password);
+    }
+
+    @Override
+    public List<User> findUserByName(String username){
+        String sql = "SELECT * FROM users WHERE LOWER(nama) LIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + username.toLowerCase() + "%");
+    }
 }
+

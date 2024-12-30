@@ -27,7 +27,61 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @GetMapping("/login")
+    public String showLogin(Model model){
+        if (!model.containsAttribute("error")) {
+            model.addAttribute("error", null);
+        }
+        model.addAttribute("email", "");
+        return "LoginPage"; 
+    }
 
+    @PostMapping("/login")
+    public String login(@RequestParam ("email") String email,
+                        @RequestParam ("password") String password,
+                        Model model, 
+                        HttpSession session){
+
+        List<User> users = userRepository.findUser(email, password);
+        if (users.size()==1) {
+            User user = users.get(0);
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("password", user.getPassword());
+            session.setAttribute("role", user.getRoles());
+            return "redirect:/Dashbord";
+        }
+        else{
+            model.addAttribute("Error", "Email Atau Password Salah!");
+            model.addAttribute("email", email);
+            return "LoginPage";
+        }
+    }
+    @GetMapping("/Dashboard")
+    public String showDashboard(@RequestParam (defaultValue = "") String username, HttpSession session, Model model){
+        if(session.getAttribute("username") != null){
+            String nama = (String)session.getAttribute("username");
+            String role = (String)session.getAttribute("role");
+
+            model.addAttribute("username", nama);
+            model.addAttribute("role", role);
+
+            if(model.getAttribute("role").equals("admin")){
+                List<User> Allusers = userRepository.findUserByName(username);
+                model.addAttribute("users",Allusers);
+                return "redirect:/Dashboard/admin";
+            }
+            else{
+                List<User> Allusers = userRepository.findUserByName(username);
+                model.addAttribute("users",Allusers);
+                return "redirect:/Dashboard/user";
+            }
+        }
+        else{
+            return "redirect:/user";
+        }
+    }
     @GetMapping("/activities")
     public String activities(HttpSession session, Model model) {
         //TEST

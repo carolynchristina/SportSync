@@ -13,4 +13,6 @@ public interface UserRepository {
     int rowCount(String status, String keyword);
     boolean editStatus(String username, boolean status);
     boolean deleteUser(String username);
+    List<User> findUser(String username, String password);
+    List<User> findUserByName(String username);
 }
