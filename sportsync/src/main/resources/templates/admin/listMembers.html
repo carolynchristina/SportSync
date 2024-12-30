@@ -4,7 +4,7 @@
     <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
     <link rel="stylesheet" th:href="@{/admin/css/headerAdmin_styles.css}">
     <link rel="stylesheet" th:href="@{/admin/css/listMembers_styles.css}">
-    <title>Komponen Bobot Nilai</title>
+    <title>Members List</title>
 </head>
 <body>
     <th:block class="header" th:include="~{/admin/header :: headerAdmin}"></th:block>
@@ -13,6 +13,7 @@
         <div class="fragments_container">
             <th:block th:include="~{/admin/search :: searchBar}"></th:block>
             <th:block th:include="~{/admin/pagination :: pagination}"></th:block>
+            <th:block th:include="~{/admin/filter :: filter}"></th:block>
         </div>
         <div class="list">
             <div class="container">
@@ -21,14 +22,20 @@
                         <tr>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Edit</th>
+                            <th>Status</th>
+                            <th>Information</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="u : ${users}">
                             <td th:text="${u.username}">Username</td>
                             <td th:text="${u.email}">Email</td>
-                            <td><a><img src="/admin/assets/icon_edit.png" class="editBtn"></a></td>
+                            <td th:text="${u.status}">Status</td>
+                            <td>
+                                <a class="infoBtn" th:href="@{/admin/memberInfo?user={username}(username=${u.username})}">
+                                    <img src="/admin/assets/icon_info.png" class="iconInfo">
+                                </a>
+                            </td>
                         </tr>
                     <tbody>
                 </table>

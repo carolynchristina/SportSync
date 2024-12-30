@@ -1,7 +1,7 @@
 <div th:fragment="searchBar">
-    <form method="GET" th:action="@{/admin/listMembers}">
-            <input type="text" name="filter" th:value="${filter}" placeholder="search by username">
-            <input type="hidden" name="page" th:if="${currentPage} != null" th:value="${currentPage}">
-            <button type="submit">search</button>
+    <form method="GET" th:action="@{/admin/}">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="Search by username">
+        <input type="hidden" name="page" th:if="${currentPage} != null" th:value="${currentPage}">
+        <button type="submit">Search</button>
     </form>
 </div>

@@ -1,6 +1,7 @@
 package com.pbw.sportsync.admin;
 
 import java.util.List;
+import java.util.ArrayList;
 import com.pbw.sportsync.user.UserRepository;
 import com.pbw.sportsync.user.User;
 import com.pbw.sportsync.race.Race;
@@ -27,25 +28,37 @@ public class AdminController {
     @Autowired
     private RaceRepository raceRepo;
 
-    @GetMapping("/listMembers")
-    public String listMembers(@RequestParam(defaultValue="") String filter,
-        @RequestParam(defaultValue="1") int page,
+    @GetMapping("/")
+    public String listMembers(@RequestParam(defaultValue="1") int page,
+        @RequestParam(defaultValue="") String keyword,
+        @RequestParam(defaultValue="") String status,
         Model model){
             List<User> user;
             if(page == 0){ //tanpa pagination
-                user = this.userRepo.findByKeyword(filter);
+                user = this.userRepo.findByKeyword(keyword);
+                if(!status.equals("")){ //filter berdasarkan status member
+                    List<User> filteredUsers = new ArrayList<>();
+                    for(User u : user){
+                        if(u.getStatus().equalsIgnoreCase(status)){
+                            filteredUsers.add(u);
+                        }
+                    }
+                    user = filteredUsers;
+                }
             }else{ //dengan pagination
                 int limit = 8;
                 int offset = (page - 1) * limit;
-                int rowCount = this.userRepo.rowCount();
-                user = this.userRepo.pagination(limit, offset);
+                int rowCount = this.userRepo.rowCount(status, keyword);
+                user = this.userRepo.pagination(limit, offset, status, keyword);
                 int pageCount = (int) Math.ceil((double) rowCount / limit);
-    
+                
                 model.addAttribute("currentPage", page);
                 model.addAttribute("pageCount", pageCount);
+                
             }
+            model.addAttribute("status", status);
             model.addAttribute("users", user);
-            model.addAttribute("filter", filter);
+            model.addAttribute("keyword", keyword);
 
             return "admin/listMembers";
     }
@@ -82,5 +95,43 @@ public class AdminController {
     public String reset(Model model){
         model.addAttribute("race", new Race());
         return "admin/addRace";
+    }
+
+    @GetMapping("/memberInfo")
+    public String memberInfo(@RequestParam(name="user") String username, Model model){
+        User user = this.userRepo.findByKeyword(username).get(0);
+        model.addAttribute("user", user);
+        model.addAttribute("edit", false);
+        return "admin/memberInfo";
+    }
+
+    @GetMapping("/edit")
+    public String edit(@RequestParam(name="user") String username, Model model){
+        User user = this.userRepo.findByKeyword(username).get(0);
+        model.addAttribute("user", user);
+        model.addAttribute("edit", true);
+        return "admin/memberInfo";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@RequestParam(name="user") String username, @RequestParam("status") boolean status,  Model model){
+        boolean success = this.userRepo.editStatus(username, status);
+        if(success){
+            User user = this.userRepo.findByKeyword(username).get(0);
+            model.addAttribute("user", user);
+            return "admin/memberInfo";
+        }else{
+            model.addAttribute("error", "Edit role gagal");
+            return "admin/edit";
+        }
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name="user") String username, Model model){
+        boolean success = this.userRepo.deleteUser(username);
+        if(success){
+            return "redirect:/admin/";
+        }
+        return "admin/memberInfo";
     }
 }
