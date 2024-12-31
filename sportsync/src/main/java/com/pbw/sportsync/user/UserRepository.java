@@ -11,4 +11,7 @@ public interface UserRepository {
     List<User> findByKeyword(String keyword);
     List<User> pagination(int limit, int offset);
     int rowCount();
+    List<WeekChartData> getWeekChartData(String username);
+    List<MonthChartData> getMonthChartData(String username);
+    List<YearChartData> getYearChartData(String username);
 }

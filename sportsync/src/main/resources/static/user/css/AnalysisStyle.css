@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.body {
+    display: grid;
+    grid-template-rows: 95px auto;
+    grid-template-areas:
+        "header"
+        "main";
+}
+
+.main {
+    grid-area: main;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F9F9F9;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.title h1 {
+    font-size: 36px;
+    color: #3325C5;
+}
+
+.usernameTitle{
+    font-size: 36px;
+    color: #3325C5;
+}
+
+.export-btn {
+    background-color: #3325C5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.export-btn:hover {
+    background-color: #2418A5;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #DDE6FF;
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h2 {
+    font-size: 24px;
+    color: #3325C5;
+    margin-bottom: 20px;
+}
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 300px; 
+    position: relative;
+    margin-bottom: 20px;
+    padding: 50px;
+}
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; 
+    height: 100%;
+    width: 8%; 
+    text-align: center;
+}
+
+
+.bar {
+    background-color: #3325C5;
+    width: 20%;
+    border-radius: 10px;
+    position: relative;
+}
+
+
+.bar-value {
+    position: relative;
+    top: -20px;
+    font-size: 12px;
+    color: #3325C5;
+}
+
+.bar-label {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+
+.summary {
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.summary p {
+    margin: 5px 0;
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+
+    .title {
+        display: none;
+    }
+
+    .usernameTitle {
+        display: inline-block !important;
+    }
+}

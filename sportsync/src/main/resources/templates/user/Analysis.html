@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/AnalysisStyle.css}">
+    <title>Analysis</title>
+    <script src="/user/js/analysis.js" defer></script>
+    <script th:inline="javascript">
+        const weekChartData = /*[[${weekChartData}]]*/ {};
+        const monthChartData = /*[[${monthChartData}]]*/ {};
+        const yearChartData = /*[[${yearChartData}]]*/ {};
+    </script>
+</head>
+<body>
+    <div class="body">
+        <!-- Header -->
+        <th:block class="header" th:include="~{user/Header :: headerUser}"></th:block>
+        
+        <div class="main">
+            <div class="title">
+                <h1>Activity Analysis</h1>
+                <button class="export-btn">Export as PDF</button>
+            </div>
+
+            <div class="usernameTitle" style="display: none;">
+                <span th:text="${username} + '\'s Activity Analysis'"></span>
+            </div>
+                   
+                        
+            <!-- Week -->
+            <div class="chart-container">
+                <h2>Week</h2>
+                <hr>
+                <div id="weekChart" class="bar-chart"></div>
+                <div class="summary">
+                    <p><strong>Summary</strong></p>
+                    <p>Total Activities: <span th:text="${weekTotalActivities}"></span></p>
+                    <p>Total Distance: <span th:text="${weekTotalDistance} + 'm'"></span></p>
+                    <p>Average Distance: <span th:text="${weekAverageDistance} + 'm'"></span></p>
+                </div>
+            </div>
+    
+            <!-- Month -->
+            <div class="chart-container">
+                <h2>Month</h2>
+                <hr>
+                <div id="monthChart" class="bar-chart"></div>
+                <div class="summary">
+                    <p><strong>Summary</strong></p>
+                    <p>Total Activities: <span th:text="${monthTotalActivities}"></span></p>
+                    <p>Total Distance: <span th:text="${monthTotalDistance} + 'm'"></span></p>
+                    <p>Average Distance: <span th:text="${monthAverageDistance} + 'm'"></span></p>
+                </div>
+            </div>
+    
+            <!-- Year -->
+            <div class="chart-container">
+                <h2>Year</h2>
+                <hr>
+                <div id="yearChart" class="bar-chart"></div>
+                <div class="summary">
+                    <p><strong>Summary</strong></p>
+                    <p>Total Activities: <span th:text="${yearTotalActivities}"></span></p>
+                    <p>Total Distance: <span th:text="${yearTotalDistance} + 'm'"></span></p>
+                    <p>Average Distance: <span th:text="${yearAverageDistance} + 'm'"></span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
