@@ -10,7 +10,8 @@ CREATE TABLE users(
 	username VARCHAR(30) PRIMARY KEY,
 	email VARCHAR(60),
 	password VARCHAR(60),
-	roles VARCHAR(10)
+	roles VARCHAR(10),
+	status boolean
 );
 
 CREATE TABLE race(
@@ -29,36 +30,37 @@ CREATE TABLE activity(
 	jarakTempuh int, --meter
 	durasi TIME, --hh:mm:ss
 	foto BYTEA,
-	username VARCHAR(30) REFERENCES users(username),
+	username VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE, --hapus otomatis jika username dihapus
 	idRace int REFERENCES race(id)
 );
 
 CREATE TABLE raceParticipants(
-	username VARCHAR(30) REFERENCES users(username),
+	username VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE, --hapus otomatis jika username dihapus
 	idRace int REFERENCES race(id)
 );
 
-INSERT INTO users (username, email, password, roles) VALUES
-('admin', 'admin@gmail.com', 'admin123', 'admin'),
-('alice', 'alice@gmail.com', 'password1', 'pengguna'),
-('bobby', 'bobby@gmail.com', 'password2', 'pengguna'),
-('charles', 'charles@gmail.com', 'password3', 'pengguna'),
-('diana', 'diana@gmail.com', 'password4', 'pengguna'),
-('edward', 'edward@gmail.com', 'password5', 'pengguna'),
-('fiona', 'fiona@gmail.com', 'password6', 'pengguna'),
-('greg', 'greg@gmail.com', 'password7', 'pengguna'),
-('hannah', 'hannah@gmail.com', 'password8', 'pengguna'),
-('ivan', 'ivan@gmail.com', 'password9', 'pengguna'),
-('julia', 'julia@gmail.com', 'password10', 'pengguna'),
-('karen', 'karen@gmail.com', 'password11', 'pengguna'),
-('linda', 'linda@gmail.com', 'password12', 'pengguna'),
-('mia', 'mia@gmail.com', 'password13', 'pengguna'),
-('noah', 'noah@gmail.com', 'password14', 'pengguna'),
-('olivia', 'olivia@gmail.com', 'password15', 'pengguna'),
-('peter', 'peter@gmail.com', 'password16', 'pengguna'),
-('rachel', 'rachel@gmail.com', 'password18', 'pengguna'),
-('qira', 'qira@gmail.com', 'password19', 'pengguna'),
-('steve', 'steve@gmail.com', 'password19', 'pengguna');
+--password: {nama}pass (misal: nama: alice, password: alicepass)
+INSERT INTO users (username, email, password, roles, status) VALUES
+('admin', 'admin@gmail.com', '$2a$10$w75XAuVuRo.SePNZf7L/O.Tzod4gOi6.sXNXDIdN3BLQ70XOvWmhS', 'admin', true),
+('alice', 'alice@gmail.com', '$2a$10$CsRVcGlbj/RmSZ85dxtyOOn5uqcTw1Ks4p8QPM3AyRnFtdzRZqsEC', 'pengguna', true),
+('bobby', 'bobby@gmail.com', '$2a$10$2XEzZ44.QBNphivTZsxwX.ssMrO0FEJTlQ3.UN6XUMsLug/oiebP2', 'pengguna', true),
+('charles', 'charles@gmail.com', '$2a$10$TOvFyQy2snIob1vxZyP58epKZPbLDAaK5Bmy0NQPs/U6PRl1e6Y5C', 'pengguna', false),
+('diana', 'diana@gmail.com', '$2a$10$nmcBQNru8jorM.n47hCafO9RrwQEmGlnvQn706IMS49ixmLUzB93y', 'pengguna', true),
+('edward', 'edward@gmail.com', '$2a$10$XWk.EU4GRpj2ZKVc2mc8nepy1hSL7D1kH8MaWIuwir6qtKCJGd4PW', 'pengguna', true),
+('fiona', 'fiona@gmail.com', '$2a$10$lJxMWEmwN.GiZWgPfdFAV.v2bc2K6aclIIcLtUzMduwAt0oqI5bUO', 'pengguna', true),
+('greg', 'greg@gmail.com', '$2a$10$2OQig.RpOX4a/9agblasweCw7nf5.gXQuRTmNAXXXYCjQbvV4Bn6K', 'pengguna', false),
+('hannah', 'hannah@gmail.com', '$2a$10$cQzyUn6VcaBnHjr8hg5HnOb3QluFD.O5wEmKDakAi2bznDFwyXwH6', 'pengguna', false),
+('ivan', 'ivan@gmail.com', '$2a$10$2OaeW.JAdBbKgTdNwsuL1O592bU13nU.fnXwpL7ntOZUXUfoK6Fom', 'pengguna', false),
+('julia', 'julia@gmail.com', '$2a$10$nnF5AiLtbelS2KJDQOaHxuhjAn.rjzgUMXrh1rqzMZ2VYmGfNgA8C', 'pengguna', true),
+('karen', 'karen@gmail.com', '$2a$10$E.q9mZ8J091WlQegmWSXfOnu0ubomXBTU6AwpRt4pEJY3NjLVQUgS', 'pengguna', false),
+('linda', 'linda@gmail.com', '$2a$10$b704sWJSP/EeHF650mpcBePqZNNh8VSAk7jaZybIuXj5RIvS6IW4q', 'pengguna', false),
+('mia', 'mia@gmail.com', '$2a$10$lsPNZbRKw2q9RVnxDSwqquDdVyTvxjtUjalyIu97fMdOXqndh6mia', 'pengguna', false),
+('noah', 'noah@gmail.com', '$2a$10$cNuqQKY57qDuxw/CGj.BwecEZc/AE7Sz3mqxbeMVNAJDhi2ytQvN6', 'pengguna', true),
+('olivia', 'olivia@gmail.com', '$2a$10$SwDApthMpRuKBr99xirF5OMh/26CuQjzEiw3NlJ14xwjkoudA0n9e', 'pengguna', true),
+('peter', 'peter@gmail.com', '$2a$10$zJFUFQBTAt.C5Hmn0EfDl.AJnSJi30j5b55Fv9q9pOQGJ1Zm1IqKa', 'pengguna', true),
+('rachel', 'rachel@gmail.com', '$2a$10$emgmGHnkNbXeBubDkPaeQ.abuWqLnGFOuGvp2eqxW.TspQdlopvbW', 'pengguna', false),
+('qira', 'qira@gmail.com', '$2a$10$a9vHaKt/eMw39aZnTgVoyuNLHynqajsomWnrRoXVAXi7ml3.ImxHa', 'pengguna', false),
+('steve', 'steve@gmail.com', '$2a$10$K2IOW6IqSlOWiEsCLh/RNOtP8Togcg4lYvsCZmHEPti/ALzaTGEOe', 'pengguna', false);
 
 INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
 ('December Run 10K Race', 'Run a total of 10km', '2024-12-01', '2024-12-31'),
@@ -98,3 +100,13 @@ INSERT INTO raceParticipants (username, idRace) VALUES
 ('peter', 2),
 ('mia', 1),
 ('rachel', 2);
+
+---------------------------------------------------------------
+--VIEW
+CREATE OR REPLACE VIEW lastActPerUser AS
+SELECT username, MAX(tglwaktumulai) AS last_activity
+FROM ACTIVITY
+GROUP BY username
+ORDER BY username;
+
+

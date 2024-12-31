@@ -8,4 +8,5 @@ public class User {
     private final String email;
     private final String password;
     private final String roles;
+    private final String status;
 }

@@ -16,14 +16,14 @@ body {
     padding: 20px;
 }
 
-.mainContainer{
+h1{
+    text-align: center;
+}
+
+.infoContainer{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-h1{
-    text-align: center;
 }
 
 .container{
@@ -40,26 +40,12 @@ h1{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-form{
-    width: 100%;
-    display: grid;
-    gap: 15px;
-    font-size: 16px;
-}
-
-.formGroup{
+.infoGroup{
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     width: 100%;
     gap: 15px;
-}
-
-.formControl{
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
 .buttonsContainer{
@@ -68,8 +54,8 @@ form{
     margin-top: 15px;
     gap: 20px;
 }
-
-main .button{
+  
+.buttonNonHeader{
     padding: 10px 24px;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0px 2px 1px rgba(170, 170, 170, 0.25);
@@ -83,8 +69,14 @@ main .button{
     font-size: 16px;
     font-weight: 400;
     transition: background-color 0.3s ease;
-
+    
     &:hover{
-        background-color: #f7f7f7;
+      background-color: #f7f7f7;
     }
 }
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+  
