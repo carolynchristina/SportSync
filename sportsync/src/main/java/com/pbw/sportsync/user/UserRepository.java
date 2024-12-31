@@ -15,4 +15,7 @@ public interface UserRepository {
     boolean deleteUser(String username);
     List<User> findUser(String username, String password);
     List<User> findUserByName(String username);
+    List<WeekChartData> getWeekChartData(String username);
+    List<MonthChartData> getMonthChartData(String username);
+    List<YearChartData> getYearChartData(String username);
 }

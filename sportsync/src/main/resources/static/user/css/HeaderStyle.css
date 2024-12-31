@@ -48,3 +48,9 @@
     width: 40px;
     height: 40px;
 }
+
+@media print {
+    .header {
+        display:none;
+    }
+}
