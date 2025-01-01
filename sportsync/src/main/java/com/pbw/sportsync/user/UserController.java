@@ -31,7 +31,16 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-    
+
+    @GetMapping("/LandingPage")
+    public String landingPage(Model model){
+        if (!model.containsAttribute("error")) {
+            model.addAttribute("error", null);
+        }
+        model.addAttribute("email", "");
+        return "user/LandingPage";
+    }
+
     @GetMapping("/login")
     public String showLogin(Model model){
         if (!model.containsAttribute("error")) {
@@ -54,7 +63,12 @@ public class UserController {
             session.setAttribute("email", user.getEmail());
             session.setAttribute("password", user.getPassword());
             session.setAttribute("role", user.getRoles());
-            return "redirect:/Dashbord";
+            if(user.getRoles().equals("admin")){
+                return "redirect:/admin/";
+            }
+            else{
+                return "redirect:/user/Dashboard";
+            }
         }
         else{
             model.addAttribute("Error", "Email Atau Password Salah!");
@@ -63,7 +77,9 @@ public class UserController {
         }
     }
     @GetMapping("/Dashboard")
-    public String showDashboard(@RequestParam (defaultValue = "") String username, HttpSession session, Model model){
+    public String showDashboard(@RequestParam (defaultValue = "") String username,
+                                HttpSession session,
+                                Model model){
         if(session.getAttribute("username") != null){
             String nama = (String)session.getAttribute("username");
             String role = (String)session.getAttribute("role");
@@ -71,19 +87,10 @@ public class UserController {
             model.addAttribute("username", nama);
             model.addAttribute("role", role);
 
-            if(model.getAttribute("role").equals("admin")){
-                List<User> Allusers = userRepository.findUserByName(username);
-                model.addAttribute("users",Allusers);
-                return "redirect:/Dashboard/admin";
-            }
-            else{
-                List<User> Allusers = userRepository.findUserByName(username);
-                model.addAttribute("users",Allusers);
-                return "redirect:/Dashboard/user";
-            }
+            return "user/Dashboard";
         }
         else{
-            return "redirect:/user";
+            return "redirect:/user/login";
         }
     }
     @GetMapping("/activities")
