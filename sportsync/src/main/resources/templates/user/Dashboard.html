@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/DashboardStyle.css}">
-    <script th:src="@{/user/js/mainScript.js}" defer></script>
+    <script th:src="@{/user/js/Overlay.js}" defer></script>
     <title>Dashboard</title>
 </head>
 <body>
+    
     <div class="body">
         <div class="header">
             <div class="leftHeader">
                 <label for="" class="logo">SportSync</label>
-                <button for="" class="dashboard">Dashboard</button>
-                <button for="" class="activities">Activities</button>
-                <button for="" class="race">Races</button>
-                <button for="" class="analysis">Analysis</button>
+                <a th:href="@{/user/Dashboard}">
+                    <button for="" class="dashboard">Dashboard</button>
+                </a>
+                <a th:href="@{/user/activities}">
+                    <button for="" class="activities">Activities</button>
+                </a>
+                <a th:href="@{/user/races}">
+                    <button for="" class="race">Races</button>
+                </a>
+                <a th:href="@{/user/analysis}">
+                    <button for="" class="analysis">Analysis</button>
+                </a>
             </div>
             <div class="rightHeader">
-                <img src="/user/assets/DashboardPage/userIcon.svg" alt="">
+                <img src="/user/assets/DashboardPage/userIcon.svg" onclick="showElement()">
             </div>
         </div>
         <main class="mainDashboard">
@@ -98,6 +107,11 @@
                 </div>
             </div>
         </main>
+    </div>
+    <div id="OverlayIconUser">
+        <form action="logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
 </body>
 </html>

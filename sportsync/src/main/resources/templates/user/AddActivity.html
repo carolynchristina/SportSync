@@ -7,7 +7,7 @@
     <title>Add New Activity</title>
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/AddActivityStyle.css}">
     <script th:src="@{/user/js/addActivity.js}" defer></script>
-
+    <script th:src="@{/user/js/Overlay.js}" defer></script>
 </head>
 
 <body>
@@ -100,6 +100,11 @@
             </form>
 
         </div>
+    </div>
+    <div id="OverlayIconUser">
+        <form action="logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
 </body>
 
