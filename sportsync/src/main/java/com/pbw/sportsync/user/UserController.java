@@ -26,57 +26,13 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/sportsync/user")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/LandingPage")
-    public String landingPage(Model model){
-        if (!model.containsAttribute("error")) {
-            model.addAttribute("error", null);
-        }
-        model.addAttribute("email", "");
-        return "user/LandingPage";
-    }
-
-    @GetMapping("/login")
-    public String showLogin(Model model){
-        if (!model.containsAttribute("error")) {
-            model.addAttribute("error", null);
-        }
-        model.addAttribute("email", "");
-        return "LoginPage"; 
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam ("email") String email,
-                        @RequestParam ("password") String password,
-                        Model model, 
-                        HttpSession session){
-
-        List<User> users = userRepository.findUser(email, password);
-        if (users.size()==1) {
-            User user = users.get(0);
-            session.setAttribute("username", user.getUsername());
-            session.setAttribute("email", user.getEmail());
-            session.setAttribute("password", user.getPassword());
-            session.setAttribute("role", user.getRoles());
-            if(user.getRoles().equals("admin")){
-                return "redirect:/admin/";
-            }
-            else{
-                return "redirect:/user/Dashboard";
-            }
-        }
-        else{
-            model.addAttribute("Error", "Email Atau Password Salah!");
-            model.addAttribute("email", email);
-            return "LoginPage";
-        }
-    }
-    @GetMapping("/Dashboard")
+    @GetMapping("")
     public String showDashboard(@RequestParam (defaultValue = "") String username,
                                 HttpSession session,
                                 Model model){
@@ -90,7 +46,7 @@ public class UserController {
             return "user/Dashboard";
         }
         else{
-            return "redirect:/user/login";
+            return "redirect:/sportsync/login";
         }
     }
     @GetMapping("/activities")
