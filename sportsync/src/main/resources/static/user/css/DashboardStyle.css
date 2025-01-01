@@ -138,6 +138,8 @@ body{
 }
 .mainDashboard .leftside2{
     grid-area: side2;
+    width: 30vw;
+    height: 27vw;
     background-color: #F4F4F4;
     margin: 20px;
     padding: 0px;
@@ -179,9 +181,10 @@ body{
 .mainDashboard .middle{
     grid-area: middle;
     display: flex;
+    width: 33vw;
     flex-direction: column;
     background-color: #F4F4F4;
-    margin: 20px;
+    margin-top: 20px;
 }
 .middle .img-middle{
     flex: 0.23;
@@ -236,7 +239,7 @@ body{
     color: white;
 }
 .img-middle img{
-    width: 31.3vw;
+    width: 33vw;
 }
 .rightside{
     display: flex;
@@ -245,7 +248,7 @@ body{
 }
 .rightside .friendList button{
     background-color: white;
-    width: 13.8vw;
+    width: 15vw;
     height: 5vh;
     flex: 0.8;
     border: 0px;
@@ -256,7 +259,7 @@ body{
 }
 .rightside .addFriend button{
     background-color: white;
-    width: 13.8vw;
+    width: 15vw;
     height: 5vh;
     border: 0px;
 }
@@ -267,9 +270,8 @@ body{
 .mainDashboard .rightside{
     grid-area: side3;
     background-color: #F4F4F4;
-    margin: 20px;
-    margin-right: 60px;
-
+    width: 30vw;
+    margin-top: 20px;
 }
 .header{
     grid-area: header;
