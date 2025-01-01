@@ -317,7 +317,7 @@ body{
     height: 700px;
     background-size: 100vw;
     background-repeat:no-repeat ;
-    background-image: url(/sportsync/src/main/resources/Assets/LandingPage/LandingPageBackground.svg);
+    background-image: url(/user/assets/LandingPage/LandingPageBackground.svg);
     padding-top: 250px;
 }
 .Main1 button{
