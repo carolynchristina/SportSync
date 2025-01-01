@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import com.pbw.sportsync.user.UserRepository;
 import com.pbw.sportsync.user.User;
+import com.pbw.sportsync.RequiredRole;
 import com.pbw.sportsync.race.Race;
 import com.pbw.sportsync.race.RaceRepository;
 
@@ -19,7 +20,7 @@ import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/sportsync/admin")
 public class AdminController {
     
     @Autowired
@@ -28,7 +29,8 @@ public class AdminController {
     @Autowired
     private RaceRepository raceRepo;
 
-    @GetMapping("/")
+    @GetMapping("")
+    @RequiredRole("admin")
     public String listMembers(@RequestParam(defaultValue="1") int page,
         @RequestParam(defaultValue="") String keyword,
         @RequestParam(defaultValue="") String status,
@@ -64,12 +66,14 @@ public class AdminController {
     }
 
     @GetMapping("/addRace")
+    @RequiredRole("admin")
     public String addRace(Model model){
         model.addAttribute("race", new Race());
         return "admin/addRace";
     }
 
     @PostMapping("/addRace/save")
+    @RequiredRole("admin")
     public String save(@Valid @ModelAttribute("race") Race race, BindingResult bindingResult, Model model){
         //cek validasi error
         if(bindingResult.hasErrors()){
@@ -92,12 +96,14 @@ public class AdminController {
     }
 
     @PostMapping("/addRace/reset")
+    @RequiredRole("admin")
     public String reset(Model model){
         model.addAttribute("race", new Race());
         return "admin/addRace";
     }
 
     @GetMapping("/memberInfo")
+    @RequiredRole("admin")
     public String memberInfo(@RequestParam(name="user") String username, Model model){
         User user = this.userRepo.findByKeyword(username).get(0);
         model.addAttribute("user", user);
@@ -106,6 +112,7 @@ public class AdminController {
     }
 
     @GetMapping("/edit")
+    @RequiredRole("admin")
     public String edit(@RequestParam(name="user") String username, Model model){
         User user = this.userRepo.findByKeyword(username).get(0);
         model.addAttribute("user", user);
@@ -114,6 +121,7 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
+    @RequiredRole("admin")
     public String edit(@RequestParam(name="user") String username, @RequestParam("status") boolean status,  Model model){
         boolean success = this.userRepo.editStatus(username, status);
         if(success){
@@ -127,10 +135,11 @@ public class AdminController {
     }
 
     @GetMapping("/delete")
+    @RequiredRole("admin")
     public String delete(@RequestParam(name="user") String username, Model model){
         boolean success = this.userRepo.deleteUser(username);
         if(success){
-            return "redirect:/admin/";
+            return "redirect:/sportsync/admin";
         }
         return "admin/memberInfo";
     }

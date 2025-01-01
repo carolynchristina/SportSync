@@ -15,7 +15,7 @@
         <div class="main">
             <div class="title">
                 <label for="">Your Activities</label>
-                <a th:href="@{/user/addActivity}"><button class="add-activity-button">Add New Activity</button></a>
+                <a th:href="@{/sportsync/user/addActivity}"><button class="add-activity-button">Add New Activity</button></a>
             </div>
 
             <div class="activities-container">
@@ -57,7 +57,7 @@
 
     </div>
     <div id="OverlayIconUser">
-        <form action="logout" method="post">
+        <form action="/sportsync/logout" method="GET">
             <button id="logoutButton" type="submit" value="logout">Log out</button>
         </form>
     </div>

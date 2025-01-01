@@ -13,7 +13,7 @@
             <img th:src="@{/user/assets/LoginPage/loginimg.png}" alt="">
         </div>
         <div class="rightSide">
-            <form action="/user/login" method="post">
+            <form action="/sportsync/login" method="post">
                 <div class="container">
                     <label for="">Welcome To SportSync</label>
                     <div class="email">
@@ -26,6 +26,7 @@
                     </div>
                     <button type="submit">Sign In</button>
                     <label for="">Don't have an account?     <a href="">Register</a></label>
+                    <span th:if="${error}" th:text="${error}"></span>
                 </div>
             </form>
         </div>

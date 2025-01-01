@@ -3,19 +3,19 @@
         <ul class="pagination_container">
             <!-- Previous Button -->
             <div class="pagination_item">
-                <a th:href="@{/admin/(page=${currentPage} - 1, keyword=${keyword}, status=${status})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                <a th:href="@{/sportsync/admin(page=${currentPage} - 1, keyword=${keyword}, status=${status})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </div>
 
             <!-- Page Numbers -->
             <div th:each="i : ${#numbers.sequence(1, pageCount)}" class="pagination_item">
-                <a th:href="@{/admin/(page=${i}, keyword=${keyword}, status=${status})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
+                <a th:href="@{/sportsync/admin(page=${i}, keyword=${keyword}, status=${status})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
             </div>
 
             <!-- Next Button -->
             <div class="pagination_item">
-                <a th:href="@{/admin/(page=${currentPage} + 1, keyword=${keyword}, status=${status})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                <a th:href="@{/sportsync/admin(page=${currentPage} + 1, keyword=${keyword}, status=${status})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </div>
