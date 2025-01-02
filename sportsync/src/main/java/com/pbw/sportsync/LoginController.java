@@ -49,6 +49,7 @@ public class LoginController {
             if(user != null){ //berhasil login, tambah di session
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRoles());
+                session.setAttribute("email", user.getEmail());
                 
                 //redirect sesuai role
                 if(user.getRoles().equals("admin")){

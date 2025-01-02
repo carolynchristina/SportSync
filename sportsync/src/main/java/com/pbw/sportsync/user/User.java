@@ -1,12 +1,14 @@
 package com.pbw.sportsync.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@AllArgsConstructor
 @Data
 public class User {
-    private final String username;
-    private final String email;
-    private final String password;
-    private final String roles;
-    private final String status;
+    private String username;
+    private String email;
+    private String password;
+    private String roles;
+    private String status;
 }

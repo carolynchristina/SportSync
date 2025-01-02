@@ -1,6 +1,7 @@
 <html th:fragment="headerUser">
     <head>
         <link rel="stylesheet" type="text/css" th:href="@{/user/css/HeaderStyle.css}">
+        <script th:src="@{/user/js/Overlay.js}" defer></script>
     </head>
 <body>    
     <div class="header">
@@ -12,7 +13,20 @@
             <a th:href="@{/sportsync/user/analysis}" class="button"><button lass="analysis">Analysis</button></a>
         </div>
         <div class="rightHeader">
-            <a th:href="@{/sportsync/user/profile}"><img src="assets/Header/userIcon.svg" alt="profile"></a>
+            <img th:src="@{/user/assets/Header/userIcon.svg}" alt="profile" id="profileIcon">
         </div>
     </div>
+
+    <!-- Overlay -->
+    <div id="OverlayIconUser">
+        <p><strong>Username:</strong> <span th:text="${username}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${email}"></span></p>
+        <a th:href="@{/sportsync/user/editProfile}">
+            <button id="editProfileButton">Edit Profile</button>
+        </a>
+        <form th:action="@{/sportsync/user/logout}" method="post" style="margin: 0;">
+            <button id="logoutButton" type="submit">Logout</button>
+        </form>
+    </div>
 </body>
+</html>

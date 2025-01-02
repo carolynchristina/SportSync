@@ -9,7 +9,6 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -317,5 +316,24 @@ public class UserJdbc implements UserRepository{
         if(result.size()==0) return Optional.empty(); //user tidak ditemukan
         else return Optional.of(result.get(0)); //user ditemukan
     }
+
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        List<User> result = jdbcTemplate.query(sql, this::mapRowToUser, username);
+        if(result.size()==0) return Optional.empty(); //user tidak ditemukan
+        else return Optional.of(result.get(0)); //user ditemukan
+    }
+
+
+    @Override
+    public void saveUser(String oldUsername, User user) {
+        String sql = "UPDATE users SET username = ?, email = ?, password = ?, roles = ?, status = ? WHERE username = ?";
+        jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), user.getPassword(), user.getRoles(), user.getStatus(), oldUsername);
+    }
+
+
+
 }
 

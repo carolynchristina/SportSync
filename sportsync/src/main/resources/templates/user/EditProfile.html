@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/EditProfileStyle.css}">
+    <title>Edit Profile</title>
+    
+</head>
+<body>
+    <div class="body">
+        <!-- Header -->
+        <th:block class="header" th:include="~{user/Header :: headerUser}"></th:block>
+        
+        <div class="main">
+            <div class="title">
+                <h1>Edit Profile</h1>
+            </div> 
+
+            <div th:if="${error}" style="color: red;">
+                <p th:text="${error}"></p>
+            </div>
+
+            <form method="post" th:action="@{/sportsync/user/editProfile}" th:method="post">
+                <div class="form-container">
+                    <!-- Username -->
+                    <div>
+                        <label for="username"><b>Username*</b></label><br>
+                        <input type="text" id="username" name="username" th:value="${username}" required minlength="4" maxlength="30">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="email"><b>Email*</b></label><br>
+                        <input type="text" id="email" name="email" th:value="${email}" required minlength="8" maxlength="60">
+                    </div>
+
+                    <!-- Current Password -->
+                    <div>
+                        <label for="currPassword"><b>Current Password*</b></label><br>
+                        <input type="password" id="currPassword" name="currPassword" required minlength="8" maxlength="20">
+                    </div>
+
+                    <!-- New Password -->
+                    <div>
+                        <label for="newPassword"><b>New Password</b></label><br>
+                        <input type="password" id="newPassword" name="newPassword" minlength="8" maxlength="20">
+                    </div>
+
+                    <!-- Confirm New Password -->
+                    <div>
+                        <label for="confPassword"><b>Confirm New Password</b></label><br>
+                        <input type="password" id="confPassword" name="confPassword" minlength="8" maxlength="20">
+                    </div>
+
+                    <div class="formActions">
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    
+</body>
+</html>

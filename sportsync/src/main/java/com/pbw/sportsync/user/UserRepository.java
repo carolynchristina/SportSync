@@ -18,4 +18,6 @@ public interface UserRepository {
     List<WeekChartData> getWeekChartData(String username);
     List<MonthChartData> getMonthChartData(String username);
     List<YearChartData> getYearChartData(String username);
+    Optional<User> findByUsername(String username);
+    void saveUser(String oldUsername, User user);
 }

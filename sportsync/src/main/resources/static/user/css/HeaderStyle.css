@@ -54,29 +54,62 @@
         display:none;
     }
 }
-#OverlayIconUser{
-    width: 350px;
-    height: 150px;
+
+#profileIcon:hover{
+    cursor: pointer;
+}
+
+#logoutButton{
+    background-color: #E2253C;
+    color: white;
+}
+
+#OverlayIconUser {
+    width: fit-content;
+    height: auto;
     border: 1px solid black;
+    border-radius: 8px;
     position: absolute;
-    right: 1%;
-    top: 9%;
+    right: 1px;
+    top: 95px;
     background-color: white;
     display: flex;
     flex-direction: column;
     padding: 10px;
     align-items: center;
-    border-radius: 15px;
-    visibility: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    visibility: hidden; 
+    z-index: 10; 
 }
-#OverlayIconUser button:hover{
+
+#OverlayIconUser button{
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#OverlayIconUser p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+button:hover {
     cursor: pointer;
 }
-#logoutButton{
-    background-color: red;
+
+#editProfileButton {
+    background-color: #3325C5;
     color: white;
-    width: 300px;
-    height: 60px;
-    border: 0px;
-    border-radius: 8px;
+}
+
+#editProfileButton:hover {
+    background-color: #0056b3;
+}
+
+#logoutButton:hover {
+    background-color: darkred;
 }

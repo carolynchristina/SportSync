@@ -24,56 +24,6 @@ body{
     "main";
 
 }
-.header{
-    grid-area: header;
-    display: flex;
-    flex-direction: row;
-    padding: 25px;
-    background-color: #F4F4F4;
-}
-.leftHeader{
-    flex: 1;
-    display: flex;
-    align-items: center;
-
-}
-.leftHeader a{
-    flex: 0.1;
-    width: 20px;
-    height: 95px;
-    border: 0px;
-    background-color:#F4F4F4 ;
-    color: #5E587A;
-    font-size: 18px;
-}
-.leftHeader a button{
-    width: 100px;
-    height: 95px;
-    border: 0px;
-    background-color:#F4F4F4 ;
-    color: #5E587A;
-    font-size: 18px;
-}
-.leftHeader button:hover{
-    cursor: pointer;
-    background-color: rgba(51, 37, 197, 0.1);
-}
-.leftHeader .logo{
-    font-size: 36px;
-    color: #3325C5;
-    flex: 0.2;
-
-}
-.rightHeader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rightHeader img{
-    width: 40px;
-    height: 40px;
-}
-
 .mainDashboard{
     grid-area: main;
     display: grid;
@@ -273,50 +223,6 @@ body{
     width: 30vw;
     margin-top: 20px;
 }
-.header{
-    grid-area: header;
-    display: flex;
-    flex-direction: row;
-    background-color: #F4F4F4;
-}
-.leftHeader{
-    flex: 1;
-    padding-left: 20px;
-}
-.leftHeader label.logo{
-    font-size: 30px;
-    color: #3325C5;
-}
-.leftHeader .races{
-    font-size: 23px;
-    color: #5E587A;
-    margin-left: 100px;
-    border: 0px;
-    height: 95px;
-    width: 120px;
-    background-color: #F4F4F4;
-
-}
-.leftHeader .races:hover{
-    cursor: pointer;
-    background-color: rgba(51, 37, 197, 0.1);
-}
-.rightHeader{
-    padding: 25px;
-}
-.rightHeader button{
-    border: 0px;
-    width: 120px;
-    height: 40px;
-    border-radius: 8px;
-    background-color: #3325C5;
-    color: white;
-
-}
-.rightHeader button:hover{
-    cursor: pointer;
-    background-color: rgba(51, 37, 197, 0.8);
-}
 .Main1{
     grid-area: main1;
     display: flex;
@@ -347,9 +253,6 @@ body{
     font-size: 80px;
     color: #3325C5;
     margin-right:20px;
-}
-.header .logo{
-    font-size: 36px;
 }
 .Main2{
     grid-area: main2;
@@ -403,30 +306,4 @@ body{
 }
 .Footer label:nth-child(3){
     font-size: 20px;
-}
-#OverlayIconUser{
-    width: 350px;
-    height: 150px;
-    border: 1px solid black;
-    position: absolute;
-    right: 1%;
-    top: 9%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    align-items: center;
-    border-radius: 15px;
-    visibility: hidden;
-}
-#OverlayIconUser button:hover{
-    cursor: pointer;
-}
-#logoutButton{
-    background-color: red;
-    color: white;
-    width: 300px;
-    height: 60px;
-    border: 0px;
-    border-radius: 8px;
 }
