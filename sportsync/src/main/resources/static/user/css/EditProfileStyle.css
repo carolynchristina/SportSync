@@ -1,0 +1,64 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 95px 60vw;
+    grid-template-areas:
+        "header"
+        "main";
+}
+.main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.title {
+    display: flex;
+    font-size: 36px;
+    color: #3325C5;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.form-container{
+    border: #3325C5 solid 1px;
+    border-radius: 16px;
+    width: 30vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+input[type="text"], input[type="password"]{
+    border: #3325C5 solid 1px;
+    border-radius: 8px;
+    padding: 6px;
+    width: 100%;
+}
+.submit-btn{
+    width: 120px;
+    height: 40px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #3325C5;
+    color: white;
+}
+button:hover, a:hover{
+    cursor:pointer;
+}

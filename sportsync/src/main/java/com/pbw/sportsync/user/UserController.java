@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,9 +40,11 @@ public class UserController {
         if(session.getAttribute("username") != null){
             String nama = (String)session.getAttribute("username");
             String role = (String)session.getAttribute("role");
+            String email = (String) session.getAttribute("email");
 
             model.addAttribute("username", nama);
             model.addAttribute("role", role);
+            model.addAttribute("email", email);
 
             return "user/Dashboard";
         }
@@ -53,10 +56,14 @@ public class UserController {
     public String activities(HttpSession session, Model model) {
 
         String username = (String) session.getAttribute("username");
-
+        String email = (String) session.getAttribute("email");
+        
         List<Activity> activityList = userRepository.findUserActivities(username);
+        
         model.addAttribute("activityList", activityList);
-
+        model.addAttribute("username", username);
+        model.addAttribute("email", email);
+        
         return "user/Activities"; 
     }
 
@@ -67,7 +74,10 @@ public class UserController {
         model.addAttribute("datetimeNow", datetimeNow);
         
         String username = (String) session.getAttribute("username");
+        String email = (String) session.getAttribute("email");
+
         model.addAttribute("username", username);
+        model.addAttribute("email", email);
 
         LocalDate dateNow = LocalDate.now();
         List<Race> joinedRaces = userRepository.findValidJoinedRaces(username, dateNow);
@@ -117,18 +127,19 @@ public class UserController {
     @GetMapping("/analysis")
     public String analysis(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
-
+        String email = (String) session.getAttribute("email");
+        
         List<WeekChartData> weekChartData = userRepository.getWeekChartData(username);
         List<MonthChartData> monthChartData = userRepository.getMonthChartData(username);
         List<YearChartData> yearChartData = userRepository.getYearChartData(username);
-
+        
         //Sort weekChartData
         List<String> daysOfWeek = Arrays.asList("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN");
         Map<String, WeekChartData> weekDataMap = new HashMap<>();
         for (WeekChartData data : weekChartData) {
             weekDataMap.put(data.getHari(), data);
         }
-
+        
         List<WeekChartData> sortedWeekChartData = new ArrayList<>();
         for (String day : daysOfWeek) {
             WeekChartData data = weekDataMap.get(day);
@@ -139,20 +150,20 @@ public class UserController {
     
             }
         }
-
+        
         //Summary
         int weekTotalActivities = 0;
         int weekTotalDistance = 0;
         int weekAverageDistance = 0;
-
+        
         int monthTotalActivities = 0;
         int monthTotalDistance = 0;
         int monthAverageDistance = 0;
-
+        
         int yearTotalActivities = 0;
         int yearTotalDistance = 0;
         int yearAverageDistance = 0;
-
+        
         for (WeekChartData data : weekChartData) {
             if (data.getTotalJarakTempuh() > 0) {
                 weekTotalActivities++;
@@ -172,7 +183,7 @@ public class UserController {
         if (monthTotalActivities > 0) {
             monthAverageDistance = monthTotalDistance / monthTotalActivities;
         }
-
+        
         for (YearChartData data : yearChartData) {
             if (data.getTotalJarakTempuh() > 0) {
                 yearTotalActivities++;
@@ -182,8 +193,9 @@ public class UserController {
         if (yearTotalActivities > 0) {
             yearAverageDistance = yearTotalDistance / yearTotalActivities;
         }
-
+        
         model.addAttribute("username", username);
+        model.addAttribute("email", email);
         model.addAttribute("weekChartData", sortedWeekChartData);
         model.addAttribute("monthChartData", monthChartData);
         model.addAttribute("yearChartData", yearChartData);
@@ -206,7 +218,74 @@ public class UserController {
     @PostMapping("logout")
     public String logout (HttpSession session) {
         session.invalidate();
-        return "redirect:/user/login";
+        return "redirect:/sportsync";
     }
 
+    @GetMapping("/editProfile")
+    public String editProfile(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+        String email = (String) session.getAttribute("email");
+
+        model.addAttribute("username", username);
+        model.addAttribute("email", email);
+
+        return "user/EditProfile";
+    }
+
+    @PostMapping("/editProfile")
+    public String saveEditProfile(HttpSession session, 
+                                  @RequestParam("username") String username,
+                                  @RequestParam("email") String email,
+                                  @RequestParam("currPassword") String currPassword,
+                                  @RequestParam("newPassword") String newPassword,
+                                  @RequestParam("confPassword") String confPassword,
+                                  Model model) {
+
+        String oldUsername = (String) session.getAttribute("username");
+        String oldEmail = (String) session.getAttribute("email");
+
+        model.addAttribute("username", oldUsername);
+        model.addAttribute("email", oldEmail);
+
+        if (userRepository.findByUsername(oldUsername).isEmpty()) {
+            model.addAttribute("error", "User not found");
+            return "user/EditProfile";
+        }
+
+        User user = userRepository.findByUsername(oldUsername).get();
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (user == null || !passwordEncoder.matches(currPassword, user.getPassword())) {
+            model.addAttribute("error", "Current password is incorrect");
+            return "user/EditProfile";
+        } 
+
+        if (!username.equals(oldUsername) && userRepository.findByUsername(username).isPresent()){
+            model.addAttribute("error", "New username is already taken");
+            return "user/EditProfile";
+        }
+
+        if (!email.equals(oldEmail) && userRepository.findUser(email).isPresent()){
+            model.addAttribute("error", "New email is already taken");
+            return "user/EditProfile";
+        }
+
+        user.setUsername(username);
+        user.setEmail(email);
+
+        if (!newPassword.isEmpty()) {
+            if (!newPassword.equals(confPassword)) {
+                model.addAttribute("error", "New password and confirmation password do not match");
+                return "user/EditProfile";
+            }
+            user.setPassword(passwordEncoder.encode(newPassword));
+        }
+
+        userRepository.saveUser(oldUsername, user);
+
+        session.setAttribute("username", username);
+        session.setAttribute("email", email);
+
+        return "redirect:/sportsync/user";
+    }
 }
