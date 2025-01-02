@@ -1,5 +1,5 @@
 <div th:fragment="filter">
-    <form method="GET" th:action="@{/admin/}">
+    <form method="GET" th:action="@{/sportsync/admin}">
         <select class="select" name="status" th:value="${status}" onchange="this.form.submit()">
             <option value="" disabled selected>Filter by member status:</option>
             <option value="">All</option>

@@ -4,28 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/DashboardStyle.css}">
-    <script th:src="@{/user/js/mainScript.js}" defer></script>
+    <script th:src="@{/user/js/Overlay.js}" defer></script>
     <title>Dashboard</title>
 </head>
 <body>
+    
     <div class="body">
         <div class="header">
             <div class="leftHeader">
                 <label for="" class="logo">SportSync</label>
-                <button for="" class="dashboard">Dashboard</button>
-                <button for="" class="activities">Activities</button>
-                <button for="" class="race">Races</button>
-                <button for="" class="analysis">Analysis</button>
+                <a th:href="@{/sportsync/user}">
+                    <button for="" class="dashboard">Dashboard</button>
+                </a>
+                <a th:href="@{/sportsync/user/activities}">
+                    <button for="" class="activities">Activities</button>
+                </a>
+                <a th:href="@{/sportsync/user/races}">
+                    <button for="" class="race">Races</button>
+                </a>
+                <a th:href="@{/sportsync/user/analysis}">
+                    <button for="" class="analysis">Analysis</button>
+                </a>
             </div>
             <div class="rightHeader">
-                <img src="/sportsync/src/main/resources/Assets/DashboardPage/userIcon.svg" alt="">
+                <img src="/user/assets/DashboardPage/userIcon.svg" onclick="showElement()">
             </div>
         </div>
         <main class="mainDashboard">
             <div class="leftside1">
                 <div class="leftside-group">
-                    <img src="/sportsync/src/main/resources/Assets/DashboardPage/userIcon.svg" alt="">
-                    <label for="">User</label>
+                    <img src="/user/assets/DashboardPage/userIcon.svg" alt="">
+                    <span th:text="${username}">Nama</span>
                     <hr>
                     <div class="followList">
                         <div class="countFollow">
@@ -40,9 +49,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="addActivity">
-                        <label for="">Add Activities</label>
-                    </div>
+                    
                 </div>
             </div>
             <div class="leftside2">
@@ -52,7 +59,7 @@
                 </div>
                 <hr>
                 <div class="weekCalender">
-                    <img src="/sportsync/src/main/resources/Assets/DashboardPage/calenderIcon.svg" alt="">
+                    <img src="/user/assets/DashboardPage/calenderIcon.svg" alt="">
                     <label for="">M</label>
                     <label for="">T</label>
                     <label for="">W</label>
@@ -68,7 +75,7 @@
             </div>
             <div class="middle">
                 <div class="img-middle">
-                    <img src="/sportsync/src/main/resources/Assets/DashboardPage/imgDP.svg" alt="">
+                    <img src="/user/assets/DashboardPage/imgDP.svg" alt="">
                 </div>
                 <div class="paraf1">
                     <label for="">Getting Started</label>
@@ -76,7 +83,7 @@
                 </div>
                 <hr>
                 <div class="paraf2">
-                    <img src="/sportsync/src/main/resources/Assets/DashboardPage/middleDashboardIcon.svg" alt="">           
+                    <img src="/user/assets/DashboardPage/middleDashboardIcon.svg" alt="">           
                     <div class="labelParaf2">
                         <label for="">See what your friends are doing</label>
                         <label for="">Find your friends on SportSync or invite them to join you. Cheer them on, discover new workouts and start training with the athletes you already know.</label>
@@ -98,6 +105,11 @@
                 </div>
             </div>
         </main>
+    </div>
+    <div id="OverlayIconUser">
+        <form action="/sportsync/logout" method="GET">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
 </body>
 </html>

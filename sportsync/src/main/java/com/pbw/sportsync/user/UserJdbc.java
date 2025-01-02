@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -310,15 +311,11 @@ public class UserJdbc implements UserRepository{
     }
 
     @Override
-    public List<User> findUser(String email, String password) {
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        return jdbcTemplate.query(sql, this::mapRowToUser, email, password);
-    }
-
-    @Override
-    public List<User> findUserByName(String username){
-        String sql = "SELECT * FROM users WHERE LOWER(nama) LIKE ?";
-        return jdbcTemplate.query(sql, this::mapRowToUser, "%" + username.toLowerCase() + "%");
+    public Optional<User> findUser(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        List<User> result = jdbcTemplate.query(sql, this::mapRowToUser, email);
+        if(result.size()==0) return Optional.empty(); //user tidak ditemukan
+        else return Optional.of(result.get(0)); //user ditemukan
     }
 }
 

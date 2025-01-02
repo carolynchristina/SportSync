@@ -10,22 +10,23 @@
     <div class="body">
 
         <div class="leftSide">
-            <img src="/sportsync/src/main/resources/static/user/assets/LoginPage/loginimg.png" alt="">
+            <img th:src="@{/user/assets/LoginPage/loginimg.png}" alt="">
         </div>
         <div class="rightSide">
-            <form action="" method="post">
+            <form action="/sportsync/login" method="post">
                 <div class="container">
                     <label for="">Welcome To SportSync</label>
                     <div class="email">
                         <label for="">Email:</label>
-                        <input type="text" placeholder="example@email.com" name="" id="">
+                        <input type="text" id="email" name="email" placeholder="Input email Anda" required th:value="${email}">
                     </div>
                     <div class="password">
                         <label for="">Password:</label>
-                        <input type="text" placeholder="*******" name="" id="">
+                        <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">
                     </div>
-                    <button type="button" style="height: 5px;">Sign In</button>
+                    <button type="submit">Sign In</button>
                     <label for="">Don't have an account?     <a href="">Register</a></label>
+                    <span th:if="${error}" th:text="${error}"></span>
                 </div>
             </form>
         </div>

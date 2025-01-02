@@ -2,6 +2,7 @@ package com.pbw.sportsync.user;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository {
     void saveActivity(Activity activity);
@@ -13,8 +14,7 @@ public interface UserRepository {
     int rowCount(String status, String keyword);
     boolean editStatus(String username, boolean status);
     boolean deleteUser(String username);
-    List<User> findUser(String username, String password);
-    List<User> findUserByName(String username);
+    Optional<User> findUser(String email);
     List<WeekChartData> getWeekChartData(String username);
     List<MonthChartData> getMonthChartData(String username);
     List<YearChartData> getYearChartData(String username);

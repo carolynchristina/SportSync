@@ -29,14 +29,14 @@
                     <span th:text="${user.status}"></span>
                 </div> 
 
-                <form action="/admin/edit" method="POST" th:if="${edit}">
+                <form action="/sportsync/admin/edit" method="POST" th:if="${edit}">
                     <div class="infoGroup">
                         <label>Status</label>
                             <span><input type="radio" name="status" value=true>Active</span><br>
                             <span><input type="radio" name="status" value=false>Inactive</span>
                     </div>
                     <div class="buttonsContainer">
-                        <a th:href="@{/admin/memberInfo(user=${user.username})}" class="buttonNonHeader">Cancel</a>
+                        <a th:href="@{/sportsync/admin/memberInfo(user=${user.username})}" class="buttonNonHeader">Cancel</a>
                         <input type="hidden" name="user" th:value="${user.username}">
                         <button class="buttonNonHeader" type="submit" value="Save">Save</button>
                     </div>
@@ -45,8 +45,8 @@
                 <form method="GET" th:if="!${edit}">
                     <input type="hidden" name="user" th:value="${user.username}">
                     <div class="buttonsContainer">
-                        <button class="buttonNonHeader" type="submit" formaction="/admin/edit">Edit</button>
-                        <button class="buttonNonHeader" type="submit" formaction="/admin/delete">Delete</button>
+                        <button class="buttonNonHeader" type="submit" formaction="/sportsync/admin/edit">Edit</button>
+                        <button class="buttonNonHeader" type="submit" formaction="/sportsync/admin/delete">Delete</button>
                     </div>
                 </form>
             </div>

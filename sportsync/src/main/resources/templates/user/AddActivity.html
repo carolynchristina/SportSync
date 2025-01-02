@@ -7,7 +7,7 @@
     <title>Add New Activity</title>
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/AddActivityStyle.css}">
     <script th:src="@{/user/js/addActivity.js}" defer></script>
-
+    <script th:src="@{/user/js/Overlay.js}" defer></script>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                 <label for="">Add New Activity</label>
             </div>
 
-            <form method="post" th:action="@{/user/saveActivity}" th:method="post" enctype="multipart/form-data">
+            <form method="post" th:action="@{/sportsync/user/saveActivity}" th:method="post" enctype="multipart/form-data">
                 <div class="form-container">
                     <input type="text" name="username" th:value="${username}" hidden>
                     <!-- Title -->
@@ -100,6 +100,11 @@
             </form>
 
         </div>
+    </div>
+    <div id="OverlayIconUser">
+        <form action="/sportsync/logout" method="GET">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
     </div>
 </body>
 

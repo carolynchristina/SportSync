@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/AnalysisStyle.css}">
     <title>Analysis</title>
     <script src="/user/js/analysis.js" defer></script>
+    <script th:src="@{/user/js/Overlay.js}" defer></script>
     <script th:inline="javascript">
         const weekChartData = /*[[${weekChartData}]]*/ {};
         const monthChartData = /*[[${monthChartData}]]*/ {};
@@ -69,6 +70,10 @@
 
         </div>
     </div>
-
+    <div id="OverlayIconUser">
+        <form action="/sportsync/logout" method="post">
+            <button id="logoutButton" type="submit" value="logout">Log out</button>
+        </form>
+    </div>
 </body>
 </html>
