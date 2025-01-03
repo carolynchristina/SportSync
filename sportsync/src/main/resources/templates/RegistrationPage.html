@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/RegistrationPageStyle.css}">
+    <title>Registration Page</title>
+</head>
+<body>
+    <div class="body">
+        <div class="leftSide">
+            <div id="label-container">
+                <label for="">Join Now</label>
+                <label for="">and</label>
+                <label for="">Start Your</label>
+                <label for="">Adventure!</label>
+            </div>
+        </div>
+        <div class="rightSide">
+            <form action="/sportsync/Register" method="post">
+                <div class="container">
+                    <div class="login">
+                        <label for="">Register</label>
+                        <label for="">Already have an account? <a href="">Login</a></label>
+                    </div>
+                    <div class="fullname">
+                        <label for="">Full name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Masukan Nama Lengkap Anda" required th:value="${fullname}">
+                    </div>
+                    <div class="email">
+                        <label for="">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Input email Anda" required th:value="${email}">
+                    </div>
+                    <div class="username">
+                        <label for="">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Masukan Username Anda" required th:value="${username}">
+                    </div>
+                    <div class="password">
+                        <label for="">Password </label>
+                        <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">
+                    </div>
+                    <div class="confPassword"> 
+                        <label for="">Konfirmasi Password</label>
+                        <input type="confpassword" id="confpassword" name="confpassword" placeholder="Konfirmasi Password Anda" required th:value="${confpassword}">
+                    </div>
+                    <span th:if="${error}" th:text="${error}"></span>
+                </div>
+                <div class="nextbutton">
+                    <a href="">
+                        <button type="submit">Next</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div> 
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/DataUserReqStyle.css}">
+    <title>Data User Registration Page</title>
+</head>
+<body>
+    <div class="body">
+        <div class="leftSide">
+            <div id="label-container">
+                <label for="">Complete Your</label>
+                <label for="">Profile</label>
+                <label for="">and</label>
+                <label for="">Take the First Step</label>
+                <label for="">Toward Your Goals</label>
+            </div>
+        </div>
+        <div class="rightSide">
+            <form action="/sportsync/Register" method="post">
+                <div class="container">
+                    <div class="login">
+                        <label for="">Enter Your Data</label>
+                    </div>
+                    <div class="gender-country">
+                        <div class="gender">
+                            <label for="">Jenis Kelamin</label>
+                            <select name="gender" id="gender">
+                                <option value="" disabled selected>Pilih Gender</option>
+                                <option value="Woman">Woman</option>
+                                <option value="Man">Man</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div class="country">
+                            <label for="">Negara</label>
+                            <select name="country" id="country">
+                                <option value="" disabled selected>Pilih Negara</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="birthday">
+                        <label for="">Tanggal Lahir</label>
+                        <input type="date" id="birthday" name="birthday" placeholder="Masukan Tanggal Lahir Anda" required th:value="${birthday}">
+                    </div>
+                    <div class="weight">
+                        <label for="">Berat Badan</label>
+                        <input type="number" id="username" name="username" placeholder="Masukan Berat Badan anda" required th:value="${username}">
+                    </div>
+                    <div class="height">
+                        <label for="">Tinggi Badan</label>
+                        <input type="number" id="username" name="username" placeholder="Masukan Tinggi Badan Anda" required th:value="${username}">
+                    </div>
+                    <div class="activitylvl"> 
+                        <label for="">Level Aktivitas</label>
+                            <select name="activitylvl" id="activitylvl ">
+                                <option value="" disabled selected>Pilih Level Aktifitas</option>
+                                <option value="">Jarang Aktif</option>
+                                <option value="">Sesekali Aktif</option>
+                                <option value="">Sering Aktif</option>
+                                <option value="">Sangat Aktif</option>
+                            </select>
+                    </div>
+                    <span th:if="${error}" th:text="${error}"></span>
+                </div>
+                <div class="nextbutton">
+                    <a href="">
+                        <button type="submit">Register</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        fetch('https://restcountries.com/v3.1/all')
+            .then(response => response.json())
+            .then(data => {
+                const countrySelect = document.getElementById('country');
+                data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.name.common;
+                    option.textContent = country.name.common;
+                    countrySelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
