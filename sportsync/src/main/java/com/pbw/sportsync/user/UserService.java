@@ -24,4 +24,13 @@ public class UserService {
         }
         return null; //gagal login
     }
+    public void register(String email, String password){
+        String encodedPassword = passwordEncoder.encode(password);
+
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(encodedPassword);
+
+        userRepository.saveEncryptedPassword(user);
+    }
 }
