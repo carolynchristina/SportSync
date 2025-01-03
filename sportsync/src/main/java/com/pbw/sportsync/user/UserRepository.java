@@ -20,4 +20,6 @@ public interface UserRepository {
     List<YearChartData> getYearChartData(String username);
     Optional<User> findByUsername(String username);
     void saveUser(String oldUsername, User user);
+    void addUser(User user);
+    void saveEncryptedPassword(User user);
 }

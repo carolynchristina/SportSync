@@ -317,7 +317,16 @@ public class UserJdbc implements UserRepository{
         else return Optional.of(result.get(0)); //user ditemukan
     }
 
-
+    @Override
+    public void addUser(User user){
+        String sql = "INSERT INTO users (username, email, password, role, status) VALUES (?,?,?,?,?)";
+        jdbcTemplate.update(sql,
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRoles(),
+                user.getStatus());
+    }
     @Override
     public Optional<User> findByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -333,7 +342,11 @@ public class UserJdbc implements UserRepository{
         jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), user.getPassword(), user.getRoles(), user.getStatus(), oldUsername);
     }
 
-
+    @Override
+    public void saveEncryptedPassword(User user){
+        String sql ="UPDATE users set password = ? WHERE email = ?";
+        jdbcTemplate.update(sql, user.getPassword(),user.getEmail());
+    }
 
 }
 
