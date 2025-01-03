@@ -1,0 +1,117 @@
+.body{
+    display: grid;
+    grid-template-columns: 40vw 60vw;
+    grid-template-rows: 100vh;
+    grid-template-areas: 
+    "left right";
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.leftSide{
+    grid-area: left;
+    background-color: #3325c5;
+}
+.leftSide #label-container{
+    color: white;
+    font-size:60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    margin-left: 100px;
+    margin-top: 180px
+}
+#label-container label{
+    flex: 1;
+    margin: 0px;
+    padding: 0px;
+}
+.rightSide{
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    width: 40vw;
+    height: 60vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.login{
+    font-size: 40px;
+}
+.birthday{
+    flex: 0.2;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-right: 500px;
+}
+.gender-country{
+    display: flex;
+    flex: 0.3;
+    flex-direction: row;
+}
+.gender{
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.country{
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.weight{
+    flex: 0.2;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-right: 500px;
+}
+.height{
+    flex: 0.2;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-right: 500px;
+}
+.activitylvl{
+    flex: 0.2;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-right: 500px;
+}
+.nextbutton{
+    margin-top: 20px;
+    display: flex;
+    justify-content: right;
+}
+.nextbutton a button{
+    border: 0px;
+    border-radius: 8px;
+    background-color: #3325c5;
+    color: white;
+    width: 6vw;
+    height: 4vh;
+}
+.nextbutton a button:hover{
+    cursor: pointer;
+    background-color: rgba(51, 37, 197, 0.8);
+}
+input, select{
+    height: 4vh;
+    border: 1px solid #3325c5;
+    border-radius: 8px;
+
+}
+
