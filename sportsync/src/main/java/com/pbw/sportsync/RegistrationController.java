@@ -22,7 +22,11 @@ public class RegistrationController {
     
     @Autowired
     private UserRepository userRepository;
-
+    @GetMapping("/Register")
+    public String showRegister(HttpSession session){
+        
+        return "RegistrationPage";
+    }
     @PostMapping("/Register")
     public String showRegistration (@RequestParam String fullname,
                                     @RequestParam String email,
@@ -35,9 +39,11 @@ public class RegistrationController {
         user.setPassword(password);
         user.setUsername(username);
         user.setRoles("pengguna");
-        user.setStatus("true");
-
+        user.setStatus("Active");
+        //tambah user ke database
         userRepository.addUser(user);
+        //enkripsi password
+        userService.register(email, password);
 
         return "redirect:/sportsync/login";
     }

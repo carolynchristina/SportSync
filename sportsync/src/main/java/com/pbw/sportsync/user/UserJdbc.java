@@ -319,13 +319,20 @@ public class UserJdbc implements UserRepository{
 
     @Override
     public void addUser(User user){
-        String sql = "INSERT INTO users (username, email, password, role, status) VALUES (?,?,?,?,?)";
+        boolean stats = true;
+        if(user.getStatus().equalsIgnoreCase("active")){
+            stats = true;
+        }
+        else{
+            stats = false;
+        }
+        String sql = "INSERT INTO users (username, email, password, roles, status) VALUES (?,?,?,?,?)";
         jdbcTemplate.update(sql,
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
                 user.getRoles(),
-                user.getStatus());
+                stats);
     }
     @Override
     public Optional<User> findByUsername(String username) {
@@ -344,7 +351,7 @@ public class UserJdbc implements UserRepository{
 
     @Override
     public void saveEncryptedPassword(User user){
-        String sql ="UPDATE users set password = ? WHERE email = ?";
+        String sql ="UPDATE users SET password = ? WHERE email = ?";
         jdbcTemplate.update(sql, user.getPassword(),user.getEmail());
     }
 

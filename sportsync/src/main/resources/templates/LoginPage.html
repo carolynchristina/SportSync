@@ -25,7 +25,7 @@
                         <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">
                     </div>
                     <button type="submit">Sign In</button>
-                    <label for="">Don't have an account?     <a href="">Register</a></label>
+                    <label for="">Don't have an account?     <a th:href="@{/sportsync/Register}">Register</a></label>
                     <span th:if="${error}" th:text="${error}"></span>
                 </div>
             </form>
