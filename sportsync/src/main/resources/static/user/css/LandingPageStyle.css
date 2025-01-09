@@ -313,7 +313,7 @@ body{
     text-align: right;
     justify-content: right;
     flex-direction: column;
-    width: 100vw;
+    width: 99vw;
     height: 700px;
     background-size: 100vw;
     background-size: cover;
