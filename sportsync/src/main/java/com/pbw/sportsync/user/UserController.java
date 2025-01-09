@@ -38,19 +38,51 @@ public class UserController {
                                 HttpSession session,
                                 Model model){
         if(session.getAttribute("username") != null){
+            return "redirect:/sportsync/user/dashboard";
+        }
+        else{
+            return "redirect:/sportsync/login";
+        }
+    }
+    @GetMapping("/dashboard")
+    public String dashboard(HttpSession session, Model model){
+            
             String nama = (String)session.getAttribute("username");
             String role = (String)session.getAttribute("role");
             String email = (String) session.getAttribute("email");
+
+            List<WeekChartData> weekChartData = userRepository.getWeekChartData(nama);
+            Map<String, WeekChartData> weekDataMap = new HashMap<>();
+            List<String> daysOfWeek = Arrays.asList("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN");
+            for (WeekChartData data : weekChartData) {
+                weekDataMap.put(data.getHari(), data);
+            }
+            List<WeekChartData> sortedWeekChartData = new ArrayList<>();
+            for (String day : daysOfWeek) {
+                WeekChartData data = weekDataMap.get(day);
+                if (data != null) {
+                    sortedWeekChartData.add(data);
+                } else {
+                    sortedWeekChartData.add(new WeekChartData(day, 0));
+        
+                }
+            }
+
+            int weekTotalDistance = 0;
+
+            for (WeekChartData data : weekChartData) {
+                if (data.getTotalJarakTempuh() > 0) {
+                    weekTotalDistance += data.getTotalJarakTempuh();
+                }
+            }
 
             model.addAttribute("username", nama);
             model.addAttribute("role", role);
             model.addAttribute("email", email);
 
+            model.addAttribute("weekChartData", sortedWeekChartData);
+            model.addAttribute("weekTotalDistance", weekTotalDistance);
             return "user/Dashboard";
-        }
-        else{
-            return "redirect:/sportsync/login";
-        }
     }
     @GetMapping("/activities")
     public String activities(HttpSession session, Model model) {

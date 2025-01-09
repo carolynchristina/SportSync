@@ -37,22 +37,22 @@
             <div class="leftside2">
                 <div class="kmPerWeek">
                     <label for="">This Week</label>
-                    <label for="">0 Km</label>
+                    <span th:text="${weekTotalDistance} + ' m'"></span>
                 </div>
                 <hr>
                 <div class="weekCalender">
                     <img src="/user/assets/DashboardPage/calenderIcon.svg" alt="">
-                    <label for="">M</label>
-                    <label for="">T</label>
-                    <label for="">W</label>
-                    <label for="">T</label>
-                    <label for="">F</label>
-                    <label for="">S</label>
-                    <label for="">S</label>
+                    <button onclick="updateDay('MON')">M</button>
+                    <button onclick="updateDay('TUE')">T</button>
+                    <button onclick="updateDay('WED')">W</button>
+                    <button onclick="updateDay('THU')">T</button>
+                    <button onclick="updateDay('FRI')">F</button>
+                    <button onclick="updateDay('SAT')">S</button>
+                    <button onclick="updateDay('SUN')">S</button>
                 </div>
                 <div class="today">
-                    <label for="">Monday</label>
-                    <label for="">0 Km</label>
+                    <p id="selectedDay">Monday</p>
+                    <p id="distance">0 m</p>
                 </div>
             </div>
             <div class="middle">
@@ -75,19 +75,37 @@
                 <hr>
             </div>
             <div class="rightside">
-                <div class="friendList">
-                    <button>
-                        Friend List
-                    </button>
-                </div>
-                <div class="addFriend">
-                    <button>
-                        Add Friend
-                    </button>
-                </div>
+                
             </div>
         </main>
     </div>
-
+    
+    <script>
+        const weekData = /*[[${weekChartData}]]*/ [];
+        const dayMap = {
+            'MON': 'Monday',
+            'TUE': 'Tuesday',
+            'WED': 'Wednesday',
+            'THU': 'Thursday',
+            'FRI': 'Friday',
+            'SAT': 'Saturday',
+            'SUN': 'Sunday'
+        };
+        function updateDay(dayCode) {
+            // Update nama hari yang dipilih
+            document.getElementById("selectedDay").innerText = dayMap[dayCode];
+            
+            
+            // Cari data m dari weekChartData
+            const data = weekData.find(data => data.hari === dayCode);
+            
+            // Update jarak
+            if (data) {
+                document.getElementById("distance").innerText = data.totalJarakTempuh + " m";
+            } else {
+                document.getElementById("distance").innerText = "0 m";
+            }
+        }
+    </script>
 </body>
 </html>

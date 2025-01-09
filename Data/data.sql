@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS raceParticipants CASCADE;
 DROP TABLE IF EXISTS activity CASCADE;
 DROP TABLE IF EXISTS race CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS friendlist CASCADE;
 
 CREATE TABLE users(
 	username VARCHAR(30) PRIMARY KEY,
@@ -13,7 +14,12 @@ CREATE TABLE users(
 	roles VARCHAR(10),
 	status boolean
 );
-
+CREATE TABLE friendlist (
+    user1 VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE,
+    user2 VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE,
+    PRIMARY KEY (user1, user2),
+    CONSTRAINT chk_diff_users CHECK (user1 <> user2)
+);
 CREATE TABLE race(
 	id SERIAL PRIMARY KEY,
 	judul VARCHAR(100),
@@ -101,6 +107,18 @@ INSERT INTO raceParticipants (username, idRace) VALUES
 ('mia', 1),
 ('rachel', 2);
 
+INSERT INTO friendlist (user1, user2) VALUES
+('alice', 'bobby'),
+('alice', 'charles'),
+('bobby', 'diana'),
+('charles', 'edward'),
+('diana', 'fiona'),
+('fiona', 'greg'),
+('greg', 'hannah'),
+('alice', 'edward'),
+('mia', 'noah'),
+('julia', 'olivia'),
+('peter', 'rachel');
 ---------------------------------------------------------------
 --VIEW
 CREATE OR REPLACE VIEW lastActPerUser AS
@@ -108,5 +126,18 @@ SELECT username, MAX(tglwaktumulai) AS last_activity
 FROM ACTIVITY
 GROUP BY username
 ORDER BY username;
+
+
+CREATE OR REPLACE VIEW userFriends AS
+SELECT 
+    user1 AS username,
+    user2 AS friend
+FROM friendlist
+UNION
+SELECT 
+    user2 AS username,
+    user1 AS friend
+FROM friendlist
+ORDER BY username, friend;
 
 

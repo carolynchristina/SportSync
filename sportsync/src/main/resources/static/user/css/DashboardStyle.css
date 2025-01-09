@@ -117,8 +117,15 @@ body{
     justify-content: center;
     align-items: center;
 }
-.leftside2 .weekCalender label{
+.leftside2 .weekCalender button{
     flex: 0.1;
+    border: 0px;
+    background-color:#F4F4F4;
+    height: 10vh;
+}
+.leftside2 .weekCalender button:hover{
+    cursor: pointer;
+    background-color: rgba(51, 37, 197, 0.1);
 }
 .leftside2 .today{
     display: flex;
@@ -306,4 +313,27 @@ body{
 }
 .Footer label:nth-child(3){
     font-size: 20px;
+}
+.friendListoverlay{
+    border: 1px solid black;
+    width: 30vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    left: 69.5%;
+    top: 17%;
+    background-color: #F4F4F4;
+    color: black;
+}
+.addFriendoverlay{
+    border: 1px solid black;
+    width: 30vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    left: 69.5%;
+    top: 17%;
+    background-color: #F4F4F4;
+    color: black;
+    display: hidden;
 }
