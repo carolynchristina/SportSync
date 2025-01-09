@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preload" th:href="@{/user/assets/LandingPage/LandingPageBackground1.svg}" as="image">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/LandingPageStyle.css}">
     <script th:src="@{/user/js/mainScript.js}" defer></script>
@@ -48,5 +49,11 @@
             <img th:src="@{/user/assets/LandingPage/sosmedIcon.svg}" alt="">
         </footer>
     </div>
+    <script>
+        window.addEventListener('load', function() {
+            var main1 = document.querySelector('.Main1');
+            main1.classList.add('loaded'); // Menambahkan class 'loaded' setelah halaman dimuat
+        });
+    </script>
 </body>
 </html>
