@@ -75,11 +75,119 @@
                 <hr>
             </div>
             <div class="rightside">
-                
+                <!-- Slideshow 1 -->
+                <div class="slideshow-container1">
+                    <div class="mySlides1">
+                        <img src="/user/assets/DashboardPage/ad1.png" alt="Iklan 1">
+                    </div>
+                    <div class="mySlides1">
+                        <img src="/user/assets/DashboardPage/ad2.jpg" alt="Iklan 2">
+                    </div>
+                    <div class="mySlides1">
+                        <img src="/user/assets/DashboardPage/ad3.webp" alt="Iklan 3">
+                    </div>
+                </div>
+            
+                <!-- Slideshow 2 -->
+                <div class="slideshow-container2">
+                    <div class="mySlides2">
+                        <img src="/user/assets/DashboardPage/ad4.jpg" alt="Iklan 4">
+                    </div>
+                    <div class="mySlides2">
+                        <img src="/user/assets/DashboardPage/ad5.webp" alt="Iklan 5">
+                    </div>
+                    <div class="mySlides2">
+                        <img src="/user/assets/DashboardPage/ad6.jpg" alt="Iklan 6">
+                    </div>
+                </div>
+            
+                <!-- Slideshow 3 -->
+                <div class="slideshow-container3">
+                    <div class="mySlides3">
+                        <img src="/user/assets/DashboardPage/ad7.jpeg" alt="Iklan 7">
+                    </div>
+                    <div class="mySlides3">
+                        <img src="/user/assets/DashboardPage/ad8.jpg" alt="Iklan 8">
+                    </div>
+                    <div class="mySlides3">
+                        <img src="/user/assets/DashboardPage/ad9.jpg" alt="Iklan 9">
+                    </div>
+                </div>
             </div>
         </main>
     </div>
+    <script>
+        let slideIndex1 = 0;
     
+        function showSlides1() {
+            let slides1 = document.getElementsByClassName("mySlides1");
+            
+            // Menyembunyikan semua slide
+            for (let i = 0; i < slides1.length; i++) {
+                slides1[i].style.display = "none";
+            }
+    
+            slideIndex1++;
+    
+            if (slideIndex1 > slides1.length) {
+                slideIndex1 = 1; // Kembali ke slide pertama jika sudah mencapai yang terakhir
+            }
+    
+            // Menampilkan slide berikutnya
+            slides1[slideIndex1 - 1].style.display = "block";
+            setTimeout(showSlides1, 6000); // Ganti gambar setiap 2 detik
+        }
+    
+        showSlides1(); // Memulai slideshow
+    </script>
+    <script>
+        let slideIndex2 = 0;
+    
+        function showSlides2() {
+            let slides2 = document.getElementsByClassName("mySlides2");
+            
+            // Menyembunyikan semua slide
+            for (let i = 0; i < slides2.length; i++) {
+                slides2[i].style.display = "none";
+            }
+    
+            slideIndex2++;
+    
+            if (slideIndex2 > slides2.length) {
+                slideIndex2 = 1; // Kembali ke slide pertama jika sudah mencapai yang terakhir
+            }
+    
+            // Menampilkan slide berikutnya
+            slides2[slideIndex2 - 1].style.display = "block";
+            setTimeout(showSlides2, 4000); // Ganti gambar setiap 2 detik
+        }
+    
+        showSlides2(); // Memulai slideshow
+    </script>
+    <script>
+        let slideIndex3 = 0;
+    
+        function showSlides3() {
+            let slides3 = document.getElementsByClassName("mySlides3");
+            
+            // Menyembunyikan semua slide
+            for (let i = 0; i < slides3.length; i++) {
+                slides3[i].style.display = "none";
+            }
+    
+            slideIndex3++;
+    
+            if (slideIndex3 > slides3.length) {
+                slideIndex3 = 1; // Kembali ke slide pertama jika sudah mencapai yang terakhir
+            }
+    
+            // Menampilkan slide berikutnya
+            slides3[slideIndex3 - 1].style.display = "block";
+            setTimeout(showSlides3, 5000); // Ganti gambar setiap 2 detik
+        }
+    
+        showSlides3(); // Memulai slideshow
+    </script>
     <script>
         const weekData = /*[[${weekChartData}]]*/ [];
         const dayMap = {
