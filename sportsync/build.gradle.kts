@@ -40,7 +40,7 @@ dependencies {
 	implementation("com.zaxxer:HikariCP:5.0.1")
 	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.postgresql:postgresql:42.5.0")
+	implementation("org.postgresql:postgresql:42.5.1")
 }
 
 tasks.withType<Test> {
