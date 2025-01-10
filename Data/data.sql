@@ -73,6 +73,12 @@ INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
 ('Half Marathon', 'Run a total of 21km', '2024-12-15', '2024-12-22'),
 ('Last Day of the Year Sprint', 'A fast 5km run to end the year', '2024-12-31', '2024-12-31');
 
+--Race ongoing (tglSelesai >= CURRENT_DATE)
+INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai)
+VALUES
+('Spring Fun Run', 'A fun run event for the spring season', '2025-01-05', '2025-01-20'),
+('Marathon Challenge', 'Challenge yourself with a 42km marathon!', '2025-01-10', '2025-01-15');
+
 INSERT INTO activity (judul, deskripsi, tglWaktuMulai, jarakTempuh, durasi, foto, username, idRace) VALUES
 ('Morning Run', 'A refreshing 1km run to start the day', '2024-01-01 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),
 ('Morning Run', 'A refreshing 1km run to start the day', '2024-01-01 07:00:00', 1000, '01:00:00', NULL, 'bobby', NULL),
@@ -140,4 +146,8 @@ SELECT
 FROM friendlist
 ORDER BY username, friend;
 
-
+--validasi isi leaderboard
+SELECT username, jarakTempuh, durasi 
+FROM activity 
+WHERE idRace = 1
+ORDER BY jarakTempuh DESC, durasi ASC;
