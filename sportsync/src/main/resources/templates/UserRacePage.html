@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/user/css/UserRace.css}">
+    <title>User Races</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Sportsync</h1>
+        <nav>
+            <a href="/sportsync/home">Home</a>
+            <a href="/sportsync/user/races">My Races</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Available Races</h2>
+        <ul>
+            <th:block th:each="race : ${races}">
+                <li>
+                    <h3 th:text="${race.judul}"></h3>
+                    <p th:text="${race.deskripsi}"></p>
+                    <p><strong>Start Date:</strong> <span th:text="${race.tglMulai}"></span></p>
+                    <p><strong>End Date:</strong> <span th:text="${race.tglSelesai}"></span></p>
+                </li>
+            </th:block>
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2025 Sportsync</p>
+    </footer>
+</body>
+</html>

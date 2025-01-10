@@ -26,4 +26,16 @@ public class RaceController {
 
         return "RacesPage";
     }
+
+    @GetMapping("/sportsync/user/races")
+    public String getUserRaces(Model model) {
+        List<Race> ongoingRaces = raceRepository.findOngoingRaces();
+        List<Race> pastRaces = raceRepository.findPastRaces();
+
+        model.addAttribute("ongoingRaces", ongoingRaces);
+        model.addAttribute("pastRaces", pastRaces);
+        model.addAttribute("userLoggedIn", true);
+
+        return "UserRacesPage";
+    }
 }
