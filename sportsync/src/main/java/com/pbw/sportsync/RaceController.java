@@ -1,11 +1,15 @@
 package com.pbw.sportsync;
 
 import com.pbw.sportsync.race.RaceRepository;
+import com.pbw.sportsync.user.Activity;
 import com.pbw.sportsync.race.Race;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 @Controller
@@ -24,7 +28,7 @@ public class RaceController {
         model.addAttribute("ongoingRaces", ongoingRaces);
         model.addAttribute("pastRaces", pastRaces);
 
-        return "RacesPage";
+        return "RacePage";
     }
 
     @GetMapping("/sportsync/user/races")
@@ -38,4 +42,12 @@ public class RaceController {
 
         return "UserRacesPage";
     }
+
+    @GetMapping("/sportsync/races/{id}/leaderboard")
+    public String getLeaderboard(@PathVariable int id, Model model) {
+        List<Activity> leaderboard = raceRepository.findLeaderboardByRaceId(id);
+        model.addAttribute("leaderboard", leaderboard);
+        return "user/LeaderboardPage";
+    }
+
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="/user/css/LeaderboardPage.css">
+</head>
+<body>
+    <div class="bodyLandingPage">
+        <div class="header">
+            <div class="leftHeader">
+                <label class="logo">SportSync</label>
+                <button onclick="window.location.href='/sportsync/races';" class="button">Races</button>
+            </div>
+            <div class="rightHeader">
+                <button type="button" onclick="window.location.href='/sportsync/login';">Login</button>
+            </div>
+        </div>
+
+        <main class="Main1">
+            <h1>Leaderboard</h1>
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Distance (m)</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterasi menggunakan Thymeleaf -->
+                        <tr th:each="entry, iterStat : ${leaderboard}">
+                            <td th:text="${iterStat.index + 1}"></td>
+                            <td th:text="${entry.username}"></td>
+                            <td th:text="${entry.jarakTempuh}"></td>
+                            <td th:text="${entry.durasi}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

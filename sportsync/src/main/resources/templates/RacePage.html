@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/user/css/RacesPageStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/RacePage.css}">
     <title>Races</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
                         <h2 th:text="${race.judul}">Race Name</h2>
                         <p>📅 <span th:text="${race.tglMulai} + ' to ' + ${race.tglSelesai}">Date Range</span></p>
                         <p>📝 <span th:text="${race.deskripsi}">Description</span></p>
-                        <a th:href="@{/sportsync/races/leaderboard}">
+                        <a th:href="@{/sportsync/races/{id}/leaderboard(id=${race.id})}">
                             <button>See Result</button>
                         </a>
                     </div>

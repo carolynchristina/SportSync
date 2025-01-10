@@ -354,6 +354,5 @@ public class UserJdbc implements UserRepository{
         String sql ="UPDATE users SET password = ? WHERE email = ?";
         jdbcTemplate.update(sql, user.getPassword(),user.getEmail());
     }
-
 }
 

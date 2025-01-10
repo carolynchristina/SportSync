@@ -39,4 +39,11 @@ public class Activity {
         this.foto = foto;
         this.idRace = idRace;
     }
+
+    //untuk leaderboard 
+    public Activity(String username, int jarakTempuh, LocalTime durasi) {
+        this.username = username;
+        this.jarakTempuh = jarakTempuh;
+        this.durasi = durasi;
+    }
 }
