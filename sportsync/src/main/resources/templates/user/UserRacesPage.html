@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/user/css/UserRacesPage.css}">
+    <title>User Races</title>
+</head>
+<body>
+    <div class="bodyRacesPage">
+        <!-- Header -->
+        <th:block class="header" th:include="~{user/Header :: headerUser}"></th:block>
+
+        <!-- Main Content -->
+        <main class="mainRaces">
+            <!-- Ongoing Races -->
+            <section class="ongoingRaces">
+                <h1>Ongoing Races</h1>
+                <div class="raceCards" th:each="race : ${ongoingRaces}">
+                    <div class="raceCard">
+                        <h2 th:text="${race.judul}">Race Name</h2>
+                        <p>📅 <span th:text="${race.tglMulai} + ' to ' + ${race.tglSelesai}">Date Range</span></p>
+                        <p>📝 <span th:text="${race.deskripsi}">Description</span></p>
+                        <button th:if="${#authentication.name == 'anonymousUser'}"
+                                onclick="window.location.href='/sportsync/login';">
+                            Join Race
+                        </button>
+                        <button th:if="${#authentication.name != 'anonymousUser'}"
+                                th:onclick="'window.location.href=\'/sportsync/user/joinRace/' + ${race.id} + '\';'">
+                            Join Race
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Past Races -->
+            <section class="pastRaces">
+                <h1>Past Races</h1>
+                <div class="raceCards" th:each="race : ${pastRaces}">
+                    <div class="raceCard">
+                        <h2 th:text="${race.judul}">Race Name</h2>
+                        <p>📅 <span th:text="${race.tglMulai} + ' to ' + ${race.tglSelesai}">Date Range</span></p>
+                        <p>📝 <span th:text="${race.deskripsi}">Description</span></p>
+                        <button th:onclick="'window.location.href=\'/sportsync/user/pastRace/' + ${race.id} + '/leaderboard\';'">
+                            See Result
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

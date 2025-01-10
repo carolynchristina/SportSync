@@ -1,0 +1,89 @@
+/* Konsistensi font dan gaya */
+.bodyRacesPage {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', sans-serif;
+    background-color: #F4F4F4;
+}
+
+/* Header tetap mengikuti style dari Analysis Header */
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 25px;
+    background-color: #F4F4F4;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+/* Main Content */
+.mainRaces {
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ongoingRaces, .pastRaces {
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.ongoingRaces h1, .pastRaces h1 {
+    font-size: 36px;
+    color: #3325C5;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 2px solid #3325C5;
+    padding-bottom: 5px;
+}
+
+/* Race Cards Container */
+.raceCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsif */
+    gap: 40px; /* Jarak antar kartu */
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Race Card */
+.raceCard {
+    background: #F0EFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%;
+    max-width: 300px;
+}
+
+.raceCard h2 {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.raceCard p {
+    font-size: 14px;
+    color: #5E587A;
+    margin: 5px 0;
+}
+
+.raceCard button {
+    background-color: #3325C5;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+}
+
+.raceCard button:hover {
+    background-color: rgba(51, 37, 197, 0.8);
+}
