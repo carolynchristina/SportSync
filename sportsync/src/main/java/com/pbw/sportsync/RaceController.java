@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,18 +32,6 @@ public class RaceController {
         return "RacePage";
     }
 
-    @GetMapping("/sportsync/user/races")
-    public String getUserRaces(Model model) {
-        List<Race> ongoingRaces = raceRepository.findOngoingRaces();
-        List<Race> pastRaces = raceRepository.findPastRaces();
-
-        model.addAttribute("ongoingRaces", ongoingRaces);
-        model.addAttribute("pastRaces", pastRaces);
-        model.addAttribute("userLoggedIn", true);
-
-        return "UserRacesPage";
-    }
-
     @GetMapping("/sportsync/races/{id}/leaderboard")
     public String getLeaderboard(@PathVariable int id, Model model) {
         List<Activity> leaderboard = raceRepository.findLeaderboardByRaceId(id);
@@ -50,4 +39,28 @@ public class RaceController {
         return "user/LeaderboardPage";
     }
 
+    @GetMapping("/sportsync/user/races")
+    public String getUserRaces(Model model) {
+        List<Race> ongoingRaces = raceRepository.findOngoingRaces();
+        List<Race> pastRaces = raceRepository.findPastRaces();
+
+        model.addAttribute("ongoingRaces", ongoingRaces);
+        model.addAttribute("pastRaces", pastRaces);
+
+        return "user/UserRacesPage";
+    }
+
+    @GetMapping("/sportsync/user/joinRace/{id}")
+    public String joinRace(@PathVariable int id, Principal principal) {
+        String username = principal.getName();
+        raceRepository.joinRace(id, username);
+        return "redirect:/sportsync/user/races";
+    }
+
+    @GetMapping("/sportsync/user/pastRace/{id}/leaderboard")
+    public String getPastRaceLeaderboard(@PathVariable int id, Model model) {
+        List<Activity> leaderboard = raceRepository.findLeaderboardByRaceId(id);
+        model.addAttribute("leaderboard", leaderboard);
+        return "user/PastRaceLeaderboardPage";
+    }
 }

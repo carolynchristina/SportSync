@@ -9,4 +9,5 @@ public interface RaceRepository {
     List<Race> findOngoingRaces();
     List<Race> findPastRaces();
     List<Activity> findLeaderboardByRaceId(int raceId);
+    void joinRace(int raceId, String username);
 }

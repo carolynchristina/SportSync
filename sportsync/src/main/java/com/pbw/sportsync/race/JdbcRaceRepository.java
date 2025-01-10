@@ -34,7 +34,7 @@ public class JdbcRaceRepository implements RaceRepository {
         String sql = "SELECT * FROM race WHERE tglSelesai < CURRENT_DATE";
         return jdbcTemplate.query(sql, this::mapRowToRace);
     }
-    
+
     @Override
     public List<Activity> findLeaderboardByRaceId(int raceId) {
         String sql = """
@@ -59,5 +59,11 @@ public class JdbcRaceRepository implements RaceRepository {
             rs.getDate("tglMulai").toLocalDate(),
             rs.getDate("tglSelesai").toLocalDate()
         );
+    }
+
+    @Override
+    public void joinRace(int raceId, String username) {
+        String sql = "INSERT INTO raceParticipants (idRace, username) VALUES (?, ?)";
+        jdbcTemplate.update(sql, raceId, username);
     }
 }
