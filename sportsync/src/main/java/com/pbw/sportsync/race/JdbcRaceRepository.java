@@ -3,6 +3,8 @@ package com.pbw.sportsync.race;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.pbw.sportsync.user.Activity;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,6 +34,22 @@ public class JdbcRaceRepository implements RaceRepository {
         String sql = "SELECT * FROM race WHERE tglSelesai < CURRENT_DATE";
         return jdbcTemplate.query(sql, this::mapRowToRace);
     }
+    
+    @Override
+    public List<Activity> findLeaderboardByRaceId(int raceId) {
+        String sql = """
+            SELECT username, jarakTempuh, durasi 
+            FROM activity 
+            WHERE idRace = ? 
+            ORDER BY jarakTempuh DESC, durasi ASC
+        """;
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Activity(
+            rs.getString("username"),
+            rs.getInt("jarakTempuh"),
+            rs.getTime("durasi").toLocalTime()
+        ), raceId);
+    }
+
 
     private Race mapRowToRace(ResultSet rs, int rowNum) throws SQLException {
         return new Race(
