@@ -1,0 +1,147 @@
+/* Konsistensi font dan gaya header dengan Landing Page */
+bodyRacesPage {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', sans-serif;
+    background-color: #F4F4F4;
+}
+
+/* Header */
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 25px;
+    background-color: #F4F4F4;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.leftHeader {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 36px;
+    color: #3325C5;
+    font-family: "Poppins-Regular", sans-serif;
+}
+
+.races {
+    font-size: 18px;
+    color: #3325C5;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.races::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #3325C5; /* Active color for the line */
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+.rightHeader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.rightHeader button {
+    background-color: #3325C5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.rightHeader button:hover {
+    background-color: rgba(51, 37, 197, 0.8);
+    transform: scale(1.05);
+}
+
+/* Main Content */
+.mainRaces {
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ongoingRaces, .pastRaces {
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.ongoingRaces h1, .pastRaces h1 {
+    font-size: 36px;
+    color: #3325C5;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 2px solid #3325C5;
+    padding-bottom: 5px;
+}
+
+/* Race Cards Container */
+.raceCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adapts to available space */
+    gap: 40px; /* Space between cards */
+    width: 100%; /* Ensures the container uses the full available width */
+    margin: 0 auto; /* Centers the grid container */
+}
+
+/* Race Card */
+.raceCard {
+    background: #F0EFFF; /* Updated background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%; /* Makes the card responsive */
+    max-width: 300px; /* Limits maximum width of the card */
+}
+
+
+.raceCard h2 {
+    font-size: 18px;
+    color: black; /* Bold black color */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.raceCard p {
+    font-size: 14px;
+    color: #5E587A;
+    margin: 5px 0;
+}
+
+.raceCard button {
+    background-color: #3325C5;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 100%; /* Makes the button fill the width of the card */
+    max-width: 200px; /* Optional: Limit maximum width for responsiveness */
+    text-align: center; /* Center-align text within the button */
+}
+
+.raceCard button:hover {
+    background-color: rgba(51, 37, 197, 0.8);
+}
