@@ -150,4 +150,3 @@ SELECT username, jarakTempuh, durasi
 FROM activity 
 WHERE idRace = 1
 ORDER BY jarakTempuh DESC, durasi ASC;
-
