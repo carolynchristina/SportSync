@@ -54,7 +54,8 @@ public class UserJdbc implements UserRepository{
                 race.judul, 
                 race.deskripsi, 
                 race.tglMulai, 
-                race.tglSelesai 
+                race.tglSelesai,
+                race.jarakTempuh 
             FROM 
                 raceParticipants 
                 INNER JOIN race 
@@ -79,7 +80,8 @@ public class UserJdbc implements UserRepository{
             resultSet.getString("judul"),
             resultSet.getString("deskripsi"),
             resultSet.getDate("tglMulai").toLocalDate(),
-            resultSet.getDate("tglSelesai").toLocalDate()
+            resultSet.getDate("tglSelesai").toLocalDate(), 
+            resultSet.getInt("jarakTempuh")
         );
     }
 

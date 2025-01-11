@@ -153,7 +153,7 @@ public class UserController {
 
         userRepository.saveActivity(activity);
 
-        return "redirect:/user/activities";
+        return "redirect:/sportsync/user/activities";
     }
 
     @GetMapping("/analysis")
