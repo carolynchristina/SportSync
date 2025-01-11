@@ -1,7 +1,14 @@
 <div th:fragment="searchBar">
-    <form method="GET" th:action="@{/sportsync/admin}">
-        <input type="text" name="keyword" th:value="${keyword}" placeholder="Search by username">
-        <input type="hidden" name="page" th:if="${currentPage} != null" th:value="${currentPage}">
-        <button type="submit" class="btn">Search</button>
-    </form>
+    <div th:if="${object} == 'member'">
+        <form method="GET" th:action="@{/sportsync/admin}">
+            <input type="text" name="keyword" th:value="${keyword}" placeholder="Search by username">
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+    <div th:if="${object} == 'race'">
+        <form method="GET" th:action="@{/sportsync/admin/listRace}">
+            <input type="text" name="keyword" th:value="${keyword}" placeholder="Search by title">
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
 </div>

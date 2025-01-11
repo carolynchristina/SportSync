@@ -15,4 +15,5 @@ public interface UserRepository {
     void saveUser(String oldUsername, User user);
     void addUser(User user);
     void saveEncryptedPassword(User user);
+    String lastActivityDate(String username);
 }

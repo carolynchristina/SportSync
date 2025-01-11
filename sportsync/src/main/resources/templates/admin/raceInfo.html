@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
+    <link rel="stylesheet" th:href="@{/admin/css/memberInfo_styles.css}">
+    <title>Race Information</title>
+</head>
+<body>
+    <th:block class="header" th:include="~{/admin/header :: headerAdmin}"></th:block>
+    <main>
+        <h1>Race Information</h1>
+        <div class="infoContainer">
+            <div class="container">
+                <div class="infoGroup">
+                    <label>Title</label>
+                    <span th:text="${race.judul}"></span>
+                </div> 
+                <div class="infoGroup">
+                    <label>Description</label>
+                    <span th:text="${race.deskripsi}"></span>
+                </div> 
+                <div class="infoGroup">
+                    <label>Start Date</label>
+                    <span th:text="${race.tglMulai}"></span>
+                </div>
+                <div class="infoGroup">
+                    <label>End Date</label>
+                    <span th:text="${race.tglSelesai}"></span>
+                </div> 
+                <div class="infoGroup">
+                    <label>Distance (m)</label>
+                    <span th:text="${race.jarakTempuh}"></span>
+                </div> 
+                <div class="infoGroup">
+                    <label>Total Participants</label>
+                    <span th:text="${participants}"></span>
+                </div> 
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<div th:fragment="filter">
+    <form method="GET" th:action="@{/sportsync/admin/listRace}">
+        <select class="select" name="status" th:value="${status}" onchange="this.form.submit()">
+            <option value="" disabled selected>Filter by race status:</option>
+            <option value="">All</option>
+            <option th:selected="${status=='Ongoing'}">Ongoing</option>
+            <option th:selected="${status=='Finished'}">Finished</option>
+        </select>
+    </form>
+</div>
