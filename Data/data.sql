@@ -25,7 +25,8 @@ CREATE TABLE race(
 	judul VARCHAR(100),
 	deskripsi VARCHAR(200),
 	tglMulai DATE, --YYYY-MM-DD
-	tglSelesai DATE --YYYY-MM-DD
+	tglSelesai DATE, --YYYY-MM-DD
+	jarakTempuh int
 );
 
 CREATE TABLE activity(
@@ -69,31 +70,31 @@ INSERT INTO users (username, email, password, roles, status) VALUES
 ('steve', 'steve@gmail.com', '$2a$10$K2IOW6IqSlOWiEsCLh/RNOtP8Togcg4lYvsCZmHEPti/ALzaTGEOe', 'pengguna', false);
 
 INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
-('December Run 10K Race', 'Run a total of 10km', '2024-12-01', '2024-12-31'),
-('Half Marathon', 'Run a total of 21km', '2024-12-15', '2024-12-22'),
-('Last Day of the Year Sprint', 'A fast 5km run to end the year', '2024-12-31', '2024-12-31');
+('January Run 10K Race', 'Run a total of 10km', '2025-01-01', '2025-01-31', 10000),
+('Half Marathon', 'Run a total of 21km', '2025-01-07', '2025-01-14', 21000),
+('First Day of the Year Sprint', 'A fast 5km run to end the year', '2025-01-01', '2025-01-01', 5000);
 
 INSERT INTO activity (judul, deskripsi, tglWaktuMulai, jarakTempuh, durasi, foto, username, idRace) VALUES
-('Morning Run', 'A refreshing 1km run to start the day', '2024-01-01 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),
-('Morning Run', 'A refreshing 1km run to start the day', '2024-01-01 07:00:00', 1000, '01:00:00', NULL, 'bobby', NULL),
-('December Run', 'Competing in the December Run 10K Race', '2024-12-05 07:00:00', 10000, '01:00:00', NULL, 'bobby', 1),
-('Evening Run', 'A relaxing evening run of 2km', '2024-01-01 18:00:00', 2000, '00:30:00', NULL, 'charles', NULL),
-('December Run', 'Part of the 10km race', '2024-12-15 08:00:00', 10000, '01:20:00', NULL, 'diana', 1),
-('Morning Run', 'Run uphill for 3km', '2024-12-20 07:30:00', 3000, '01:30:00', NULL, 'edward', NULL),
-('City Jogging', 'Exploring the city while jogging 5km', '2024-12-31 06:45:00', 5000, '00:45:00', NULL, 'fiona', 3),
-('Nature Run', 'A 10km run in the park', '2024-01-02 07:00:00', 10000, '01:00:00', NULL, 'greg', NULL),
-('Beach Run', 'Running along the beach for 4km', '2024-01-03 08:00:00', 4000, '01:00:00', NULL, 'hannah', NULL),
-('Morning Sprint', 'A quick 5km race', '2024-12-31 07:10:00', 5000, '00:15:00', NULL, 'julia', 3),
+('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),
+('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'bobby', NULL),
+('December Run', 'Competing in the January Run 10K Race', '2025-01-05 07:00:00', 10000, '01:00:00', NULL, 'bobby', 1),
+('Evening Run', 'A relaxing evening run of 2km', '2025-01-01 18:00:00', 2000, '00:30:00', NULL, 'charles', NULL),
+('December Run', 'Part of the 10km race', '2025-01-15 08:00:00', 10000, '01:20:00', NULL, 'diana', 1),
+('Morning Run', 'Run uphill for 3km', '2025-01-10 07:30:00', 3000, '01:30:00', NULL, 'edward', NULL),
+('City Jogging', 'Exploring the city while jogging 5km', '2025-01-01 06:45:00', 5000, '00:45:00', NULL, 'fiona', 3),
+('Nature Run', 'A 10km run in the park', '2025-01-02 07:00:00', 10000, '01:00:00', NULL, 'greg', NULL),
+('Beach Run', 'Running along the beach for 4km', '2025-01-03 08:00:00', 4000, '01:00:00', NULL, 'hannah', NULL),
+('Morning Sprint', 'A quick 5km race', '2025-01-01 07:10:00', 5000, '00:15:00', NULL, 'julia', 3),
 ('Mountain Cycling', 'Cycling a mountain for 7km', '2024-03-16 06:00:00', 7000, '02:10:00', NULL, 'karen', NULL),
 ('Urban Run', 'Running around downtown for 2.5km', '2024-03-17 17:00:00', 2500, '00:35:00', NULL, 'linda', NULL),
 ('River Run', 'A 3km run along the river', '2024-03-18 06:30:00', 3000, '00:25:00', NULL, 'mia', NULL),
 ('Evening Cycling', 'Casual evening bike ride of 8km', '2024-10-19 18:00:00', 8000, '00:50:00', NULL, 'noah', NULL),
 ('Forest Run', 'Running through a forest trail for 4km', '2024-10-20 08:00:00', 4000, '01:00:00', NULL, 'olivia', NULL),
-('Hill Run', 'Challenging uphill run for 5km', '2024-12-31 07:30:00', 5000, '00:50:00', NULL, 'peter', 3),
+('Hill Run', 'Challenging uphill run for 5km', '2025-01-01 07:30:00', 5000, '00:50:00', NULL, 'peter', 3),
 ('Night Run', 'A quiet 2km night run', '2024-03-22 20:00:00', 2000, '00:40:00', NULL, 'qira', NULL),
 ('Park Run', 'Jogging in the park for 6km', '2024-03-23 06:00:00', 6000, '00:55:00', NULL, 'rachel', NULL),
 ('Weekend Run', 'Running in the hills for 7km', '2024-03-24 07:00:00', 7000, '01:40:00', NULL, 'steve', NULL),
-('Marathon Run', 'Participating in the Half Marathon', '2024-12-20 06:30:00', 21000, '01:10:00', NULL, 'alice', 2);
+('Marathon Run', 'Participating in the Half Marathon', '2025-01-10 06:30:00', 21000, '01:10:00', NULL, 'alice', 2);
 
 INSERT INTO raceParticipants (username, idRace) VALUES
 ('bobby', 1),
