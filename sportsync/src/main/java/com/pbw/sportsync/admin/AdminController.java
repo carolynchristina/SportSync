@@ -73,7 +73,6 @@ public class AdminController {
     }
 
     @PostMapping("/addRace/save")
-    @RequiredRole("admin")
     public String save(@Valid @ModelAttribute("race") Race race, BindingResult bindingResult, Model model){
         //cek validasi error
         if(bindingResult.hasErrors()){
@@ -96,7 +95,6 @@ public class AdminController {
     }
 
     @PostMapping("/addRace/reset")
-    @RequiredRole("admin")
     public String reset(Model model){
         model.addAttribute("race", new Race());
         return "admin/addRace";
@@ -121,7 +119,6 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
-    @RequiredRole("admin")
     public String edit(@RequestParam(name="user") String username, @RequestParam("status") boolean status,  Model model){
         boolean success = this.userRepo.editStatus(username, status);
         if(success){

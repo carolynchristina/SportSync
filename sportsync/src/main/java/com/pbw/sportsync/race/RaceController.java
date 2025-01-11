@@ -1,4 +1,5 @@
 package com.pbw.sportsync.race;
+import com.pbw.sportsync.RequiredRole;
 import com.pbw.sportsync.activity.Activity;
 
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,7 @@ public class RaceController {
     }
 
     @GetMapping("/sportsync/user/races")
+    @RequiredRole("pengguna")
     public String getUserRaces(Model model) {
         List<Race> ongoingRaces = raceRepository.findOngoingRaces();
         List<Race> pastRaces = raceRepository.findPastRaces();
@@ -47,6 +49,7 @@ public class RaceController {
     }
 
     @GetMapping("/sportsync/user/joinRace/{id}")
+    @RequiredRole("pengguna")
     public String joinRace(@PathVariable int id, Principal principal) {
         String username = principal.getName();
         raceRepository.joinRace(id, username);
@@ -54,6 +57,7 @@ public class RaceController {
     }
 
     @GetMapping("/sportsync/user/pastRace/{id}/leaderboard")
+    @RequiredRole("pengguna")
     public String getPastRaceLeaderboard(@PathVariable int id, Model model) {
         List<Activity> leaderboard = raceRepository.findLeaderboardByRaceId(id);
         model.addAttribute("leaderboard", leaderboard);
