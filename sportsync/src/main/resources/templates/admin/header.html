@@ -1,8 +1,13 @@
 <div th:fragment="headerAdmin">
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/admin/css/headerAdmin_styles.css}">
+        <script th:src="@{/user/js/Overlay.js}" defer></script>
+    </head>
     <div class="header">
         <div class="leftHeader">
             <label class="logo">SportSync</label>
             <a th:href="@{/sportsync/admin}" class="button"><button class="listMembers">Members</button></a>
+            <a th:href="@{/sportsync/admin/listRace}" class="button"><button class="listRace">Race</button></a>
             <a th:href="@{/sportsync/admin/addRace}" class="button"><button class="addRace">Add Race</button></a>
         </div>
         <div class="rightHeader">

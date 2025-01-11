@@ -19,8 +19,20 @@ public class JdbcRaceRepository implements RaceRepository {
 
     @Override
     public void addRace(Race race) {
-        String sql = "INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, race.getJudul(), race.getDeskripsi(), race.getTglMulai(), race.getTglSelesai());
+        String sql = "INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai, jarakTempuh) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, race.getJudul(), race.getDeskripsi(), race.getTglMulai(), race.getTglSelesai(), race.getJarakTempuh());
+    }
+
+    @Override
+    public List<Race> findAllRace(){
+        String sql = "SELECT * FROM race";
+        return jdbcTemplate.query(sql, this::mapRowToRace);
+    }
+
+    @Override
+    public List<Race> findByKeyword(String keyword){
+        String sql = "SELECT * FROM race WHERE judul ILIKE ?";
+        return jdbcTemplate.query(sql, this::mapRowToRace, "%"+keyword+"%");
     }
 
     @Override
@@ -89,5 +101,41 @@ public class JdbcRaceRepository implements RaceRepository {
                 )
         """;
         return jdbcTemplate.query(sql, this::mapRowToRace, username, dateNow, dateNow);
+    }
+
+    @Override
+    public List<Race> pagination(int limit, int offset, String status, String keyword){
+        String sql = "";
+        if(status.equals("")){ //all race
+            sql = "SELECT * FROM race WHERE judul ILIKE ? LIMIT ? OFFSET ?";
+        }else if(status.equalsIgnoreCase("Ongoing")){ //ongoing race
+            sql = "SELECT * FROM race WHERE tglSelesai >= CURRENT_DATE AND judul ILIKE ? LIMIT ? OFFSET ?";
+        }else{ //finished race
+            sql = "SELECT * FROM race WHERE tglSelesai < CURRENT_DATE AND judul ILIKE ? LIMIT ? OFFSET ?";
+        }
+        return jdbcTemplate.query(sql, this::mapRowToRace, "%"+keyword+"%", limit, offset);
+    }
+
+    @Override
+    public int rowCount(String status, String keyword){
+        String sql = "SELECT COUNT(*) FROM race WHERE judul ILIKE ?";
+        if(status.equalsIgnoreCase("Ongoing")){ //ongoing race
+            sql += " AND tglSelesai >= CURRENT_DATE";
+        }else if(status.equalsIgnoreCase("Finished")){ //finished race
+            sql += " AND tglSelesai < CURRENT_DATE";
+        }
+        return jdbcTemplate.queryForObject(sql, Integer.class, "%"+keyword+"%");
+    }
+
+    @Override
+    public List<Race> findById(Integer id){
+        String sql = "SELECT * FROM race WHERE id = ?";
+        return jdbcTemplate.query(sql, this::mapRowToRace, id);
+    }
+
+    @Override
+    public int totalParticipants(Integer id){
+        String sql = "SELECT COUNT(*) FROM raceParticipants WHERE idRace = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, id);
     }
 }
