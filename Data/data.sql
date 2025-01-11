@@ -14,12 +14,14 @@ CREATE TABLE users(
 	roles VARCHAR(10),
 	status boolean
 );
+
 CREATE TABLE friendlist (
     user1 VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE,
     user2 VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE,
     PRIMARY KEY (user1, user2),
     CONSTRAINT chk_diff_users CHECK (user1 <> user2)
 );
+
 CREATE TABLE race(
 	id SERIAL PRIMARY KEY,
 	judul VARCHAR(100),
@@ -69,16 +71,13 @@ INSERT INTO users (username, email, password, roles, status) VALUES
 ('qira', 'qira@gmail.com', '$2a$10$a9vHaKt/eMw39aZnTgVoyuNLHynqajsomWnrRoXVAXi7ml3.ImxHa', 'pengguna', false),
 ('steve', 'steve@gmail.com', '$2a$10$K2IOW6IqSlOWiEsCLh/RNOtP8Togcg4lYvsCZmHEPti/ALzaTGEOe', 'pengguna', false);
 
+
 INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai, jarakTempuh) VALUES
 ('January Run 10K Race', 'Run a total of 10km', '2025-01-01', '2025-01-31', 10000),
 ('Half Marathon', 'Run a total of 21km', '2025-01-07', '2025-01-14', 21000),
-('First Day of the Year Sprint', 'A fast 5km run to end the year', '2025-01-01', '2025-01-01', 5000);
-
---Race ongoing (tglSelesai >= CURRENT_DATE)
-INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai)
-VALUES
-('Spring Fun Run', 'A fun run event for the spring season', '2025-01-05', '2025-01-20'),
-('Marathon Challenge', 'Challenge yourself with a 42km marathon!', '2025-01-10', '2025-01-15');
+('First Day of the Year Sprint', 'A fast 5km run to end the year', '2025-01-01', '2025-01-01', 5000),
+('Spring Fun Run', 'A fun run event for the spring season', '2025-01-05', '2025-01-20', 1000),
+('Marathon Challenge', 'Challenge yourself with a 42km marathon!', '2025-01-10', '2025-01-15', 42000);
 
 INSERT INTO activity (judul, deskripsi, tglWaktuMulai, jarakTempuh, durasi, foto, username, idRace) VALUES
 ('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),

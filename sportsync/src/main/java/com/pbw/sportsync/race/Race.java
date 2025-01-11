@@ -5,14 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.pbw.sportsync.user.Activity;
+import com.pbw.sportsync.activity.Activity;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Date;
 import java.time.LocalDate;
-
 import java.util.List;
 
 @Data
