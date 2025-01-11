@@ -77,9 +77,9 @@ INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
 INSERT INTO activity (judul, deskripsi, tglWaktuMulai, jarakTempuh, durasi, foto, username, idRace) VALUES
 ('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),
 ('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'bobby', NULL),
-('December Run', 'Competing in the January Run 10K Race', '2025-01-05 07:00:00', 10000, '01:00:00', NULL, 'bobby', 1),
+('January Run', 'Competing in the January Run 10K Race', '2025-01-05 07:00:00', 10000, '01:00:00', NULL, 'bobby', 1),
 ('Evening Run', 'A relaxing evening run of 2km', '2025-01-01 18:00:00', 2000, '00:30:00', NULL, 'charles', NULL),
-('December Run', 'Part of the 10km race', '2025-01-15 08:00:00', 10000, '01:20:00', NULL, 'diana', 1),
+('January Run', 'Part of the 10km race', '2025-01-15 08:00:00', 10000, '01:20:00', NULL, 'diana', 1),
 ('Morning Run', 'Run uphill for 3km', '2025-01-10 07:30:00', 3000, '01:30:00', NULL, 'edward', NULL),
 ('City Jogging', 'Exploring the city while jogging 5km', '2025-01-01 06:45:00', 5000, '00:45:00', NULL, 'fiona', 3),
 ('Nature Run', 'A 10km run in the park', '2025-01-02 07:00:00', 10000, '01:00:00', NULL, 'greg', NULL),
