@@ -145,3 +145,52 @@ bodyRacesPage {
 .raceCard button:hover {
     background-color: rgba(51, 37, 197, 0.8);
 }
+
+/* Modal styling */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 10px;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content .btn-confirm {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-content .btn-cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-content button:hover {
+    opacity: 0.9;
+}

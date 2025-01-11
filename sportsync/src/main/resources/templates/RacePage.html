@@ -28,9 +28,7 @@
                         <h2 th:text="${race.judul}">Race Name</h2>
                         <p>📅 <span th:text="${race.tglMulai} + ' to ' + ${race.tglSelesai}">Date Range</span></p>
                         <p>📝 <span th:text="${race.deskripsi}">Description</span></p>
-                        <a th:href="@{/sportsync/login}">
-                            <button>Join Race</button>
-                        </a>
+                        <button onclick="showModal()">Join Race</button>
                     </div>
                 </div>
             </section>
@@ -50,5 +48,34 @@
             </section>
         </main>
     </div>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Pemberitahuan</h2>
+            <p>Anda harus login terlebih dahulu untuk bergabung dalam race ini. <br> Apakah Anda ingin melanjutkan ke halaman login?</p>
+            <button class="btn-confirm" onclick="redirectToLogin()">Ya</button>
+            <button class="btn-cancel" onclick="closeModal()">Tidak</button>
+        </div>
+    </div>
+    <script>
+        const modal = document.getElementById("loginModal");
+
+        function showModal() {
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        function redirectToLogin() {
+            window.location.href = '/sportsync/login';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>
