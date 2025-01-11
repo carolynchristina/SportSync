@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pbw.sportsync.RequiredRole;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -22,6 +24,7 @@ public class AnalysisController {
     private AnalysisRepository analysisRepository;
 
     @GetMapping("/analysis")
+    @RequiredRole("pengguna")
     public String analysis(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         String email = (String) session.getAttribute("email");

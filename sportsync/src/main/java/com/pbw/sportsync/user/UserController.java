@@ -1,4 +1,5 @@
 package com.pbw.sportsync.user;
+import com.pbw.sportsync.RequiredRole;
 import com.pbw.sportsync.analysis.*;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class UserController {
         }
     }
     @GetMapping("/dashboard")
+    @RequiredRole("pengguna")
     public String dashboard(HttpSession session, Model model){
             
             String nama = (String)session.getAttribute("username");
@@ -88,6 +90,7 @@ public class UserController {
     }
 
     @GetMapping("/editProfile")
+    @RequiredRole("pengguna")
     public String editProfile(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         String email = (String) session.getAttribute("email");

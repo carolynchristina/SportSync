@@ -1,4 +1,5 @@
 package com.pbw.sportsync.activity;
+import com.pbw.sportsync.RequiredRole;
 import com.pbw.sportsync.race.*;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class ActivityController {
     private RaceRepository raceRepository;
     
     @GetMapping("/activities")
+    @RequiredRole("pengguna")
     public String activities(HttpSession session, Model model) {
 
         String username = (String) session.getAttribute("username");
@@ -48,6 +50,7 @@ public class ActivityController {
     }
 
     @GetMapping("/addActivity")
+    @RequiredRole("pengguna")
     public String addActivity(HttpSession session, Model model) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         String datetimeNow = LocalDateTime.now().format(formatter);
