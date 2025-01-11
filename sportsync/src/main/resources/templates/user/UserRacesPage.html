@@ -7,7 +7,7 @@
     <title>User Races</title>
 </head>
 <body>
-    <div class="bodyRacesPage">
+    <div class="body">
         <!-- Header -->
         <th:block class="header" th:include="~{user/Header :: headerUser}"></th:block>
 
@@ -21,12 +21,12 @@
                         <h2 th:text="${race.judul}">Race Name</h2>
                         <p>📅 <span th:text="${race.tglMulai} + ' to ' + ${race.tglSelesai}">Date Range</span></p>
                         <p>📝 <span th:text="${race.deskripsi}">Description</span></p>
-                        <button th:if="${#authentication.name == 'anonymousUser'}"
+                        <!-- <button th:if="${#authentication.name == 'anonymousUser'}"
                                 onclick="window.location.href='/sportsync/login';">
                             Join Race
                         </button>
-                        <button th:if="${#authentication.name != 'anonymousUser'}"
-                                th:onclick="'window.location.href=\'/sportsync/user/joinRace/' + ${race.id} + '\';'">
+                        <button th:if="${#authentication.name != 'anonymousUser'}" -->
+                        <button th:onclick="'window.location.href=\'/sportsync/user/joinRace/' + ${race.id} + '\';'">
                             Join Race
                         </button>
                     </div>

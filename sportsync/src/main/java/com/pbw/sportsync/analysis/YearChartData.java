@@ -1,4 +1,4 @@
-package com.pbw.sportsync.user;
+package com.pbw.sportsync.analysis;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

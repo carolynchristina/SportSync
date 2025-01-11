@@ -1,14 +1,10 @@
-package com.pbw.sportsync;
-
-import com.pbw.sportsync.race.RaceRepository;
-import com.pbw.sportsync.user.Activity;
-import com.pbw.sportsync.race.Race;
+package com.pbw.sportsync.race;
+import com.pbw.sportsync.activity.Activity;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.List;

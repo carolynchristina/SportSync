@@ -56,22 +56,16 @@ h1{
 }
   
 .buttonNonHeader{
-    padding: 10px 24px;
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0px 2px 1px rgba(170, 170, 170, 0.25);
-    border-radius: 5px;
-    border: 1px #AAAAAA solid;
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    font-size: 16px;
-    font-weight: 400;
-    transition: background-color 0.3s ease;
+    width: 120px;
+    height: 40px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #3325C5;
+    color: white;
     
     &:hover{
       background-color: #f7f7f7;
+      color: #000;
     }
 }
 

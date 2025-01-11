@@ -14,12 +14,14 @@ CREATE TABLE users(
 	roles VARCHAR(10),
 	status boolean
 );
+
 CREATE TABLE friendlist (
     user1 VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE,
     user2 VARCHAR(30) REFERENCES users(username) ON DELETE CASCADE,
     PRIMARY KEY (user1, user2),
     CONSTRAINT chk_diff_users CHECK (user1 <> user2)
 );
+
 CREATE TABLE race(
 	id SERIAL PRIMARY KEY,
 	judul VARCHAR(100),
@@ -71,11 +73,7 @@ INSERT INTO users (username, email, password, roles, status) VALUES
 INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
 ('December Run 10K Race', 'Run a total of 10km', '2024-12-01', '2024-12-31'),
 ('Half Marathon', 'Run a total of 21km', '2024-12-15', '2024-12-22'),
-('Last Day of the Year Sprint', 'A fast 5km run to end the year', '2024-12-31', '2024-12-31');
-
---Race ongoing (tglSelesai >= CURRENT_DATE)
-INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai)
-VALUES
+('Last Day of the Year Sprint', 'A fast 5km run to end the year', '2024-12-31', '2024-12-31'),
 ('Spring Fun Run', 'A fun run event for the spring season', '2025-01-05', '2025-01-20'),
 ('Marathon Challenge', 'Challenge yourself with a 42km marathon!', '2025-01-10', '2025-01-15');
 

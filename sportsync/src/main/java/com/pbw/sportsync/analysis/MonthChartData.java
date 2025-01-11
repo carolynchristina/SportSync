@@ -1,11 +1,11 @@
-package com.pbw.sportsync.user;
+package com.pbw.sportsync.analysis;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class WeekChartData {
-    private String hari;
+public class MonthChartData {
+    private String minggu;
     private int totalJarakTempuh;
 }
