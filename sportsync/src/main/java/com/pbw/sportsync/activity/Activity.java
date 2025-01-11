@@ -1,4 +1,4 @@
-package com.pbw.sportsync.user;
+package com.pbw.sportsync.activity;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -38,5 +38,12 @@ public class Activity {
         this.username = username;
         this.foto = foto;
         this.idRace = idRace;
+    }
+
+    //untuk leaderboard 
+    public Activity(String username, int jarakTempuh, LocalTime durasi) {
+        this.username = username;
+        this.jarakTempuh = jarakTempuh;
+        this.durasi = durasi;
     }
 }

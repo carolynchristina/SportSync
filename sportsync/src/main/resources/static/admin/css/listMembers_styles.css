@@ -67,7 +67,7 @@ h1{
     background: transparent;
     cursor: pointer;
     &:hover{
-        background-color: #f7f7f7;
+        background-color: #3325C5;
     }
 }
 
@@ -95,4 +95,16 @@ div.pagination_item{
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+.btn{
+    border: 0px;
+    border-radius: 8px;
+    background-color: #3325C5;
+    color: white;
+    
+    &:hover{
+      background-color: #f7f7f7;
+      color: #000;
+    }
 }

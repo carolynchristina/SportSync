@@ -1,19 +1,21 @@
 package com.pbw.sportsync.race;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.pbw.sportsync.activity.Activity;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public class JdbcRaceRepository implements RaceRepository {
-    private final JdbcTemplate jdbcTemplate;
-
-    public JdbcRaceRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void addRace(Race race) {
@@ -33,6 +35,22 @@ public class JdbcRaceRepository implements RaceRepository {
         return jdbcTemplate.query(sql, this::mapRowToRace);
     }
 
+    @Override
+    public List<Activity> findLeaderboardByRaceId(int raceId) {
+        String sql = """
+            SELECT username, jarakTempuh, durasi 
+            FROM activity 
+            WHERE idRace = ? 
+            ORDER BY jarakTempuh DESC, durasi ASC
+        """;
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Activity(
+            rs.getString("username"),
+            rs.getInt("jarakTempuh"),
+            rs.getTime("durasi").toLocalTime()
+        ), raceId);
+    }
+
+
     private Race mapRowToRace(ResultSet rs, int rowNum) throws SQLException {
         return new Race(
             rs.getInt("id"),
@@ -41,5 +59,38 @@ public class JdbcRaceRepository implements RaceRepository {
             rs.getDate("tglMulai").toLocalDate(),
             rs.getDate("tglSelesai").toLocalDate()
         );
+    }
+
+    @Override
+    public void joinRace(int raceId, String username) {
+        String sql = "INSERT INTO raceParticipants (idRace, username) VALUES (?, ?)";
+        jdbcTemplate.update(sql, raceId, username);
+    }
+
+    @Override
+    public List<Race> findValidJoinedRaces(String username, LocalDate dateNow) {
+        String sql = """
+            SELECT 
+                race.id, 
+                race.judul, 
+                race.deskripsi, 
+                race.tglMulai, 
+                race.tglSelesai 
+            FROM 
+                raceParticipants 
+                INNER JOIN race 
+                ON race.id = raceParticipants.idRace 
+            WHERE 
+                raceParticipants.username = ?
+                AND tglmulai <= ?
+                AND tglselesai >= ?
+                AND NOT EXISTS (
+                    SELECT 1 
+                    FROM activity 
+                    WHERE activity.username = raceParticipants.username 
+                    AND activity.idRace = race.id
+                )
+        """;
+        return jdbcTemplate.query(sql, this::mapRowToRace, username, dateNow, dateNow);
     }
 }
