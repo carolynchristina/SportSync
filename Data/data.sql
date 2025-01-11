@@ -69,7 +69,7 @@ INSERT INTO users (username, email, password, roles, status) VALUES
 ('qira', 'qira@gmail.com', '$2a$10$a9vHaKt/eMw39aZnTgVoyuNLHynqajsomWnrRoXVAXi7ml3.ImxHa', 'pengguna', false),
 ('steve', 'steve@gmail.com', '$2a$10$K2IOW6IqSlOWiEsCLh/RNOtP8Togcg4lYvsCZmHEPti/ALzaTGEOe', 'pengguna', false);
 
-INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai) VALUES
+INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai, jarakTempuh) VALUES
 ('January Run 10K Race', 'Run a total of 10km', '2025-01-01', '2025-01-31', 10000),
 ('Half Marathon', 'Run a total of 21km', '2025-01-07', '2025-01-14', 21000),
 ('First Day of the Year Sprint', 'A fast 5km run to end the year', '2025-01-01', '2025-01-01', 5000);
