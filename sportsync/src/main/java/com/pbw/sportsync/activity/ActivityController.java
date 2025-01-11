@@ -104,6 +104,6 @@ public class ActivityController {
 
         activityRepository.saveActivity(activity);
 
-        return "redirect:/user/activities";
+        return "redirect:/sportsync/user/activities";
     }
 }

@@ -35,14 +35,19 @@ public class Race {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate tglSelesai;
+    
+    @NotNull
+    private int jarakTempuh;
 
     private transient List<Activity> leaderboard;
-
-    public Race(int id, String judul, String deskripsi, LocalDate tglMulai, LocalDate tglSelesai) {
-        this.id = id;
-        this.judul = judul;
-        this.deskripsi = deskripsi;
-        this.tglMulai = tglMulai;
-        this.tglSelesai = tglSelesai;
+    
+    
+        public Race(int id, String judul, String deskripsi, LocalDate tglMulai, LocalDate tglSelesai, int jarakTempuh) {
+            this.id = id;
+            this.judul = judul;
+            this.deskripsi = deskripsi;
+            this.tglMulai = tglMulai;
+            this.tglSelesai = tglSelesai;
+            this.jarakTempuh = jarakTempuh;
     }
 }
