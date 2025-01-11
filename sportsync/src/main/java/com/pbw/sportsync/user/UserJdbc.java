@@ -130,4 +130,3 @@ public class UserJdbc implements UserRepository{
         jdbcTemplate.update(sql, user.getPassword(),user.getEmail());
     }
 }
-

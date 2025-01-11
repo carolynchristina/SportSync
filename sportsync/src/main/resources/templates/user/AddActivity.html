@@ -16,7 +16,7 @@
 
         <div class="main">
 
-            <div th:if="${error}" style="color: red;">
+            <div class="error-msg" th:if="${error}" style="color: red;">
                 <p th:text="${error}"></p>
             </div>
             
@@ -43,6 +43,7 @@
                             <div>
                                 <input type="number" id="jarakTempuh" name="jarakTempuh" required min="1" max="99999"> <span>meters</span>
                             </div>
+                            <div id="distanceError" style="color: red; display: none;"></div>
                         </div>
 
                         <!--Duration-->
@@ -78,14 +79,15 @@
                     <div>
                         <div class="race-checkbox">
                             <label for="isRace"><b>This is for a race</b></label>
-                            <input type="checkbox" id="isRace" name="isRace" onclick="toggleRaceDropdown()">    
+                            <input type="checkbox" id="isRace" name="isRace">    
                         </div>
                         <input type="hidden" id="hiddenIdRace" name="idRace" value="-1">
                         <select name="idRace" id="race" disabled required>
                             <option value="-1" selected>Select a race</option>
                             <option th:each="race : ${joinedRaces}" 
                                     th:value="${race.id}" 
-                                    th:text="${race.judul}">
+                                    th:text="${race.judul}"
+                                    th:data-jarakTempuh="${race.jarakTempuh}">
                             </option>
                         </select>
                     </div>

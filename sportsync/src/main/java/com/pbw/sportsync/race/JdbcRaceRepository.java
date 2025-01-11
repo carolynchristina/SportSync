@@ -57,7 +57,8 @@ public class JdbcRaceRepository implements RaceRepository {
             rs.getString("judul"),
             rs.getString("deskripsi"),
             rs.getDate("tglMulai").toLocalDate(),
-            rs.getDate("tglSelesai").toLocalDate()
+            rs.getDate("tglSelesai").toLocalDate(),
+            rs.getInt("jarakTempuh")
         );
     }
 
@@ -71,11 +72,7 @@ public class JdbcRaceRepository implements RaceRepository {
     public List<Race> findValidJoinedRaces(String username, LocalDate dateNow) {
         String sql = """
             SELECT 
-                race.id, 
-                race.judul, 
-                race.deskripsi, 
-                race.tglMulai, 
-                race.tglSelesai 
+                * 
             FROM 
                 raceParticipants 
                 INNER JOIN race 
