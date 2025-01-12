@@ -195,6 +195,36 @@ body{
     background-color: #3325C5;
     color: white;
 }
+.paraf3{
+    flex: 0.1;
+    display: flex;
+    margin: 20px;
+    flex-direction: row;
+    height: 100vh;
+}
+.paraf3 img{
+    height: 8vh;
+}
+.paraf3 .labelParaf3{
+    display: flex;
+    flex-direction: column;
+    color: #5E587A;
+    font-size: 12px;
+    margin-left: 20px;
+}
+.labelParaf3 label:nth-child(1){
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.labelParaf3 a button{
+    margin-top: 20px;
+    width: 8vw;
+    height: 4vh;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #3325C5;
+    color: white;
+}
 .img-middle img{
     width: 33vw;
 }

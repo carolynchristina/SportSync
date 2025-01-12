@@ -16,4 +16,5 @@ public interface UserRepository {
     void addUser(User user);
     void saveEncryptedPassword(User user);
     String lastActivityDate(String username);
+    int countActivity(String username);
 }

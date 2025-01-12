@@ -48,7 +48,7 @@ public class UserController {
             String nama = (String)session.getAttribute("username");
             String role = (String)session.getAttribute("role");
             String email = (String) session.getAttribute("email");
-
+            int countActivity = userRepository.countActivity(nama);
             List<WeekChartData> weekChartData = analysisRepository.getWeekChartData(nama);
             Map<String, WeekChartData> weekDataMap = new HashMap<>();
             List<String> daysOfWeek = Arrays.asList("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN");
@@ -77,6 +77,7 @@ public class UserController {
             model.addAttribute("username", nama);
             model.addAttribute("role", role);
             model.addAttribute("email", email);
+            model.addAttribute("countActivity", countActivity);
 
             model.addAttribute("weekChartData", sortedWeekChartData);
             model.addAttribute("weekTotalDistance", weekTotalDistance);

@@ -134,4 +134,9 @@ public class UserJdbc implements UserRepository{
         String sql = "SELECT last_activity FROM lastActDate WHERE username = ?";
         return jdbcTemplate.queryForObject(sql, String.class, username);
     }
+    @Override
+    public int countActivity(String username){
+        String sql = "SELECT COUNT(*) FROM activity WHERE username ILIKE ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, username);
+    }
 }
