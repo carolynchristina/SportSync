@@ -75,12 +75,6 @@ public class JdbcRaceRepository implements RaceRepository {
     }
 
     @Override
-    public void joinRace(int raceId, String username) {
-        String sql = "INSERT INTO raceParticipants (idRace, username) VALUES (?, ?)";
-        jdbcTemplate.update(sql, raceId, username);
-    }
-
-    @Override
     public List<Race> findValidJoinedRaces(String username, LocalDate dateNow) {
         String sql = """
             SELECT 
@@ -104,6 +98,16 @@ public class JdbcRaceRepository implements RaceRepository {
     }
 
     @Override
+    public boolean isUserInRace(int raceId, String username) {
+        String sql = "SELECT COUNT(*) FROM raceParticipants WHERE idRace = ? AND username = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, raceId, username);
+        return count != null && count > 0;
+    }
+
+    @Override
+    public void joinRace(int raceId, String username) {
+        String sql = "INSERT INTO raceParticipants (idRace, username) VALUES (?, ?)";
+        jdbcTemplate.update(sql, raceId, username);
     public List<Race> pagination(int limit, int offset, String status, String keyword){
         String sql = "";
         if(status.equals("")){ //all race

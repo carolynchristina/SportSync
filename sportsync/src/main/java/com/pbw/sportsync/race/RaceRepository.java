@@ -14,6 +14,7 @@ public interface RaceRepository {
     List<Activity> findLeaderboardByRaceId(int raceId);
     void joinRace(int raceId, String username);
     List<Race> findValidJoinedRaces(String username, LocalDate dateNow);
+    boolean isUserInRace(int raceId, String username);
     List<Race> pagination(int limit, int offset, String status, String keyword);
     int rowCount(String status, String keyword);
     List<Race> findById(Integer id);
