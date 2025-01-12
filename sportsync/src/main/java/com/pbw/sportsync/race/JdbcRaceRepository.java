@@ -108,6 +108,7 @@ public class JdbcRaceRepository implements RaceRepository {
     public void joinRace(int raceId, String username) {
         String sql = "INSERT INTO raceParticipants (idRace, username) VALUES (?, ?)";
         jdbcTemplate.update(sql, raceId, username);
+    }
     public List<Race> pagination(int limit, int offset, String status, String keyword){
         String sql = "";
         if(status.equals("")){ //all race
