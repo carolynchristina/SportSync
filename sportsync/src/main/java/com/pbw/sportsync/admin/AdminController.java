@@ -3,6 +3,7 @@ package com.pbw.sportsync.admin;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import com.pbw.sportsync.user.UserRepository;
 import com.pbw.sportsync.user.User;
 import com.pbw.sportsync.RequiredRole;
@@ -68,6 +69,7 @@ public class AdminController {
     }
 
     @GetMapping("/listRace")
+    @RequiredRole("admin")
     public String listRace(@RequestParam(defaultValue="1") int page,
         @RequestParam(defaultValue="") String keyword,
         @RequestParam(defaultValue="") String status, 

@@ -53,12 +53,12 @@ INSERT INTO users (username, email, password, roles, status) VALUES
 ('admin', 'admin@gmail.com', '$2a$10$w75XAuVuRo.SePNZf7L/O.Tzod4gOi6.sXNXDIdN3BLQ70XOvWmhS', 'admin', true),
 ('alice', 'alice@gmail.com', '$2a$10$CsRVcGlbj/RmSZ85dxtyOOn5uqcTw1Ks4p8QPM3AyRnFtdzRZqsEC', 'pengguna', true),
 ('bobby', 'bobby@gmail.com', '$2a$10$2XEzZ44.QBNphivTZsxwX.ssMrO0FEJTlQ3.UN6XUMsLug/oiebP2', 'pengguna', true),
-('charles', 'charles@gmail.com', '$2a$10$TOvFyQy2snIob1vxZyP58epKZPbLDAaK5Bmy0NQPs/U6PRl1e6Y5C', 'pengguna', false),
+('charles', 'charles@gmail.com', '$2a$10$TOvFyQy2snIob1vxZyP58epKZPbLDAaK5Bmy0NQPs/U6PRl1e6Y5C', 'pengguna', true),
 ('diana', 'diana@gmail.com', '$2a$10$nmcBQNru8jorM.n47hCafO9RrwQEmGlnvQn706IMS49ixmLUzB93y', 'pengguna', true),
 ('edward', 'edward@gmail.com', '$2a$10$XWk.EU4GRpj2ZKVc2mc8nepy1hSL7D1kH8MaWIuwir6qtKCJGd4PW', 'pengguna', true),
 ('fiona', 'fiona@gmail.com', '$2a$10$lJxMWEmwN.GiZWgPfdFAV.v2bc2K6aclIIcLtUzMduwAt0oqI5bUO', 'pengguna', true),
-('greg', 'greg@gmail.com', '$2a$10$2OQig.RpOX4a/9agblasweCw7nf5.gXQuRTmNAXXXYCjQbvV4Bn6K', 'pengguna', false),
-('hannah', 'hannah@gmail.com', '$2a$10$cQzyUn6VcaBnHjr8hg5HnOb3QluFD.O5wEmKDakAi2bznDFwyXwH6', 'pengguna', false),
+('greg', 'greg@gmail.com', '$2a$10$2OQig.RpOX4a/9agblasweCw7nf5.gXQuRTmNAXXXYCjQbvV4Bn6K', 'pengguna', true),
+('hannah', 'hannah@gmail.com', '$2a$10$cQzyUn6VcaBnHjr8hg5HnOb3QluFD.O5wEmKDakAi2bznDFwyXwH6', 'pengguna', true),
 ('ivan', 'ivan@gmail.com', '$2a$10$2OaeW.JAdBbKgTdNwsuL1O592bU13nU.fnXwpL7ntOZUXUfoK6Fom', 'pengguna', false),
 ('julia', 'julia@gmail.com', '$2a$10$nnF5AiLtbelS2KJDQOaHxuhjAn.rjzgUMXrh1rqzMZ2VYmGfNgA8C', 'pengguna', true),
 ('karen', 'karen@gmail.com', '$2a$10$E.q9mZ8J091WlQegmWSXfOnu0ubomXBTU6AwpRt4pEJY3NjLVQUgS', 'pengguna', false),
@@ -131,7 +131,6 @@ CREATE OR REPLACE VIEW lastActDate AS
 SELECT username, MAX(tglwaktumulai) AS last_activity
 FROM ACTIVITY
 GROUP BY username;
-
 
 CREATE OR REPLACE VIEW userFriends AS
 SELECT 

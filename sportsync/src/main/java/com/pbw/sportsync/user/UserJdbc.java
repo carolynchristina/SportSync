@@ -132,7 +132,11 @@ public class UserJdbc implements UserRepository{
     @Override
     public String lastActivityDate(String username){
         String sql = "SELECT last_activity FROM lastActDate WHERE username = ?";
-        return jdbcTemplate.queryForObject(sql, String.class, username);
+        try{
+            return jdbcTemplate.queryForObject(sql, String.class, username);
+        }catch(Exception e){
+            return "-";
+        }
     }
     @Override
     public int countActivity(String username){
