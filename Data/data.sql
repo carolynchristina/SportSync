@@ -127,11 +127,10 @@ INSERT INTO friendlist (user1, user2) VALUES
 ('peter', 'rachel');
 ---------------------------------------------------------------
 --VIEW
-CREATE OR REPLACE VIEW lastActPerUser AS
+CREATE OR REPLACE VIEW lastActDate AS
 SELECT username, MAX(tglwaktumulai) AS last_activity
 FROM ACTIVITY
-GROUP BY username
-ORDER BY username;
+GROUP BY username;
 
 
 CREATE OR REPLACE VIEW userFriends AS

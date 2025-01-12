@@ -9,6 +9,8 @@ import com.pbw.sportsync.activity.Activity;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -37,6 +39,8 @@ public class Race {
     private LocalDate tglSelesai;
     
     @NotNull
+    @Digits(integer = 10, fraction = 0)
+    @Min(100)
     private int jarakTempuh;
 
     private transient List<Activity> leaderboard;

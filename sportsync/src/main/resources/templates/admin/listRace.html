@@ -2,36 +2,39 @@
 <html lang="en">
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
+    <link rel="stylesheet" th:href="@{/admin/css/headerAdmin_styles.css}">
     <link rel="stylesheet" th:href="@{/admin/css/listMembers_styles.css}">
-    <title>Members List</title>
+    <title>Race List</title>
 </head>
 <body>
     <th:block class="header" th:include="~{/admin/header :: headerAdmin}"></th:block>
     <main>
-        <h1>Members</h1>
+        <h1>Race</h1>
         <div class="fragments_container">
             <th:block th:include="~{/admin/search :: searchBar}"></th:block>
             <th:block th:include="~{/admin/pagination :: pagination}"></th:block>
-            <th:block th:include="~{/admin/filterMember :: filter}"></th:block>
+            <th:block th:include="~{/admin/filterRace :: filter}"></th:block>
         </div>
         <div class="list">
             <div class="container">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Status</th>
+                            <th>Title</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Distance (m)</th>
                             <th>Information</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="u : ${users}">
-                            <td th:text="${u.username}">Username</td>
-                            <td th:text="${u.email}">Email</td>
-                            <td th:text="${u.status}">Status</td>
+                        <tr th:each="r : ${race}">
+                            <td th:text="${r.judul}">Title</td>
+                            <td th:text="${r.tglMulai}">Start Date</td>
+                            <td th:text="${r.tglSelesai}">End Date</td>
+                            <td th:text="${r.jarakTempuh}">Distance</td>
                             <td>
-                                <a class="infoBtn" th:href="@{/sportsync/admin/memberInfo?user={username}(username=${u.username})}">
+                                <a class="infoBtn" th:href="@{/sportsync/admin/raceInfo?race={idRace}(idRace=${r.id})}">
                                     <img src="/admin/assets/icon_info.png" class="iconInfo">
                                 </a>
                             </td>

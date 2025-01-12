@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html, charset=UTF-8">
-    <link rel="stylesheet" th:href="@{/admin/css/headerAdmin_styles.css}">
     <link rel="stylesheet" th:href="@{/admin/css/memberInfo_styles.css}">
     <title>Member Information</title>
 </head>
@@ -21,9 +20,9 @@
                     <span th:text="${user.email}"></span>
                 </div> 
                 <div class="infoGroup">
-                    <label>Password</label>
-                    <span th:text="${user.password}"></span>
-                </div> 
+                    <label>Last Activity</label>
+                    <span th:text="${lastActivity}"></span>
+                </div>
                 <div class="infoGroup" th:if="!${edit}">
                     <label>Status</label>
                     <span th:text="${user.status}"></span>
@@ -36,7 +35,9 @@
                             <span><input type="radio" name="status" value=false>Inactive</span>
                     </div>
                     <div class="buttonsContainer">
-                        <a th:href="@{/sportsync/admin/memberInfo(user=${user.username})}" class="buttonNonHeader">Cancel</a>
+                        <a th:href="@{/sportsync/admin/memberInfo(user=${user.username})}" class="buttonNonHeader">
+                            <button type="button" class="buttonNonHeader">Cancel</button>
+                        </a>
                         <input type="hidden" name="user" th:value="${user.username}">
                         <button class="buttonNonHeader" type="submit" value="Save">Save</button>
                     </div>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/admin/css/headerAdmin_styles.css}">
     <link rel="stylesheet" th:href="@{/admin/css/addRace_styles.css}">
     <title>Add Race</title>
 </head>
@@ -39,6 +38,11 @@
                     </div>
                     <div th:if="${success}">
                         <span th:text="${success}"></span>
+                    </div>
+                    <div class="formGroup">
+                        <label>Distance</label><br>
+                        <input type="number" class="formControl" name="jarakTempuh" th:field="*{jarakTempuh}">
+                        <span th:if="${#fields.hasErrors('jarakTempuh')}" th:errors="*{jarakTempuh}">TglMulai error</span>
                     </div>
     
                     <div class="buttonsContainer">

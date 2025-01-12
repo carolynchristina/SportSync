@@ -1,6 +1,7 @@
 package com.pbw.sportsync.admin;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import com.pbw.sportsync.user.UserRepository;
 import com.pbw.sportsync.user.User;
@@ -58,11 +59,43 @@ public class AdminController {
                 model.addAttribute("pageCount", pageCount);
                 
             }
-            model.addAttribute("status", status);
+            model.addAttribute("baseUrl", "/sportsync/admin");
             model.addAttribute("users", user);
             model.addAttribute("keyword", keyword);
-
+            model.addAttribute("status", status);
+            model.addAttribute("object", "member");
             return "admin/listMembers";
+    }
+
+    @GetMapping("/listRace")
+    public String listRace(@RequestParam(defaultValue="1") int page,
+        @RequestParam(defaultValue="") String keyword,
+        @RequestParam(defaultValue="") String status, 
+        Model model){
+            List<Race> race;
+            if(page == 0){ //tanpa pagination
+                if(!status.equals("")){ //filter berdasarkan status race
+                    if(status.equals("Ongoing")) race = this.raceRepo.findOngoingRaces();
+                    else race = this.raceRepo.findPastRaces();
+                }else{
+                    race = this.raceRepo.findByKeyword(keyword);
+                }
+            }else{ //dengan pagination
+                int limit = 8;
+                int offset = (page - 1) * limit;
+                int rowCount = this.raceRepo.rowCount(status, keyword);
+                race = this.raceRepo.pagination(limit, offset, status, keyword);
+                int pageCount = (int) Math.ceil((double) rowCount / limit);
+                
+                model.addAttribute("currentPage", page);
+                model.addAttribute("pageCount", pageCount);
+            }
+            model.addAttribute("baseUrl", "/sportsync/admin/listRace");
+            model.addAttribute("race", race);
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("status", status);
+            model.addAttribute("object", "race");
+            return "admin/listRace";
     }
 
     @GetMapping("/addRace")
@@ -90,8 +123,7 @@ public class AdminController {
         this.raceRepo.addRace(race);
         model.addAttribute("race", race);
         model.addAttribute("success", "Race is registered");
-        return "admin/addRace";
-        
+        return "admin/listRace";
     }
 
     @PostMapping("/addRace/reset")
@@ -104,7 +136,9 @@ public class AdminController {
     @RequiredRole("admin")
     public String memberInfo(@RequestParam(name="user") String username, Model model){
         User user = this.userRepo.findByKeyword(username).get(0);
+        String lastActivityDate = this.userRepo.lastActivityDate(username);
         model.addAttribute("user", user);
+        model.addAttribute("lastActivity", lastActivityDate);
         model.addAttribute("edit", false);
         return "admin/memberInfo";
     }
@@ -126,7 +160,7 @@ public class AdminController {
             model.addAttribute("user", user);
             return "admin/memberInfo";
         }else{
-            model.addAttribute("error", "Edit role gagal");
+            model.addAttribute("error", "Edit status gagal");
             return "admin/edit";
         }
     }
@@ -139,5 +173,15 @@ public class AdminController {
             return "redirect:/sportsync/admin";
         }
         return "admin/memberInfo";
+    }
+
+    @GetMapping("/raceInfo")
+    @RequiredRole("admin")
+    public String raceInfo(@RequestParam(name="race") Integer idRace, Model model){
+        Race race = this.raceRepo.findById(idRace).get(0);
+        int totalParticipants = this.raceRepo.totalParticipants(idRace);
+        model.addAttribute("race", race);
+        model.addAttribute("participants", totalParticipants);
+        return "admin/raceInfo";
     }
 }

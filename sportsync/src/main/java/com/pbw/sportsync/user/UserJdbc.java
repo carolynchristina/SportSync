@@ -117,7 +117,6 @@ public class UserJdbc implements UserRepository{
         else return Optional.of(result.get(0)); //user ditemukan
     }
 
-
     @Override
     public void saveUser(String oldUsername, User user) {
         String sql = "UPDATE users SET username = ?, email = ?, password = ?, roles = ?, status = ? WHERE username = ?";
@@ -128,5 +127,11 @@ public class UserJdbc implements UserRepository{
     public void saveEncryptedPassword(User user){
         String sql ="UPDATE users SET password = ? WHERE email = ?";
         jdbcTemplate.update(sql, user.getPassword(),user.getEmail());
+    }
+
+    @Override
+    public String lastActivityDate(String username){
+        String sql = "SELECT last_activity FROM lastActDate WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, username);
     }
 }
