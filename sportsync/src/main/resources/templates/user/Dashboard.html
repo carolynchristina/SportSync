@@ -20,13 +20,9 @@
                     <hr>
                     <div class="followList">
                         <div class="countFollow">
-                            <label for="">0</label>
-                            <label for="">0</label>
-                            <label for="">0</label>
+                            <label for="" th:text="${countActivity}">0</label>
                         </div>
                         <div class="labelFollow">
-                            <label for="">Follower</label>
-                            <label for="">Following</label>
                             <label for="">Activities</label>
                         </div>
                     </div>
@@ -67,9 +63,27 @@
                 <div class="paraf2">
                     <img src="/user/assets/DashboardPage/middleDashboardIcon.svg" alt="">           
                     <div class="labelParaf2">
-                        <label for="">See what your friends are doing</label>
-                        <label for="">Find your friends on SportSync or invite them to join you. Cheer them on, discover new workouts and start training with the athletes you already know.</label>
-                        <button type="button">Find Friend</button>
+                        <label for="">SportSync can track your activities</label>
+                        <label for="">SportSync is an application designed to track running events and activities while encouraging users to participate in running activities. It allows users to record their performance, join various running challenges, and stay motivated to maintain an active lifestyle.</label>
+                        <a th:href="@{/sportsync/user/activities}" class="button"><button>Activities</button></a>
+                    </div>     
+                </div>
+                <hr>
+                <div class="paraf3">
+                    <img src="/user/assets/DashboardPage/middleDashboardIcon.svg" alt="">           
+                    <div class="labelParaf3">
+                        <label for="">You can join our event</label>
+                        <label for="">SportSync is an application that tracks running events and activities while inviting users to join competitive running events. It helps users discover races, register easily, and stay engaged in the running community.</label>
+                        <a th:href="@{/sportsync/user/races}" class="button"><button>Races</button></a>
+                    </div>     
+                </div>
+                <hr>
+                <div class="paraf3">
+                    <img src="/user/assets/DashboardPage/middleDashboardIcon.svg" alt="">           
+                    <div class="labelParaf3">
+                        <label for="">We can analyze your performance</label>
+                        <label for="">SportSync is an application for tracking running events and activities that also allows you to analyze your running performance. It provides detailed insights into your progress, helping you improve and achieve your fitness goals.</label>
+                        <a th:href="@{/sportsync/user/analysis}" class="button"><button>Analysis</button></a>
                     </div>     
                 </div>
                 <hr>
@@ -135,7 +149,7 @@
     
             // Menampilkan slide berikutnya
             slides1[slideIndex1 - 1].style.display = "block";
-            setTimeout(showSlides1, 6000); // Ganti gambar setiap 2 detik
+            setTimeout(showSlides1, 6000); 
         }
     
         showSlides1(); // Memulai slideshow
