@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/user/css/DashboardStyle.css}">
     <title>Dashboard</title>
+    <script th:inline="javascript">
+        const weekChartData = /*[[${weekChartData}]]*/ {};
+        const monthChartData = /*[[${monthChartData}]]*/ {};
+        const yearChartData = /*[[${yearChartData}]]*/ {};
+    </script>
 </head>
 <body>
     
@@ -203,7 +208,6 @@
         showSlides3(); // Memulai slideshow
     </script>
     <script>
-        const weekData = /*[[${weekChartData}]]*/ [];
         const dayMap = {
             'MON': 'Monday',
             'TUE': 'Tuesday',
@@ -219,7 +223,7 @@
             
             
             // Cari data m dari weekChartData
-            const data = weekData.find(data => data.hari === dayCode);
+            const data = weekChartData.find(data => data.hari === dayCode);
             
             // Update jarak
             if (data) {
@@ -228,6 +232,7 @@
                 document.getElementById("distance").innerText = "0 m";
             }
         }
+        console.log(weekChartData);
     </script>
 </body>
 </html>

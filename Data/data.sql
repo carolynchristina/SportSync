@@ -80,7 +80,7 @@ INSERT INTO race (judul, deskripsi, tglMulai, tglSelesai, jarakTempuh) VALUES
 ('Marathon Challenge', 'Challenge yourself with a 42km marathon!', '2025-01-10', '2025-01-15', 42000);
 
 INSERT INTO activity (judul, deskripsi, tglWaktuMulai, jarakTempuh, durasi, foto, username, idRace) VALUES
-('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),
+('Morning Run', 'A refreshing 1km run to start the day', '2025-01-12 07:00:00', 1000, '01:00:00', NULL, 'alice', NULL),
 ('Morning Run', 'A refreshing 1km run to start the day', '2025-01-01 07:00:00', 1000, '01:00:00', NULL, 'bobby', NULL),
 ('January Run', 'Competing in the January Run 10K Race', '2025-01-05 07:00:00', 10000, '01:00:00', NULL, 'bobby', 1),
 ('Evening Run', 'A relaxing evening run of 2km', '2025-01-01 18:00:00', 2000, '00:30:00', NULL, 'charles', NULL),

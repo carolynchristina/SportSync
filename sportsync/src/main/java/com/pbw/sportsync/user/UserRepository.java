@@ -17,4 +17,6 @@ public interface UserRepository {
     void saveEncryptedPassword(User user);
     String lastActivityDate(String username);
     int countActivity(String username);
+    int usernameCheck(String username);
+    int emailCheck(String email);
 }

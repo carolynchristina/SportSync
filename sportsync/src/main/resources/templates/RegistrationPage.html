@@ -25,25 +25,25 @@
                     </div>
                     <div class="fullname">
                         <label for="">Full name</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Masukan Nama Lengkap Anda" required th:value="${fullname}">
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter Your Full Name" required th:value="${fullname}">
                     </div>
                     <div class="email">
                         <label for="">Email</label>
-                        <input type="text" id="email" name="email" placeholder="Input email Anda" required th:value="${email}">
+                        <input type="text" id="email" name="email" placeholder="Enter Your Email" required th:value="${email}">
                     </div>
                     <div class="username">
                         <label for="">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Masukan Username Anda" required th:value="${username}">
+                        <input type="text" id="username" name="username" placeholder="Enter Your Username" required th:value="${username}">
                     </div>
                     <div class="password">
                         <label for="">Password </label>
-                        <input type="password" id="password" name="password" placeholder="Input password Anda" required th:value="${password}">
+                        <input type="password" id="password" name="password" placeholder="Enter Your Password" required th:value="${password}">
                     </div>
                     <div class="confPassword"> 
-                        <label for="">Konfirmasi Password</label>
-                        <input type="confpassword" id="confpassword" name="confpassword" placeholder="Konfirmasi Password Anda" required th:value="${confpassword}">
+                        <label for="">Confirm Password</label>
+                        <input type="password" id="confpassword" name="confpassword" placeholder="Confirm Your Password" required th:value="${confpassword}">
                     </div>
-                    <span th:if="${error}" th:text="${error}"></span>
+                    <span th:if="${error}" th:text="${error}" style="color: red;"></span>
                 </div>
                 <div class="nextbutton">
                     <a href="">
