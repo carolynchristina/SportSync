@@ -5,14 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.pbw.sportsync.user.Activity;
+import com.pbw.sportsync.activity.Activity;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Date;
 import java.time.LocalDate;
-
 import java.util.List;
 
 @Data
@@ -37,14 +35,19 @@ public class Race {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate tglSelesai;
+    
+    @NotNull
+    private int jarakTempuh;
 
     private transient List<Activity> leaderboard;
-
-    public Race(int id, String judul, String deskripsi, LocalDate tglMulai, LocalDate tglSelesai) {
-        this.id = id;
-        this.judul = judul;
-        this.deskripsi = deskripsi;
-        this.tglMulai = tglMulai;
-        this.tglSelesai = tglSelesai;
+    
+    
+        public Race(int id, String judul, String deskripsi, LocalDate tglMulai, LocalDate tglSelesai, int jarakTempuh) {
+            this.id = id;
+            this.judul = judul;
+            this.deskripsi = deskripsi;
+            this.tglMulai = tglMulai;
+            this.tglSelesai = tglSelesai;
+            this.jarakTempuh = jarakTempuh;
     }
 }

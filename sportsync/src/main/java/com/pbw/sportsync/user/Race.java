@@ -13,4 +13,5 @@ public class Race {
     private String deskripsi;
     private LocalDate tglMulai;
     private LocalDate tglSelesai;
+    private int jarakTempuh;
 }

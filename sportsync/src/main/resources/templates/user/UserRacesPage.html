@@ -7,7 +7,7 @@
     <title>User Races</title>
 </head>
 <body>
-    <div class="bodyRacesPage">
+    <div class="body">
         <!-- Header -->
         <th:block class="header" th:include="~{user/Header :: headerUser}"></th:block>
 
@@ -21,14 +21,9 @@
                         <h2 th:text="${race.judul}">Race Name</h2>
                         <p>📅 <span th:text="${race.tglMulai} + ' to ' + ${race.tglSelesai}">Date Range</span></p>
                         <p>📝 <span th:text="${race.deskripsi}">Description</span></p>
-                        <button th:if="${#authentication.name == 'anonymousUser'}"
-                                onclick="window.location.href='/sportsync/login';">
-                            Join Race
-                        </button>
-                        <button th:if="${#authentication.name != 'anonymousUser'}"
-                                th:onclick="'window.location.href=\'/sportsync/user/joinRace/' + ${race.id} + '\';'">
-                            Join Race
-                        </button>
+                        <form th:action="@{/sportsync/user/joinRace/{id}(id=${race.id})}" method="post">
+                            <button type="button" class="joinRaceButton" th:data-race-id="${race.id}" data-user-joined="false">Join Race</button>
+                        </form>                                                                                        
                     </div>
                 </div>
             </section>
@@ -49,5 +44,71 @@
             </section>
         </main>
     </div>
+
+    <!-- Modal Popup -->
+    <div id="confirmationModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <h2>Are you sure you want to join this race?</h2>
+            <form action="" method="POST" id="joinRaceForm">
+                <div class="modal-actions">
+                    <button type="submit">Yes, join the race</button>
+                    <button type="button" id="cancelJoin">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Flash Messages -->
+    <div th:if="${error}" class="error-message"> 
+        <p th:text="${error}"></p>
+    </div>
+    <div th:if="${success}" class="success-message">
+        <p th:text="${success}"></p>
+    </div>   
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch all Join Race buttons
+            var joinButtons = document.querySelectorAll(".joinRaceButton");
+    
+            joinButtons.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    event.preventDefault(); // Prevent form submission
+                    var raceId = button.getAttribute("data-race-id");
+                    var userJoined = button.getAttribute("data-user-joined") === "true";
+    
+                    // If the user hasn't joined yet, show the modal
+                    if (!userJoined) {
+                        var modal = document.getElementById("confirmationModal");
+                        var form = document.getElementById("joinRaceForm");
+    
+                        // Update the form action URL with the selected race ID
+                        form.action = "/sportsync/user/joinRace/" + raceId;
+    
+                        // Show the modal
+                        modal.style.display = "block";
+                    }
+                });
+            });
+    
+            // Close modal when clicking the close button
+            document.getElementById("closeModal").addEventListener("click", function() {
+                document.getElementById("confirmationModal").style.display = "none";
+            });
+    
+            // Close modal when clicking the cancel button
+            document.getElementById("cancelJoin").addEventListener("click", function() {
+                document.getElementById("confirmationModal").style.display = "none";
+            });
+
+            // Hide flash messages after 5 seconds
+            setTimeout(function() {
+                var flashMessages = document.querySelectorAll('.error-message, .success-message');
+                flashMessages.forEach(function(msg) {
+                    msg.classList.add('fade-out');
+                });
+            }, 5000);
+        });
+    </script>
 </body>
 </html>

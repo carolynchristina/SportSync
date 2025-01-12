@@ -1,21 +1,21 @@
 package com.pbw.sportsync.race;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.pbw.sportsync.user.Activity;
+import com.pbw.sportsync.activity.Activity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public class JdbcRaceRepository implements RaceRepository {
-    private final JdbcTemplate jdbcTemplate;
-
-    public JdbcRaceRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void addRace(Race race) {
@@ -57,8 +57,39 @@ public class JdbcRaceRepository implements RaceRepository {
             rs.getString("judul"),
             rs.getString("deskripsi"),
             rs.getDate("tglMulai").toLocalDate(),
-            rs.getDate("tglSelesai").toLocalDate()
+            rs.getDate("tglSelesai").toLocalDate(),
+            rs.getInt("jarakTempuh")
         );
+    }
+
+    @Override
+    public List<Race> findValidJoinedRaces(String username, LocalDate dateNow) {
+        String sql = """
+            SELECT 
+                * 
+            FROM 
+                raceParticipants 
+                INNER JOIN race 
+                ON race.id = raceParticipants.idRace 
+            WHERE 
+                raceParticipants.username = ?
+                AND tglmulai <= ?
+                AND tglselesai >= ?
+                AND NOT EXISTS (
+                    SELECT 1 
+                    FROM activity 
+                    WHERE activity.username = raceParticipants.username 
+                    AND activity.idRace = race.id
+                )
+        """;
+        return jdbcTemplate.query(sql, this::mapRowToRace, username, dateNow, dateNow);
+    }
+
+    @Override
+    public boolean isUserInRace(int raceId, String username) {
+        String sql = "SELECT COUNT(*) FROM raceParticipants WHERE idRace = ? AND username = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, raceId, username);
+        return count != null && count > 0;
     }
 
     @Override
