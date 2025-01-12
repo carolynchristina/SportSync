@@ -139,4 +139,15 @@ public class UserJdbc implements UserRepository{
         String sql = "SELECT COUNT(*) FROM activity WHERE username ILIKE ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, username);
     }
+    @Override
+    public int usernameCheck(String username) {
+        String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, username);
+    }
+    
+    @Override
+    public int emailCheck(String email){
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, email);
+    }
 }

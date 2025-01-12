@@ -26,7 +26,7 @@
                     </div>
                     <button type="submit">Sign In</button>
                     <label for="">Don't have an account?     <a th:href="@{/sportsync/Register}">Register</a></label>
-                    <span th:if="${error}" th:text="${error}"></span>
+                    <span th:if="${error}" th:text="${error}" style="color: red;"></span>
                 </div>
             </form>
         </div>
